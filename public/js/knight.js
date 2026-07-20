@@ -71,20 +71,17 @@ document.addEventListener('DOMContentLoaded', function() {
         loadModel();
         
         function animate() {
-            if (window.knightAnimation.isRendering) {
-                animationId = requestAnimationFrame(animate);
-            }
-            if (window.knightAnimation.isPlaying && knight) {
+            animationId = requestAnimationFrame(animate);
+            if (knight && window.knightAnimation.isPlaying) {
                 knight.rotation.y += 0.01;
             }
-            if (window.knightAnimation.isRendering) {
-                controls.update();
-                renderer.render(scene, camera);
-            }
+            if (controls) controls.update();
+            if (renderer && scene && camera) renderer.render(scene, camera);
         }
         animate();
         
         window.addEventListener('resize', function() {
+            if (!container || !camera || !renderer) return;
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
@@ -93,45 +90,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function loadModel() {
         const loader = new THREE.GLTFLoader();
-        
-        const modelPaths = [
-            '/images/knight3d.glb',
-            '/models/knight3d.glb'
-        ];
-        
+        const modelPaths = ['/images/knight3d.glb', '/models/knight3d.glb'];
         let pathIndex = 0;
         
         function tryPath() {
-            if (pathIndex >= modelPaths.length) {
-                createPlaceholder();
-                return;
-            }
-            
+            if (pathIndex >= modelPaths.length) { createPlaceholder(); return; }
             const path = modelPaths[pathIndex];
             console.log(`Trying: ${path}`);
             
-            loader.load(
-                path,
+            loader.load(path,
                 function(gltf) {
                     console.log('✅ Knight loaded!');
                     knight = gltf.scene;
                     knight.scale.set(2.0, 2.0, 2.0);
                     knight.position.y = -0.5;
-                    
                     knight.traverse(function(node) {
-                        if (node.isMesh && node.material) {
-                            node.material.precision = 'lowp';
-                        }
+                        if (node.isMesh && node.material) node.material.precision = 'lowp';
                     });
-                    
                     scene.add(knight);
                     window.isKnightLoaded = true;
                     hideSpinner();
                 },
                 function(xhr) {
-                    if (xhr.total) {
-                        console.log(`Loading: ${(xhr.loaded / xhr.total * 100).toFixed(1)}%`);
-                    }
+                    if (xhr.total) console.log(`Loading: ${(xhr.loaded / xhr.total * 100).toFixed(1)}%`);
                 },
                 function(error) {
                     console.error(`Failed: ${path}`);
@@ -140,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             );
         }
-        
         tryPath();
     }
     
@@ -151,26 +131,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (spinner) {
             spinner.style.opacity = '0';
             spinner.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                if (spinner.parentNode) spinner.style.display = 'none';
-            }, 500);
+            setTimeout(() => { if (spinner.parentNode) spinner.style.display = 'none'; }, 500);
         }
     }
     
     function createPlaceholder() {
         console.log('Creating placeholder');
         const group = new THREE.Group();
-        
-        const bodyGeo = new THREE.BoxGeometry(1, 1.5, 0.5);
-        const body = new THREE.Mesh(bodyGeo, new THREE.MeshStandardMaterial({ color: 0x666666 }));
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1, 1.5, 0.5), new THREE.MeshStandardMaterial({ color: 0x666666 }));
         body.position.y = 0.75;
         group.add(body);
-        
-        const headGeo = new THREE.SphereGeometry(0.4, 8, 8);
-        const head = new THREE.Mesh(headGeo, new THREE.MeshStandardMaterial({ color: 0xFFD700 }));
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.4, 8, 8), new THREE.MeshStandardMaterial({ color: 0xFFD700 }));
         head.position.y = 1.8;
         group.add(head);
-        
         scene.add(group);
         knight = group;
         window.isKnightLoaded = true;
@@ -179,67 +152,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Init when landing is visible
     const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-            init3D();
-            observer.disconnect();
-        }
+        if (entries[0].isIntersecting) { init3D(); observer.disconnect(); }
     }, { threshold: 0.1 });
-    
     observer.observe(document.getElementById('landing'));
     
-    // ============================================
-    // PERFORMANCE: Pause knight when not visible
-    // ============================================
- const knightObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const container = document.getElementById('knightModel');
-        // Only pause if REALLY off screen (not just partially)
-        const isVisible = entry.isIntersecting || (container && container.getBoundingClientRect().top < window.innerHeight + 200);
-        
-        if (isVisible) {
-            if (!window.knightAnimation.isRendering) {
-                window.knightAnimation.resume();
-                if (!animationId && renderer) {
-                    function restartAnimate() {
-                        if (!window.knightAnimation.isRendering) return;
-                        animationId = requestAnimationFrame(restartAnimate);
-                        if (window.knightAnimation.isPlaying && knight) knight.rotation.y += 0.01;
-                        if (controls && renderer) {
-                            controls.update();
-                            renderer.render(scene, camera);
-                        }
-                    }
-                    restartAnimate();
-                }
-            }
-        } else {
-            window.knightAnimation.pause();
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-        }
-    });
-}, { threshold: 0.05, rootMargin: '200px' });
+    // Performance: track visibility
+    let isKnightVisible = true;
+    const knightObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { isKnightVisible = entry.isIntersecting; });
+    }, { threshold: 0.1, rootMargin: '100px' });
     
     setTimeout(() => {
-        const knightContainer = document.getElementById('knightModel');
-        if (knightContainer) knightObserver.observe(knightContainer);
+        const kc = document.getElementById('knightModel');
+        if (kc) knightObserver.observe(kc);
     }, 1000);
     
-    // Pause when tab is hidden
+    // Tab visibility
     document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            window.knightAnimation.pause();
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-        } else {
-            const knightContainer = document.getElementById('knightModel');
-            if (knightContainer && knightContainer.getBoundingClientRect().top < window.innerHeight && knightContainer.getBoundingClientRect().bottom > 0) {
-                window.knightAnimation.resume();
-            }
-        }
+        window.knightAnimation.isPlaying = !document.hidden;
     });
 });
