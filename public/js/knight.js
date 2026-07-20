@@ -16,7 +16,7 @@ window.knightAnimation = {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🎮 Knight loading...');
     
-    let scene, camera, renderer, knight, controls;
+    let scene, camera, renderer, knight;
     let animationId = null;
     
     function init3D() {
@@ -45,37 +45,22 @@ document.addEventListener('DOMContentLoaded', function() {
         renderer.domElement.style.top = '0';
         renderer.domElement.style.left = '0';
         renderer.domElement.style.zIndex = '1';
+        renderer.domElement.style.pointerEvents = 'none'; // ← Can't touch it
         container.appendChild(renderer.domElement);
-        
-        renderer.domElement.style.cursor = 'pointer';
-        renderer.domElement.addEventListener('click', function() {
-            if (window.knightAnimation.isPlaying) {
-                window.knightAnimation.pause();
-            } else {
-                window.knightAnimation.resume();
-            }
-        });
         
         scene.add(new THREE.AmbientLight(0xffffff, 0.8));
         const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
         dirLight.position.set(5, 10, 5);
         scene.add(dirLight);
         
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.minDistance = 1.5;
-        controls.maxDistance = 4.0;
-        controls.target.set(0, 0.5, 0);
-        
         loadModel();
         
         function animate() {
+            if (!window.knightAnimation.isRendering) return;
             animationId = requestAnimationFrame(animate);
             if (knight && window.knightAnimation.isPlaying) {
                 knight.rotation.y += 0.01;
             }
-            if (controls) controls.update();
             if (renderer && scene && camera) renderer.render(scene, camera);
         }
         animate();
@@ -136,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function createPlaceholder() {
-        console.log('Creating placeholder');
         const group = new THREE.Group();
         const body = new THREE.Mesh(new THREE.BoxGeometry(1, 1.5, 0.5), new THREE.MeshStandardMaterial({ color: 0x666666 }));
         body.position.y = 0.75;
@@ -156,26 +140,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.1 });
     observer.observe(document.getElementById('landing'));
     
-     // Performance: COMPLETELY STOP knight when off-screen
+    // FULL STOP when off-screen
     const knightObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Knight is visible - restart if stopped
                 if (!window.knightAnimation.isRendering) {
                     window.knightAnimation.isRendering = true;
                     window.knightAnimation.isPlaying = true;
-                    animate();
-                    console.log('🎮 Knight resumed');
+                    function restartAnimate() {
+                        if (!window.knightAnimation.isRendering) return;
+                        animationId = requestAnimationFrame(restartAnimate);
+                        if (knight && window.knightAnimation.isPlaying) knight.rotation.y += 0.01;
+                        if (renderer && scene && camera) renderer.render(scene, camera);
+                    }
+                    restartAnimate();
                 }
             } else {
-                // Knight off-screen - FULL STOP
                 window.knightAnimation.isRendering = false;
                 window.knightAnimation.isPlaying = false;
                 if (animationId) {
                     cancelAnimationFrame(animationId);
                     animationId = null;
                 }
-                console.log('🎮 Knight fully stopped');
             }
         });
     }, { threshold: 0.05 });
@@ -185,36 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (kc) knightObserver.observe(kc);
     }, 1000);
     
-    // Tab visibility
     document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            window.knightAnimation.isRendering = false;
-            window.knightAnimation.isPlaying = false;
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-        } else {
-            const kc = document.getElementById('knightModel');
-            if (kc) {
-                const rect = kc.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    window.knightAnimation.isRendering = true;
-                    window.knightAnimation.isPlaying = true;
-                    animate();
-                }
-            }
-        }
+        window.knightAnimation.isPlaying = !document.hidden;
     });
-    
-    // Export animate for restart
-    function animate() {
-        if (!window.knightAnimation.isRendering) return;
-        animationId = requestAnimationFrame(animate);
-        if (knight && window.knightAnimation.isPlaying) {
-            knight.rotation.y += 0.01;
-        }
-        if (controls) controls.update();
-        if (renderer && scene && camera) renderer.render(scene, camera);
-    }
 });
