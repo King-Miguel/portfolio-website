@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('knightModel');
         if (!container) return;
         
-        // Create scene
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x3a3a3a);
         
@@ -42,14 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
         renderer.shadowMap.enabled = false;
         renderer.setPixelRatio(1);
         
-        // Append canvas WITHOUT clearing the loading spinner
         renderer.domElement.style.position = 'absolute';
         renderer.domElement.style.top = '0';
         renderer.domElement.style.left = '0';
         renderer.domElement.style.zIndex = '1';
         container.appendChild(renderer.domElement);
         
-        // Click to pause
         renderer.domElement.style.cursor = 'pointer';
         renderer.domElement.addEventListener('click', function() {
             if (window.knightAnimation.isPlaying) {
@@ -59,13 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Lighting
         scene.add(new THREE.AmbientLight(0xffffff, 0.8));
         const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
         dirLight.position.set(5, 10, 5);
         scene.add(dirLight);
         
-        // Controls
         controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
@@ -73,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         controls.maxDistance = 4.0;
         controls.target.set(0, 0.5, 0);
         
-        // Load model
         loadModel();
         
         function animate() {
@@ -100,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadModel() {
         const loader = new THREE.GLTFLoader();
         
-        // Try multiple paths
         const modelPaths = [
             '/images/knight3d.glb',
             '/models/knight3d.glb'
@@ -133,8 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     scene.add(knight);
                     window.isKnightLoaded = true;
-                    
-                    // ✅ HIDE SPINNER
                     hideSpinner();
                 },
                 function(xhr) {
@@ -195,4 +186,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.1 });
     
     observer.observe(document.getElementById('landing'));
+    
+    // ============================================
+    // PERFORMANCE: Pause knight when not visible
+    // ============================================
+    const knightObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                window.knightAnimation.resume();
+                if (!animationId && renderer) {
+                    function restartAnimate() {
+                        if (!window.knightAnimation.isRendering) return;
+                        animationId = requestAnimationFrame(restartAnimate);
+                        if (window.knightAnimation.isPlaying && knight) knight.rotation.y += 0.01;
+                        controls.update();
+                        renderer.render(scene, camera);
+                    }
+                    restartAnimate();
+                }
+            } else {
+                window.knightAnimation.pause();
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    setTimeout(() => {
+        const knightContainer = document.getElementById('knightModel');
+        if (knightContainer) knightObserver.observe(knightContainer);
+    }, 1000);
+    
+    // Pause when tab is hidden
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            window.knightAnimation.pause();
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        } else {
+            const knightContainer = document.getElementById('knightModel');
+            if (knightContainer && knightContainer.getBoundingClientRect().top < window.innerHeight && knightContainer.getBoundingClientRect().bottom > 0) {
+                window.knightAnimation.resume();
+            }
+        }
+    });
 });
