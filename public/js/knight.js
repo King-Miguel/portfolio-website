@@ -190,29 +190,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // PERFORMANCE: Pause knight when not visible
     // ============================================
-    const knightObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
+ const knightObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const container = document.getElementById('knightModel');
+        // Only pause if REALLY off screen (not just partially)
+        const isVisible = entry.isIntersecting || (container && container.getBoundingClientRect().top < window.innerHeight + 200);
+        
+        if (isVisible) {
+            if (!window.knightAnimation.isRendering) {
                 window.knightAnimation.resume();
                 if (!animationId && renderer) {
                     function restartAnimate() {
                         if (!window.knightAnimation.isRendering) return;
                         animationId = requestAnimationFrame(restartAnimate);
                         if (window.knightAnimation.isPlaying && knight) knight.rotation.y += 0.01;
-                        controls.update();
-                        renderer.render(scene, camera);
+                        if (controls && renderer) {
+                            controls.update();
+                            renderer.render(scene, camera);
+                        }
                     }
                     restartAnimate();
                 }
-            } else {
-                window.knightAnimation.pause();
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
             }
-        });
-    }, { threshold: 0.1 });
+        } else {
+            window.knightAnimation.pause();
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+    });
+}, { threshold: 0.05, rootMargin: '200px' });
     
     setTimeout(() => {
         const knightContainer = document.getElementById('knightModel');

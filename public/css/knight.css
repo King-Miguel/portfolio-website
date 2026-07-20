@@ -444,15 +444,14 @@
 
 .model-loading p::after {
     content: '';
-    animation: summoningDots 1.5s steps(1, end) infinite;
+    animation: summoningDots 2s steps(1, end) infinite;
 }
 
 @keyframes summoningDots {
     0%   { content: ''; }
-    16%  { content: '.'; }
-    33%  { content: '..'; }
-    50%  { content: '...'; }
-    66%  { content: '..'; }
-    83%  { content: '.'; }
+    20%  { content: '.'; }
+    40%  { content: '..'; }
+    60%  { content: '...'; }
+    80%  { content: ''; }
     100% { content: ''; }
 }
