@@ -1,0 +1,138 @@
+
+body{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightgray;
+    font-family: sans-serif;
+}
+
+#background {
+    height: 95%;
+    width: 95%;
+    background: white;
+    border-radius: 15px;
+}
+
+#profileInfo {
+    width: 80%;
+    margin: 1em auto;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+#left {
+
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#left img {
+    width: 30%;
+    border-radius: 50%;
+
+}
+
+#right {
+    width: 90%;
+
+}
+
+#userTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    height: 20px;
+    background: #EFEFEF;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button:hover {
+    background:#DFDFDF
+}
+
+ #follow {
+  background: #4193EF;
+  color: white;
+}
+
+#follow:hover {
+    background: #4D9DF7;
+ 
+}
+
+.button img {
+    height: 20px;
+    width: 20px;
+}
+
+#more {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    
+}
+
+#infoMid {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 0.5em;
+
+}
+hr {
+    height: 1px;
+    background: lightgrey;
+    border: none;
+    width: 80%;
+}
+
+#bar {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    width: 75%;
+}
+
+.option img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+
+}
+.option {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: grey;
+    cursor: pointer;
+}
+
+.option:gover {
+    color:#AAAAAA
+}
+
+#active {
+    color: black;
+}
+
+
+
+#feed {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    margin: 0.3em;
+}

@@ -1,0 +1,2680 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1b1220;
+  font-family: 'DotGothic16', sans-serif;
+  color: white;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Pixel Art Styles */
+.pixel-border {
+  border: 4px solid #000;
+  box-shadow: 
+      inset 4px 4px #696969, 
+      inset -4px -4px #808080;
+  background-color: #A9A9A9;
+}
+
+.pixel-border-gold {
+  border: 4px solid #000;
+  box-shadow: inset 0 0 0 4px #FFD700;
+}
+
+.pixel-border-inset {
+  box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,0.25), 
+              inset -2px -2px 0px 0px rgba(255,255,255,0.25);
+}
+
+.pixel-button {
+  border: 4px solid #000;
+  background-color: #3E2723;
+  box-shadow: 4px 4px 0px #000;
+  transform: translate(-2px, -2px);
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+.pixel-button:active {
+  transform: translate(0px, 0px);
+  box-shadow: 0px 0px 0px #000;
+}
+
+.pixel-text-shadow {
+  text-shadow: 2px 2px #000;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar Styles - OLD SIZE */
+.sidebar {
+  width: 280px;
+  background-color: #A9A9A9;
+  border-right: 4px solid #000;
+  box-shadow: 
+      inset 4px 4px #696969, 
+      inset -4px -4px #808080;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 3rem;
+  height: 3rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  border: 2px solid #000;
+  background-color: transparent;
+}
+
+.brand-title {
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.brand-subtitle {
+  color: #3E2723;
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  position: relative;
+  color: #000;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+}
+
+.nav-item.active {
+  background-color: #696969;
+  border: 2px solid #000;
+}
+
+.nav-item:not(.active):hover {
+  background-color: rgba(105, 105, 105, 0.5);
+}
+
+.nav-item p {
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.icon-pixel {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-color: transparent;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.user-profile {
+  background-color: #696969;
+  border: 2px solid #000;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  color: #F5F5DC;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  line-height: 1.4;
+}
+
+.user-profile h3 {
+  margin-bottom: 0.5rem;
+  color: #FFD700;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.user-profile p {
+  margin-bottom: 0.25rem;
+}
+
+.special-offer-btn {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  background-color: #696969;
+  border: 2px solid #000;
+  color: #F5F5DC;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+  transition: background-color 0.3s;
+}
+
+.special-offer-btn:hover {
+  background-color: #808080;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  margin-left: 280px;
+  padding: 2rem;
+  background-color: #1c1716;
+  min-height: 100vh;
+}
+
+.character-sheet-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.parchment-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  background: #F5DEB3;
+  border: 8px double #8B4513;
+  padding: 2rem;
+  box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqCV_CFh99PnrJFixp-SOVcQbgqaW56NoP53LS3VQWKvDitIRpJJn-Js-tSkMCFECOKhjzoO3lFCZk26SyN1ezNHuhMDwFgESQyFMyO7CvDMrOQCtwd5Tnqba0mNOvHNExq3tazuBqOOvrtjIpOK3r2HUn9FTNyTkg9ivOXGqxQMQxOG5ZABiYxiK8FDhXOpZdr_nr-9VRPbZB67q7RwBsZxfEthYT2tegib1XZ2TjvlK-D9i6jZsD_9EJEd0xZewiky0iUh_DBus');
+  overflow: hidden;
+}
+
+/* Floating Runes */
+.rune {
+  position: absolute;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  color: #6b1c9c;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+  font-size: 2rem;
+}
+
+/* Character Grid */
+.character-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .character-grid {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+  }
+}
+
+/* Character Stats */
+.character-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(128, 128, 128, 0.2);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.character-portrait {
+  width: 128px;
+  height: 128px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-color: transparent;
+}
+
+.character-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.character-name {
+  font-family: 'Press Start 2P', cursive;
+  color: #000;
+  font-size: 1.125rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.character-title {
+ color: #3E2723;
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.stats-container {
+  background: #8B4513;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stats-title {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 0.875rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.skill-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-name, .skill-percent {
+  font-family: 'Press Start 2P', cursive;
+  color: #F5DEB3;
+  font-size: 0.625rem;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  background: #808080;
+  height: 16px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #228B22;
+  transition: width 0.3s ease;
+}
+
+.action-links {
+  background: rgba(128, 128, 128, 0.2);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.action-link:hover {
+  color: #6b1c9c;
+}
+
+.action-link .material-symbols-outlined {
+  color: #FFD700;
+  font-size: 2rem;
+}
+
+.action-link:hover .material-symbols-outlined {
+  color: #ffed4e;
+}
+
+.action-link span:last-child {
+  font-family: 'Press Start 2P', cursive;
+  color: #000;
+  font-size: 0.75rem;
+}
+
+/* Adventure Log */
+.adventure-log {
+  display: flex;
+  flex-direction: column;
+}
+
+.log-container {
+  background: rgba(128, 128, 128, 0.2);
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.log-title {
+  font-family: 'Press Start 2P', cursive;
+  color: #6b1c9c;
+  font-size: 1.25rem;
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: 1rem;
+}
+
+.log-content {
+  background: #F5DEB3;
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 400px;
+}
+
+.log-page {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.log-page.active {
+  display: flex;
+}
+
+/* Profile Stats Page */
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #8B4513;
+    width: 100%;
+}
+
+.stat-label {
+    font-family: 'Press Start 2P', cursive;
+    color: #8B4513;  
+    font-size: 0.75rem;
+    min-width: 80px;
+    text-align: left;
+}
+
+
+.stat-value {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;  
+    font-size: 0.75rem;
+    text-align: right;
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.xp-bar-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.xp-bar-bg {
+  width: 100%;
+  background: #808080;
+  height: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  transition: width 0.3s ease;
+}
+
+.xp-text {
+  font-family: 'Press Start 2P', cursive;
+  color: #8B4513;
+  font-size: 0.625rem;
+}
+
+.profile-quote {
+  font-family: 'Press Start 2P', cursive;
+  color: #6b1c9c;
+  font-size: 0.75rem;
+  text-align: center;
+  font-style: italic;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid #8B4513;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* Stats Page Specific Styles */
+#page3 {
+    gap: 0.5rem;
+    justify-content: flex-start;
+}
+
+.stats-radar-container {
+    display: flex;
+    justify-content: center;
+    margin: 0.25rem 0;
+}
+
+.stats-radar-container canvas {
+    width: 250px !important;
+    height: 250px !important;
+}
+
+.stats-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.5rem 0;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 10px;
+    background: #ec1111;
+    position: relative;
+}
+
+.stat-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+/* Color coding based on percentage */
+.stat-fill[style*="width: 9"] { background: #228B22; } /* 90%+ - Green */
+.stat-fill[style*="width: 8"] { background: #228B22; } /* 80%+ - Green */
+.stat-fill[style*="width: 7"] { background: #228B22; } /* 70%+ - Green */
+.stat-fill[style*="width: 6"] { background: linear-gradient(90deg, #FFD700, #FFA500); } /* 60% - Gold/Orange */
+.stat-fill[style*="width: 5"] { background: linear-gradient(90deg, #FFD700, #FFA500); } /* 50% - Gold/Orange */
+.stat-fill[style*="width: 4"] { background: linear-gradient(90deg, #FFD700, #FFA500); } /* 40% - Gold/Orange */
+.stat-fill[style*="width: 3"] { background: linear-gradient(90deg, #FFD700, #FFA500); } /* 30% - Gold/Orange */
+.stat-fill[style*="width: 2"] { background: #FF4444; } /* 20% - Red */
+.stat-fill[style*="width: 1"] { background: #FF4444; } /* 10% - Red */
+
+
+
+
+.stats-quote {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 0.5rem;
+    text-align: center;
+    font-style: italic;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    border: 2px solid #8B4513;
+    background: rgba(255, 215, 0, 0.1);
+    line-height: 1.3;
+}
+
+.log-content {
+    background: #F5DEB3;
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 400px;
+    overflow-y: auto;
+}
+
+.quest-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #8B4513 !important;  
+    font-size: 1rem !important;  
+    margin-bottom: 0.5rem !important;  
+    text-align: left !important;  
+}
+
+.quest-text {
+    font-family: 'Space Grotesk', sans-serif !important;
+    color: #4a2e1a !important; 
+    font-size: 0.875rem !important;  
+    line-height: 1.6 !important;  
+    margin-bottom: 0.75rem !important; 
+}
+
+.quest-text strong {
+    color: #4a2e1a !important; 
+}
+
+.log-page {
+    display: none;
+    flex-direction: column;
+ gap: 0.75rem; 
+    height: 100%;
+}
+
+.log-page.active {
+    display: flex;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.625rem;
+  color: #F5F5DC;
+  cursor: pointer;
+  border: 4px solid #000;
+  background-color: #3E2723;
+}
+
+.pagination-btn:hover {
+  background-color: #5D4037;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.page-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #808080;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-indicator.active {
+  background-color: #FFD700;
+}
+/* Stats Radar Chart */
+.stats-radar-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.stats-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-name {
+  font-family: 'Press Start 2P', cursive;
+  color: #8B4513;
+  font-size: 0.6rem;
+  width: 140px;
+  text-align: left;
+}
+
+.stat-bar {
+  flex: 1;
+  height: 16px;
+  background: #808080;
+  position: relative;
+}
+
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6b1c9c, #9c4dcc);
+  transition: width 0.5s ease;
+}
+
+.stat-value {
+  font-family: 'Press Start 2P', cursive;
+  color: #000;
+  font-size: 0.6rem;
+  width: 40px;
+  text-align: right;
+}
+
+.stats-quote {
+  font-family: 'Press Start 2P', cursive;
+  color: #6b1c9c;
+  font-size: 0.7rem;
+  text-align: center;
+  font-style: italic;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid #8B4513;
+  background: rgba(255, 215, 0, 0.1);
+}
+/* Protect About Page Styles from Hobbies CSS Conflicts */
+
+/* Ensure Adventure Log text colors stay correct */
+.log-content .stat-label,
+.log-content .stat-value {
+    font-family: 'Press Start 2P', cursive !important;
+    font-size: 0.75rem !important;
+}
+
+.log-content .stat-label {
+    color: #8B4513 !important;
+}
+
+.log-content .stat-value {
+    color: #000 !important;
+}
+
+/* Protect Quest Text */
+.quest-text {
+    font-family: 'Space Grotesk', sans-serif !important;
+    color: #4a2e1a !important;
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+}
+
+.quest-text strong {
+    color: #4a2e1a !important;
+}
+
+/* Protect Profile Stats */
+.profile-stats .profile-stat {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.profile-stats .stat-label {
+    font-size: 0.75rem !important;
+    color: #8B4513 !important;
+    min-width: 80px !important;
+    text-align: left !important;
+}
+
+.profile-stats .stat-value {
+    font-size: 0.75rem !important;
+    color: #000 !important;
+    text-align: right !important;
+    flex: 1 !important;
+    margin-left: 1rem !important;
+}
+
+/* Protect XP Bar */
+.xp-text {
+    font-family: 'Press Start 2P', cursive !important;
+    color: #8B4513 !important;
+    font-size: 0.625rem !important;
+}
+
+/* Protect Profile Quote */
+.profile-quote {
+    font-family: 'Press Start 2P', cursive !important;
+    color: #6b1c9c !important;
+    font-size: 0.75rem !important;
+}
+
+/* Protect Quest Titles */
+.quest-title {
+    font-family: 'Press Start 2P', cursive !important;
+    color: #8B4513 !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    text-align: left !important;
+}
+
+/* Update pagination indicators */
+.page-indicators {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  
+  .parchment-container {
+    padding: 1rem;
+  }
+  
+  .character-portrait {
+    width: 96px;
+    height: 96px;
+  }
+  
+  .character-name {
+    font-size: 1rem;
+  }
+  
+  .log-title {
+    font-size: 1rem;
+  }
+  
+  .quest-text {
+    font-size: 0.75rem;
+  }
+  
+  .pagination-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.education-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.academy-scroll {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    background: #F5DEB3;
+    border: 8px double #8B4513;
+    padding: 2rem;
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqCV_CFh99PnrJFixp-SOVcQbgqaW56NoP53LS3VQWKvDitIRpJJn-Js-tSkMCFECOKhjzoO3lFCZk26SyN1ezNHuhMDwFgESQyFMyO7CvDMrOQCtwd5Tnqba0mNOvHNExq3tazuBqOOvrtjIpOK3r2HUn9FTNyTkg9ivOXGqxQMQxOG5ZABiYxiK8FDhXOpZdr_nr-9VRPbZB67q7RwBsZxfEthYT2tegib1XZ2TjvlK-D9i6jZsD_9EJEd0xZewiky0iUh_DBus');
+    overflow: hidden;
+}
+
+.academy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.academy-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 1.5rem;
+    text-shadow: 3px 3px 0 #000;
+    margin-bottom: 0.5rem;
+}
+
+.academy-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.8rem;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .education-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+}
+/* === EDUCATION SECTION STYLES === */
+.education-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.academy-scroll {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    background: #F5DEB3;
+    border: 8px double #8B4513;
+    padding: 2rem;
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqCV_CFh99PnrJFixp-SOVcQbgqaW56NoP53LS3VQWKvDitIRpJJn-Js-tSkMCFECOKhjzoO3lFCZk26SyN1ezNHuhMDwFgESQyFMyO7CvDMrOQCtwd5Tnqba0mNOvHNExq3tazuBqOOvrtjIpOK3r2HUn9FTNyTkg9ivOXGqxQMQxOG5ZABiYxiK8FDhXOpZdr_nr-9VRPbZB67q7RwBsZxfEthYT2tegib1XZ2TjvlK-D9i6jZsD_9EJEd0xZewiky0iUh_DBus');
+    overflow: hidden;
+}
+
+.academy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.academy-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 1.5rem;
+    text-shadow: 3px 3px 0 #000;
+    margin-bottom: 0.5rem;
+}
+
+.academy-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.8rem;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .education-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+}
+
+/* Scholar Profile Styles */
+.scholar-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.scholar-card {
+    background: rgba(139, 69, 19, 0.9);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.scholar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.scholar-portrait {
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    background-color: transparent;
+}
+
+.scholar-info h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.scholar-info p {
+    font-family: 'Press Start 2P', cursive;
+    color: #F5DEB3;
+    font-size: 0.6rem;
+}
+
+.scholar-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Education-specific stat styles */
+.scholar-profile .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scholar-profile .stat-label {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.6rem;
+}
+
+.scholar-profile .stat-value {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;
+    font-size: 0.6rem;
+}
+
+.scholar-profile .xp-bar-container {
+    margin-top: 0.5rem;
+}
+
+.scholar-profile .xp-bar-bg {
+    width: 100%;
+    background: #808080;
+    height: 16px;
+}
+
+.scholar-profile .xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    transition: width 0.5s ease;
+}
+
+.scholar-profile .xp-text {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.5rem;
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
+.learning-buffs {
+    background: rgba(128, 128, 128, 0.3);
+    padding: 1rem;
+}
+
+.buffs-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.buff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.buff-item {
+    background: rgba(30, 58, 138, 0.8);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.buff-name {
+    font-family: 'Press Start 2P', cursive;
+    color: #FFD700;
+    font-size: 0.5rem;
+}
+
+.main-quest {
+    background: rgba(128, 128, 128, 0.3);
+    padding: 1rem;
+}
+
+.quest-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.quest-name {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;
+    font-size: 0.6rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.quest-bar-bg {
+    width: 100%;
+    background: #808080;
+    height: 20px;
+}
+
+.quest-bar-fill {
+    height: 100%;
+    background: #228B22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #F5DEB3;
+    font-size: 0.5rem;
+}
+
+
+/* Education Timeline Styles */
+.education-timeline {
+    position: relative;
+}
+
+.timeline-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #8B4513;
+    border: 2px solid #000;
+}
+
+.timeline-milestone {
+    position: relative;
+    margin-bottom: 2rem;
+    background: rgba(128, 128, 128, 0.2);
+    padding: 1rem;
+    border: 4px solid #000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.timeline-milestone:hover {
+    transform: translateX(5px);
+    background: rgba(128, 128, 128, 0.4);
+}
+
+.timeline-milestone.active {
+    background: rgba(139, 69, 19, 0.3);
+    border-color: #FFD700;
+}
+
+.milestone-marker {
+    position: absolute;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: #228B22;
+    border: 3px solid #000;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #F5DEB3;
+    font-size: 0.6rem;
+    z-index: 2;
+}
+
+.milestone-marker.active {
+    background: #FFD700;
+    color: #000;
+}
+
+.milestone-marker.current {
+    background: #6b1c9c;
+    color: #FFD700;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.1); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+.milestone-content h4 {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.milestone-period {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.milestone-school {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.milestone-description {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #4a2e1a;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.milestone-achievement {
+    display: inline-block;
+    background: #FFD700;
+    color: #000;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5rem;
+    border: 2px solid #000;
+}
+
+@media (max-width: 768px) {
+    .academy-scroll {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .academy-title {
+        font-size: 1rem;
+    }
+
+    .scholar-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .buff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        padding-left: 1.5rem;
+    }
+
+    .milestone-marker {
+        left: -20px;
+        width: 20px;
+        height: 20px;
+    }
+}
+.quest-completed-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #228B22;
+    color: #FFD700;
+    padding: 0.25rem 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.4rem;
+    border: 2px solid #000;
+    text-shadow: 1px 1px 0 #000;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #228B22;
+    }
+    to {
+        box-shadow: 0 0 10px #228B22, 0 0 15px #32CD32;
+    }
+}
+.quest-completed-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #228B22;
+    color: #FFD700;
+    padding: 0.25rem 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.4rem;
+    border: 2px solid #000;
+    text-shadow: 1px 1px 0 #000;
+    animation: glow-completed 2s ease-in-out infinite alternate;
+}
+
+.quest-inprogress-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #6b1c9c;
+    color: #FFD700;
+    padding: 0.25rem 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.4rem;
+    border: 2px solid #000;
+    text-shadow: 1px 1px 0 #000;
+    animation: glow-inprogress 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-completed {
+    from {
+        box-shadow: 0 0 5px #228B22;
+    }
+    to {
+        box-shadow: 0 0 10px #228B22, 0 0 15px #32CD32;
+    }
+}
+
+@keyframes glow-inprogress {
+    from {
+        box-shadow: 0 0 5px #6b1c9c;
+    }
+    to {
+        box-shadow: 0 0 10px #6b1c9c, 0 0 15px #9d4edd;
+    }
+}
+/* Guild Hall Transformation */
+.guild-hall {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    background: #F5DEB3;
+    border: 8px double #8B4513;
+    padding: 2rem;
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqCV_CFh99PnrJFixp-SOVcQbgqaW56NoP53LS3VQWKvDitIRpJJn-Js-tSkMCFECOKhjzoO3lFCZk26SyN1ezNHuhMDwFgESQyFMyO7CvDMrOQCtwd5Tnqba0mNOvHNExq3tazuBqOOvrtjIpOK3r2HUn9FTNyTkg9ivOXGqxQMQxOG5ZABiYxiK8FDhXOpZdr_nr-9VRPbZB67q7RwBsZxfEthYT2tegib1XZ2TjvlK-D9i6jZsD_9EJEd0xZewiky0iUh_DBus');
+    overflow: hidden;
+}
+
+.guild-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.guild-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 1.5rem;
+    text-shadow: 3px 3px 0 #000;
+    margin-bottom: 0.5rem;
+}
+.guild-title-container {
+  background: rgba(139, 69, 19, 0.9);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  border: 6px solid #000 !important;
+}
+
+.guild-title {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 1.5rem;
+  text-shadow: 3px 3px 0 #000;
+  margin-bottom: 0.5rem;
+}
+
+.guild-subtitle {
+  font-family: 'Press Start 2P', cursive;
+  color: #F5DEB3;
+  font-size: 0.8rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* Add these to your existing CSS */
+
+/* Main guild layout fix */
+.guild-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  min-height: 600px; /* Ensure minimum height */
+}
+
+@media (min-width: 1024px) {
+  .guild-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Constrain quest board height and make it scrollable */
+.quest-board {
+  display: flex;
+  flex-direction: column;
+  max-height: 800px; /* Limit height */
+}
+
+.quest-board-main {
+  background: #D2B48C;
+  border: 6px solid #000 !important;
+  padding: 2rem;
+  margin-top: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Important for flex child scrolling */
+}
+
+/* Make quest contracts section scrollable */
+.quest-contracts-section {
+  background: rgba(139, 69, 19, 0.9);
+  padding: 1.5rem;
+  border: 4px solid #000;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Important for flex child scrolling */
+}
+
+.quests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  flex: 1;
+  overflow-y: auto; /* Make it scrollable */
+  max-height: 400px; /* Limit the grid height */
+  padding-right: 0.5rem;
+}
+
+/* Custom scrollbar for quests grid */
+.quests-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.quests-grid::-webkit-scrollbar-track {
+  background: rgba(128, 128, 128, 0.3);
+  border: 2px solid #000;
+}
+
+.quests-grid::-webkit-scrollbar-thumb {
+  background: #6b1c9c;
+  border: 2px solid #000;
+}
+
+.quests-grid::-webkit-scrollbar-thumb:hover {
+  background: #7d2bb3;
+}
+
+/* Ensure right panel stays put */
+.quest-archives {
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+}
+
+/* Adjust quest card sizes for better fit */
+.quest-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 3px solid #000;
+  padding: 1rem; /* Reduced padding */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem; /* Reduced gap */
+  min-height: 180px; /* Ensure consistent card height */
+}
+
+.quest-icon {
+  width: 50px; /* Slightly smaller */
+  height: 50px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  align-self: center;
+  margin: 0.3rem 0; /* Reduced margin */
+}
+
+.quest-name {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem; /* Slightly smaller */
+  color: #FFD700;
+  text-align: center;
+  margin: 0.3rem 0; /* Reduced margin */
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .guild-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .quest-board {
+    max-height: none; 
+  }
+  
+  .quests-grid {
+    max-height: none; 
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 1024px) {
+  .quests-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+}
+/* Quest Board Main Container */
+.quest-board-main {
+  background: #D2B48C;
+  border: 6px solid #000 !important;
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.quest-board-title {
+  font-family: 'Press Start 2P', cursive;
+  color: #8B4513;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* Search & Filters Section */
+.search-filters-section {
+  background: rgba(139, 69, 19, 0.9);
+  padding: 1.5rem;
+  border: 4px solid #000;
+  margin-bottom: 2rem;
+}
+
+.section-subtitle {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+@media (min-width: 768px) {
+  .filters-grid {
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Improved Input Alignment */
+.search-group, .filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-label {
+  font-family: 'Press Start 2P', cursive;
+  color: #F5DEB3;
+  font-size: 0.6rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.search-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.pixel-input-search, .pixel-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: #F5DEB3;
+  border: 3px solid #000;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  color: #000;
+  box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,0.3);
+  height: 45px; /* Same height for alignment */
+}
+
+.pixel-input-search::placeholder {
+  color: #666;
+  font-size: 0.5rem;
+}
+.preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 2rem;
+}
+
+.preview-placeholder .material-symbols-outlined {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.preview-placeholder p {
+  text-align: center;
+  margin: 0;
+}
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b1c9c;
+  font-size: 1.2rem;
+}
+
+/* Quest Cards Grid */
+.quest-contracts-section {
+  background: rgba(139, 69, 19, 0.9);
+  padding: 1.5rem;
+  border: 4px solid #000;
+}
+
+.quests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.quest-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 3px solid #000;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.quest-card:hover {
+  transform: translateY(-5px);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.quest-rank-badge {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border: 2px solid #000;
+}
+
+.quest-difficulty {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.quest-icon {
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  align-self: center;
+  margin: 0.5rem 0;
+}
+
+.quest-name {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: #FFD700;
+  text-align: center;
+  margin: 0.5rem 0;
+  line-height: 1.3;
+}
+
+.quest-description {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  color: #F5DEB3;
+  text-align: center;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.quest-client {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.5rem;
+  color: #D2B48C;
+  text-align: center;
+}
+
+.quest-reward {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  color: #FFD700;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Rank-specific styles */
+.quest-s-plus { border-color: #e53e3e; }
+.quest-s-plus .quest-rank-badge { background: #e53e3e; color: #FFD700; }
+.quest-s-plus .quest-difficulty { color: #e53e3e; }
+
+.quest-s { border-color: #805ad5; }
+.quest-s .quest-rank-badge { background: #805ad5; color: #FFD700; }
+.quest-s .quest-difficulty { color: #805ad5; }
+
+.quest-a { border-color: #dd6b20; }
+.quest-a .quest-rank-badge { background: #dd6b20; color: #FFD700; }
+.quest-a .quest-difficulty { color: #dd6b20; }
+
+.quest-b { border-color: #a16207; }
+.quest-b .quest-rank-badge { background: #a16207; color: #FFD700; }
+.quest-b .quest-difficulty { color: #a16207; }
+
+.quest-c { border-color: #4a5568; }
+.quest-c .quest-rank-badge { background: #4a5568; color: #FFD700; }
+.quest-c .quest-difficulty { color: #4a5568; }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .quest-board-main {
+    padding: 1rem;
+  }
+  
+  .quests-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .search-filters-section,
+  .quest-contracts-section {
+    padding: 1rem;
+  }
+}
+.quest-board-section {
+  background: rgba(128, 128, 128, 0.3);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-family: 'Press Start 2P', cursive;
+  color: #F5DEB3;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.quest-controls-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .quest-controls-grid {
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.quest-s-plus {
+  border-color: #e53e3e !important;
+  background: rgba(229, 62, 62, 0.1);
+}
+
+.quest-s-plus .quest-rank {
+  color: #e53e3e;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.quest-s {
+  border-color: #805ad5 !important;
+  background: rgba(128, 90, 213, 0.1);
+}
+
+.quest-s .quest-rank {
+  color: #805ad5;
+}
+
+.quest-a {
+  border-color: #dd6b20 !important;
+  background: rgba(221, 107, 32, 0.1);
+}
+
+.quest-a .quest-rank {
+  color: #dd6b20;
+}
+
+.quest-b {
+  border-color: #a16207 !important;
+  background: rgba(161, 98, 7, 0.1);
+}
+
+.quest-b .quest-rank {
+  color: #a16207;
+}
+
+.quest-c {
+  border-color: #4a5568 !important;
+  background: rgba(74, 85, 104, 0.1);
+}
+
+.quest-c .quest-rank {
+  color: #4a5568;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b1c9c;
+  font-size: 1.2rem;
+}
+
+.guild-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.8rem;
+}
+
+.guild-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .guild-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+}
+
+/* Left Panel: Quest Board */
+.quest-board {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.guild-member-info {
+    background: rgba(139, 69, 19, 0.9);
+    padding: 1rem;
+}
+
+.member-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.member-portrait {
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    background-color: transparent;
+}
+
+.member-details h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: #FFD700;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.member-details p {
+    font-family: 'Press Start 2P', cursive;
+    color: #F5DEB3;
+    font-size: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.member-stats {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.member-stats .stat {
+    font-family: 'Press Start 2P', cursive;
+    color: #FFD700;
+    font-size: 0.4rem;
+    background: rgba(0,0,0,0.3);
+    padding: 0.2rem 0.4rem;
+    border: 1px solid #000;
+}
+
+.quest-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+}
+
+.search-quests {
+    flex: 2;
+}
+
+.quest-filter {
+    flex: 1;
+}
+
+/* Quest Scrolls */
+.quest-scrolls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.quest-scroll {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    background: rgba(128, 128, 128, 0.2);
+    padding: 0.75rem;
+    border: 3px solid #000;
+}
+
+.quest-scroll:hover {
+    transform: translateY(-5px);
+    background: rgba(128, 128, 128, 0.4);
+}
+
+.scroll-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    margin-bottom: 0.5rem;
+}
+
+.quest-royal .scroll-image {
+    filter: drop-shadow(0 0 15px #FFD700);
+}
+
+.quest-guild .scroll-image {
+    filter: drop-shadow(0 0 12px #a0aec0);
+}
+
+.quest-adventurer .scroll-image {
+    filter: drop-shadow(0 0 10px #854d0e);
+}
+
+.quest-rank {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.quest-royal .quest-rank {
+    color: #FFD700;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.quest-guild .quest-rank {
+    color: #6b1c9c;
+}
+
+.quest-adventurer .quest-rank {
+    color: #8B4513;
+}
+
+.quest-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5rem;
+    color: #000;
+    margin-bottom: 0.25rem;
+}
+
+.quest-client {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.35rem;
+    color: #3E2723;
+}
+
+/* Right Panel: Quest Archives */
+.quest-archives {
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+.archives-content {
+    background: rgba(128, 128, 128, 0.2);
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.archives-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.quest-display {
+    background: #F5DEB3;
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    min-height: 500px;
+}
+
+.quest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.quest-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.quest-rank-badge {
+    font-family: 'Press Start 2P', cursive;
+    color: #6b1c9c;
+    font-size: 0.5rem;
+    background: rgba(107, 28, 156, 0.1);
+    padding: 0.25rem 0.5rem;
+    border: 2px solid #6b1c9c;
+    white-space: nowrap;
+}
+
+.quest-client-info {
+    background: rgba(139, 69, 19, 0.1);
+    padding: 0.75rem;
+    border: 2px solid #8B4513;
+    margin-bottom: 1rem;
+}
+
+.quest-client-info p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #4a2e1a;
+    font-size: 0.7rem;
+    margin: 0.25rem 0;
+}
+
+.quest-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    border: 4px solid #000;
+    image-rendering: pixelated;
+    margin-bottom: 1.5rem;
+}
+
+.content-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+}
+
+.quest-brief-section, .quest-solution-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #8B4513;
+    font-size: 0.7rem;
+    margin-bottom: 0;
+}
+
+.brief-description {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #4a2e1a;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.solution-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-item {
+    background: #1e3a8a;
+    color: #FFD700;
+    padding: 0.25rem 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5rem;
+    border: 2px solid #000;
+}
+
+.quest-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 1rem 0 2rem 0;
+}
+
+.contract-details, .rewards-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contract-details p, .rewards-details p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #4a2e1a;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.quest-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 2px solid #8B4513;
+}
+
+.action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.8rem 0.6rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.55rem;
+    border: 3px solid #000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    min-height: auto;
+    line-height: 1.2;
+}
+
+.action-btn:hover {
+    transform: translate(-2px, -2px);
+}
+
+.action-btn .material-symbols-outlined {
+    font-size: 1rem;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}
+
+.btn-inspect {
+    background: #DC2626;
+    color: #F5DEB3;
+}
+
+.btn-contract {
+    background: #228B22;
+    color: #F5DEB3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quest-controls {
+        flex-direction: column;
+    }
+    
+    .quest-scrolls {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .quest-results {
+        grid-template-columns: 1fr;
+    }
+    
+    .quest-actions {
+        flex-direction: column;
+    }
+    
+    .quest-header {
+        flex-direction: column;
+    }
+}
+.side-quests {
+    background: rgba(128, 128, 128, 0.3);
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.view-side-quests-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    color: #FFD700;
+    background: linear-gradient(to bottom, #6b1c9c, #4a148c);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    transform: translate(-2px, -2px);
+    position: relative;
+    overflow: hidden;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.view-side-quests-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 215, 0, 0.2), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.view-side-quests-btn:hover {
+    background: linear-gradient(to bottom, #7d2bb3, #6b1c9c);
+    transform: translate(0px, 0px);
+    box-shadow: 2px 2px 0px #000, 0 0 15px rgba(255, 215, 0, 0.4);
+    letter-spacing: 0.5px;
+    color: #ffed4e;
+}
+
+.view-side-quests-btn:hover::before {
+    left: 100%;
+}
+
+.view-side-quests-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px #000;
+    background: linear-gradient(to bottom, #5a1c8c, #4a148c);
+}
+
+.view-side-quests-btn .material-symbols-outlined {
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.5));
+}
+
+.view-side-quests-btn:hover .material-symbols-outlined {
+    transform: scale(1.2) rotate(5deg);
+    color: #ffed4e;
+    filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.5));
+}
+
+.side-quests-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-quests-modal.active {
+    display: flex;
+}
+
+.side-quests-modal .modal-content {
+    background: #F5DEB3;
+    width: 90%;
+    max-width: 1000px;
+    height: 80vh;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+.side-quests-modal .modal-body {
+    flex: 1;
+    overflow: hidden;
+    padding: 0; 
+}
+
+.side-quests-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    height: 100%;
+    padding: 1rem;
+    flex: 1;
+    overflow: hidden;
+}
+
+.side-quests-timeline {
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 1rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.certificate-preview {
+    background: rgba(128, 128, 128, 0.2);
+    border: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 1rem;
+    overflow-y: auto;
+    height: 100%; 
+}
+
+.certificate-display {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.certificate-display .certificate-image {
+    flex: 1;
+    min-height: 200px;
+    background-color: #fff;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 3px solid #000;
+    image-rendering: high-quality;
+}
+
+.certificate-info {
+    background: rgba(139, 69, 19, 0.1);
+    padding: 1rem;
+    border: 2px solid #8B4513;
+}
+
+.certificate-info h4 {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-info p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #4a2e1a;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-meta {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.5rem;
+}
+
+.side-quest-milestone {
+    position: relative;
+    margin-bottom: 1rem;
+    background: rgba(128, 128, 128, 0.2);
+    padding: 0.75rem;
+    border: 3px solid #000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.side-quest-milestone:hover {
+    transform: translateX(5px);
+    background: rgba(128, 128, 128, 0.4);
+    border-color: #6b1c9c;
+}
+
+.side-quest-marker {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #228B22;
+    border: 2px solid #000;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #F5DEB3;
+    font-size: 0.5rem;
+    z-index: 2;
+}
+
+.side-quest-marker.completed {
+    background: #228B22;
+    animation: side-quest-glow 2s infinite alternate;
+}
+
+@keyframes side-quest-glow {
+    from {
+        box-shadow: 0 0 5px #228B22;
+    }
+    to {
+        box-shadow: 0 0 10px #228B22, 0 0 15px #32CD32;
+    }
+}
+
+.side-quest-content h5 {
+    font-family: 'Press Start 2P', cursive;
+    color: #000;
+    font-size: 0.6rem;
+    margin-bottom: 0.25rem;
+}
+
+.side-quest-period {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.side-quest-badge {
+    display: inline-block;
+    background: #228B22;
+    color: #FFD700;
+    padding: 0.2rem 0.4rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.35rem;
+    border: 1px solid #000;
+    text-shadow: 1px 1px 0 #000;
+    animation: glow-completed 2s ease-in-out infinite alternate;
+}
+
+.certificate-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2100;
+    align-items: center;
+    justify-content: center;
+}
+
+.certificate-modal.active {
+    display: flex;
+}
+
+.certificate-modal .modal-content {
+    background: #F5DEB3;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(139, 69, 19, 0.9);
+    border-bottom: 4px solid #000;
+}
+
+.modal-header h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.close-modal {
+    font-size: 1.5rem;
+    color: #FFD700;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ffed4e;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.certificate-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: #fff;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 4px solid #000;
+    image-rendering: high-quality;
+}
+
+.certificate-details {
+    background: rgba(128, 128, 128, 0.2);
+    padding: 1rem;
+    border: 2px solid #000;
+}
+
+.certificate-details p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #4a2e1a;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-date {
+    font-family: 'Press Start 2P', cursive;
+    color: #3E2723;
+    font-size: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    .side-quests-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .side-quests-timeline {
+        padding-left: 1.5rem;
+        max-height: 300px;
+    }
+    
+    .side-quest-marker {
+        left: -18px;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .side-quests-modal .modal-content,
+    .certificate-modal .modal-content {
+        width: 95%;
+        margin: 1rem;
+        height: 90vh;
+    }
+    
+    .certificate-preview {
+        min-height: 200px;
+    }
+}
+/* Disable performance-heavy background */
+#landing {
+    background: none !important;
+    background-image: none !important;
+}
+
+/* Optional: Add a simple fallback background */
+#landing {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%) !important;
+}
+#side-quest-header{
+ color: #FFD700;
+}
+
+
+#education .scholar-profile .scholar-stats .xp-bar-container .xp-text {
+  color: #FFD700 !important;
+}
+
+#education .buff-item,
+#education .buff-item.pixel-border,
+#education .buff-item[class*="pixel"] {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 6px 6px 0px #000 !important;
+    transform: translate(-3px, -3px) !important;
+}
+
+#education .buff-item:hover,
+#education .buff-item.pixel-border:hover,
+#education .buff-item[class*="pixel"]:hover {
+    transform: translate(0px, 0px) !important;
+    box-shadow: 3px 3px 0px #000 !important;
+    letter-spacing: 1px !important;
+}
+
+#education .buff-item:active,
+#education .buff-item.pixel-border:active,
+#education .buff-item[class*="pixel"]:active {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0px #000 !important;
+}
+
+/* Side Quests Button */
+#education .view-side-quests-btn,
+#education .view-side-quests-btn.pixel-button,
+#education button[class*="view-side-quests"] {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 6px 6px 0px #000 !important;
+    transform: translate(-3px, -3px) !important;
+}
+
+#education .view-side-quests-btn:hover,
+#education .view-side-quests-btn.pixel-button:hover,
+#education button[class*="view-side-quests"]:hover {
+    transform: translate(0px, 0px) !important;
+    box-shadow: 3px 3px 0px #000 !important;
+    letter-spacing: 1px !important;
+}
+
+#education .view-side-quests-btn:active,
+#education .view-side-quests-btn.pixel-button:active,
+#education button[class*="view-side-quests"]:active {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0px #000 !important;
+}
+
+#about .prev-btn.pixel-button,
+#about .next-btn.pixel-button {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 6px 6px 0px #000 !important;
+    transform: translate(-3px, -3px) !important;
+}
+
+#about .prev-btn.pixel-button:hover,
+#about .next-btn.pixel-button:hover {
+    transform: translate(0px, 0px) !important;
+    box-shadow: 3px 3px 0px #000 !important;
+    letter-spacing: 1px !important;
+}
+
+#about .prev-btn.pixel-button:active,
+#about .next-btn.pixel-button:active {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0px #000 !important;
+}

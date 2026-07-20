@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Scroll Zoom with Navigation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* The background photo */
+    .zoom-photo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.6); /* start extra zoomed in */
+      z-index: -1; /* behind text */
+      filter: brightness(0.9);
+      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      scroll-snap-align: start;
+    }
+
+    .section-content {
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 1s ease-out;
+    }
+
+    .section-visible .section-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h1 {
+      font-size: 5rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1.5rem 3rem;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      letter-spacing: 2px;
+    }
+
+    section p {
+      font-size: 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.2rem;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+      40% {transform: translateY(-20px) translateX(-50%);}
+      60% {transform: translateY(-10px) translateX(-50%);}
+    }
+
+    /* Film review specific styles */
+    .film-review {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 2rem 3rem;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0.8rem 1rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+      
+      section h1 {
+        font-size: 3rem;
+        padding: 1rem 2rem;
+      }
+      
+      section p {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+      }
+      
+      .scroll-indicator {
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="#section1" class="active">Cloudy Thoughts</a>
+      <a href="#section2">Film Review</a>
+    </div>
+  </nav>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">Scroll down ↓</div>
+
+  <!-- One background photo -->
+  <img class="zoom-photo" src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Clouds">
+
+  <!-- Section 1 -->
+  <section id="section1" class="section-visible">
+    <div class="section-content">
+      <h1>Cloudy Thoughts</h1>
+      <p>Scroll down to reveal the full image and see the film review</p>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="section2">
+    <div class="section-content film-review">
+      <h1>FILM REVIEW</h1>
+      <p>A captivating journey through cinematic excellence</p>
+    </div>
+  </section>
+
+  <!-- GSAP + ScrollTrigger -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Smooth zoom effect - finishes by end of 2nd section
+  gsap.to(".zoom-photo", {
+    scale: 1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "section:nth-of-type(2)", 
+      start: "top bottom", 
+      end: "top top",     
+      scrub: 1
+    }
+  });
+
+  // Text animation for the second section
+  gsap.to("section:nth-of-type(2) .section-content", {
+    opacity: 1,
+    y: 0,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "section:nth-of-type(2)",
+      start: "top 80%",
+      end: "top 30%",
+      scrub: 1,
+      markers: false
+    }
+  });
+
+  // Fade out animation for section1 content when scrolling down
+  gsap.to("#section1 .section-content", {
+    opacity: 0,
+    y: -50,
+    ease: "power1.out",
+    scrollTrigger: {
+      trigger: "#section1",
+      start: "top top",
+      end: "bottom 40%",
+      scrub: true
+    }
+  });
+
+  // Intersection Observer for visibility + nav highlighting
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const zoomPhoto = document.querySelector('.zoom-photo');
+  
+  const options = { threshold: 0.5 };
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+        
+        // Update active nav link
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${entry.target.id}`) {
+            link.classList.add('active');
+          }
+        });
+        
+        // Adjust zoom based on section
+        if (entry.target.id === 'section1') {
+          gsap.to(zoomPhoto, { scale: 1.6, duration: 1.2, ease: "power2.out" });
+        } else if (entry.target.id === 'section2') {
+          gsap.to(zoomPhoto, { scale: 1, duration: 1.2, ease: "power2.out" });
+        }
+      }
+    });
+  }, options);
+  
+  sections.forEach(section => observer.observe(section));
+
+  // Initialize the first section as visible
+  document.getElementById('section1').classList.add('section-visible');
+
+  // --- NEW: Trigger text animation on navbar click ---
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault(); // prevent instant jump
+    
+    const targetId = link.getAttribute('href');
+    const targetSection = document.querySelector(targetId);
+    const content = targetSection.querySelector('.section-content');
+    
+    // Smooth scroll to section
+    targetSection.scrollIntoView({ behavior: "smooth" });
+
+    // Reset content before animation
+    if (content) {
+      gsap.set(content, { opacity: 0, y: 50 });
+    }
+
+    // After scroll, animate text
+    setTimeout(() => {
+      if (content) {
+        gsap.to(content, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1, 
+          ease: "power2.out" 
+        });
+      }
+    }, 600); // delay to match scroll timing
+  });
+});
+</script>
+</body>
+</html>

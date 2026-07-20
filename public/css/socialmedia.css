@@ -1,0 +1,128 @@
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+            width: 70px;
+            height: 70px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .icon a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #fff;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .icon a span i {
+            font-size: 28px;
+            color: #333;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .icon .tooltip {
+            position: absolute;
+            top: 0;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .icon:hover .tooltip {
+            opacity: 1;
+            pointer-events: auto;
+            top: -60px;
+        }
+        
+        .icon .tooltip:before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            width: 15px;
+            background: inherit;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        /* Facebook */
+        .facebook:hover a,
+        .facebook:hover a span i,
+        .facebook .tooltip,
+        .facebook .tooltip:before {
+            background: #3b5999;
+            color: #fff;
+        }
+        
+        /* YouTube */
+        .youtube:hover a,
+        .youtube:hover a span i,
+        .youtube .tooltip,
+        .youtube .tooltip:before {
+            background: #ff0000;
+            color: #fff;
+        }
+        
+        /* TikTok */
+        .tiktok:hover a,
+        .tiktok:hover a span i,
+        .tiktok .tooltip,
+        .tiktok .tooltip:before {
+            background: #000000;
+            color: #fff;
+        }
+        
+       /* GitHub */
+        .github:hover a,
+        .github:hover a span i,
+        .github .tooltip,
+        .github .tooltip:before {
+            background: #333333;
+            color: #fff;
+        }
+        
+        /* Discord */
+        .discord:hover a,
+        .discord:hover a span i,
+        .discord .tooltip,
+        .discord .tooltip:before {
+            background: #7289da;
+            color: #fff;
+        }
+        
+        /* Instagram */
+     .instagram .tooltip,
+.instagram .tooltip:before,
+.instagram:hover a {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}

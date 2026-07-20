@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio 3D Carousel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      user-select: none;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #111, #222);
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    .conteudo_geral {
+      perspective: 1200px;
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .container {
+      width: 100%;
+      height: 500px;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .carrossel {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transform: translateZ(-350px) rotateY(0deg);
+      transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    }
+
+    .carrossel-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 220px;
+      height: 300px;
+      margin: -150px 0 0 -110px;
+      background: linear-gradient(145deg, #444, #222);
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 3.5rem;
+      color: #fff;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .carrossel-item:hover {
+      background: linear-gradient(145deg, #666, #333);
+      transform: scale(1.05) translateZ(20px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .item-image {
+      width: 100%;
+      height: 140px;
+      background: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .item-image i {
+      font-size: 4rem;
+      color: #ff6b6b;
+    }
+
+    .item-content {
+      padding: 20px;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    .item-desc {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    .item-tech {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+    }
+
+    /* Position each item around a circle with reduced spacing */
+    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(350px); }
+    .carrossel-item:nth-child(2) { transform: rotateY(60deg) translateZ(350px); }
+    .carrossel-item:nth-child(3) { transform: rotateY(120deg) translateZ(350px); }
+    .carrossel-item:nth-child(4) { transform: rotateY(180deg) translateZ(350px); }
+    .carrossel-item:nth-child(5) { transform: rotateY(240deg) translateZ(350px); }
+    .carrossel-item:nth-child(6) { transform: rotateY(300deg) translateZ(350px); }
+
+    .controls {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+
+    .control-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    .title {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+
+    .title span {
+      color: #ff6b6b;
+    }
+
+    .indicator {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .indicator-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .indicator-dot.active {
+      background: #ff6b6b;
+      transform: scale(1.2);
+    }
+
+    .view-btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .carrossel-item:hover .view-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .view-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    img {
+  pointer-events: none; 
+  -webkit-user-drag: none; 
+}
+  </style>
+</head>
+<body>
+  <div class="conteudo_geral">
+    <h1 class="title">My <span>Portfolio</span></h1>
+    
+    <div class="container">
+      <div class="carrossel" id="carrossel">
+        <div class="carrossel-item">
+          <div class="item-image">
+            <i class="fas fa-globe"></i>
+          </div>
+          <div class="item-content">
+            <h3 class="item-title">E-Commerce Site</h3>
+            <p class="item-desc">A fully responsive e-commerce platform with payment integration.</p>
+            <div class="item-tech">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">MongoDB</span>
+            </div>
+          </div>
+          <button class="view-btn">View Project</button>
+        </div>
+        <div class="carrossel-item">
+          <div class="item-image">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <div class="item-content">
+            <h3 class="item-title">Fitness App</h3>
+            <p class="item-desc">Mobile application for tracking workouts and nutrition.</p>
+            <div class="item-tech">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">Firebase</span>
+            </div>
+          </div>
+          <button class="view-btn">View Project</button>
+        </div>
+        <div class="carrossel-item">
+          <div class="item-image">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <div class="item-content">
+            <h3 class="item-title">Design Portfolio</h3>
+            <p class="item-desc">A creative portfolio website for a graphic designer.</p>
+            <div class="item-tech">
+              <span class="tech-tag">HTML/CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+          </div>
+          <button class="view-btn">View Project</button>
+        </div>
+        <div class="carrossel-item">
+          <div class="item-image">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="item-content">
+            <h3 class="item-title">Analytics Dashboard</h3>
+            <p class="item-desc">Real-time data visualization for business metrics.</p>
+            <div class="item-tech">
+              <span class="tech-tag">Vue.js</span>
+              <span class="tech-tag">D3.js</span>
+              <span class="tech-tag">Express</span>
+            </div>
+          </div>
+          <button class="view-btn">View Project</button>
+        </div>
+        <div class="carrossel-item">
+          <div class="item-image">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <div class="item-content">
+            <h3 class="item-title">Game Development</h3>
+            <p class="item-desc">An interactive browser-based game with multiplayer.</p>
+            <div class="item-tech">
+              <span class="tech-tag">Phaser</span>
+              <span class="tech-tag">Socket.io</span>
+            </div>
+          </div>
+          <button class="view-btn">View Project</button>
+        </div>
+        <div class="carrossel-item">
+          <div class="item-image">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="item-content">
+            <h3 class="item-title">AI Chatbot</h3>
+            <p class="item-desc">A conversational AI assistant for customer support.</p>
+            <div class="item-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">NLP</span>
+            </div>
+          </div>
+          <button class="view-btn">View Project</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="indicator" id="indicator">
+      <div class="indicator-dot active"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+    </div>
+    
+    <div class="controls">
+      <div class="control-btn" id="prev-btn"><i class="fas fa-arrow-left"></i></div>
+      <div class="control-btn" id="next-btn"><i class="fas fa-arrow-right"></i></div>
+    </div>
+  </div>
+
+  <script>
+    const carrossel = document.getElementById("carrossel");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const indicatorDots = document.querySelectorAll('.indicator-dot');
+    let currentRotation = 0;
+    let startX = 0;
+    let dragging = false;
+    const rotationStep = 60; // degrees to rotate on each click
+    let currentIndex = 0;
+
+    // Rotate carousel function
+    function rotateCarousel(degrees) {
+      currentRotation += degrees;
+      carrossel.style.transform = `translateZ(-350px) rotateY(${currentRotation}deg)`;
+      
+      // Update current index
+      currentIndex = (currentIndex - (degrees / 60) + 6) % 6;
+      
+      // Update indicator
+      updateIndicator();
+    }
+
+    function updateIndicator() {
+      indicatorDots.forEach((dot, index) => {
+        if (index === currentIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    // Event listeners for buttons
+    prevBtn.addEventListener('click', () => rotateCarousel(rotationStep));
+    nextBtn.addEventListener('click', () => rotateCarousel(-rotationStep));
+
+    // Click on indicator dots
+    indicatorDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        const steps = index - currentIndex;
+        rotateCarousel(-steps * rotationStep);
+      });
+    });
+
+    // Mouse and touch events for dragging
+    document.addEventListener("mousedown", (e) => {
+      dragging = true;
+      startX = e.clientX;
+      carrossel.style.transition = 'none';
+    });
+
+    document.addEventListener("mouseup", () => {
+      dragging = false;
+      carrossel.style.transition = 'transform 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+      
+      // Snap to nearest position
+      const snappedRotation = Math.round(currentRotation / rotationStep) * rotationStep;
+      currentRotation = snappedRotation;
+      carrossel.style.transform = `translateZ(-350px) rotateY(${currentRotation}deg)`;
+      
+      // Update current index
+      currentIndex = (6 - Math.round(currentRotation / 60) % 6) % 6;
+      updateIndicator();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!dragging) return;
+      let deltaX = e.clientX - startX;
+      startX = e.clientX;
+      currentRotation += deltaX * 0.5; // speed multiplier
+      carrossel.style.transform = `translateZ(-350px) rotateY(${currentRotation}deg)`;
+    });
+
+    // For touch screens
+    document.addEventListener("touchstart", (e) => {
+      dragging = true;
+      startX = e.touches[0].clientX;
+      carrossel.style.transition = 'none';
+    });
+
+    document.addEventListener("touchend", () => {
+      dragging = false;
+      carrossel.style.transition = 'transform 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+      
+      // Snap to nearest position
+      const snappedRotation = Math.round(currentRotation / rotationStep) * rotationStep;
+      currentRotation = snappedRotation;
+      carrossel.style.transform = `translateZ(-350px) rotateY(${currentRotation}deg)`;
+      
+      // Update current index
+      currentIndex = (6 - Math.round(currentRotation / 60) % 6) % 6;
+      updateIndicator();
+    });
+
+    document.addEventListener("touchmove", (e) => {
+      if (!dragging) return;
+      let deltaX = e.touches[0].clientX - startX;
+      startX = e.touches[0].clientX;
+      currentRotation += deltaX * 0.5;
+      carrossel.style.transform = `translateZ(-350px) rotateY(${currentRotation}deg)`;
+    });
+  </script>
+</body>
+</html>

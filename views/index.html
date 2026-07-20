@@ -1,0 +1,2527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keyword" content="King Miguel T. Remo, Remo, King Miguel T., King Miguel, Remo King">
+    <meta name="description" content="Hello, I am King Miguel Remo and I am but a humble Web Developer. Please do consider hiring me.">
+    <link rel="icon" href="/images/knightC.png">
+    <title>King | Portfolio</title>
+    <link rel = "stylesheet" href = "/css/preloader.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/portfolio.css">
+    <link rel ="stylesheet" href = "/css/projects.css">
+    <link rel="stylesheet" href="/css/hobbies.css">
+    <link rel="stylesheet" href="/css/knight.css">
+    <link rel = "stylesheet"href="/css/map.css">
+    <link rel ="stylesheet" href = "/css/contact.css">
+<style>
+#contact {
+    contain: layout paint style;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Force GPU acceleration where needed */
+.message-board {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+.village-background,
+.village-background::before,
+.village-background::after {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Remove complex gradients and replace with simple ones */
+#landing,
+.contact-section {
+    background: linear-gradient(135deg, #1b1220 0%, #2d1b36 100%) !important;
+    background-image: none !important;
+}
+
+/* Disable any animations that might be running */
+.landing-rune,
+.rune {
+    animation: none !important;
+    transition: none !important;
+}
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1b1220 0%, #2d1b36 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    z-index: 9999;
+    text-align: center;
+}
+
+/* Welcome Screen */
+#welcomeScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    text-align: center;
+}
+
+/* Typing Animation for Title */
+.welcome-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: #FFD700;
+    text-shadow: 3px 3px 0 #000;
+    line-height: 1.4;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: preloaderTyping 2s steps(40, end) forwards;
+    width: 0;
+}
+
+/* Typing Animation for Subtitle */
+.preloader-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: #F5DEB3;
+    text-shadow: 2px 2px 0 #000;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: preloaderTyping 1.5s steps(30, end) 2.2s forwards;
+    width: 0;
+}
+
+/* Start Button - Hidden initially, appears after typing */
+.start-button {
+    padding: 1rem 2rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    background: #6b1c9c;
+    color: #FFD700;
+    border: 4px solid #000;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #000;
+    transform: translate(-2px, -2px);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: preloaderFadeInButton 0.5s ease 4s forwards;
+}
+
+.start-button:hover {
+    transform: translate(0px, 0px);
+    box-shadow: 0px 0px 0px #000;
+    background: #7d2bb3;
+}
+
+/* Loading Screen */
+#loadingScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* Forge Status - Simple centered text */
+.forge-status {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #F5DEB3;
+    text-align: center;
+    order: 2;
+}
+
+/* Progress Bar - Original Orange Style with Completion Glow */
+#preloader .loading-bar-container {
+    width: 100%;
+    background: #000;
+    border: 4px solid #000;
+    padding: 3px;
+    order: 1;
+    box-shadow: 
+        inset 2px 2px 0px rgba(255,255,255,0.1),
+        inset -2px -2px 0px rgba(0,0,0,0.5);
+}
+
+#preloader .loading-bar-fill {
+    height: 25px;
+    background: #dd6b20;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+    animation: preloaderForgeProgress 2s linear infinite;
+    transition: all 0.5s ease;
+    width: 0%;
+    position: relative;
+}
+
+/* GLOW EFFECT FOR 100% COMPLETION - PRELOADER SPECIFIC */
+#preloader .loading-bar-fill.preloader-complete {
+    background: linear-gradient(90deg, #FFD700, #ffed4e, #FFD700);
+    animation: 
+        preloaderForgeProgress 1s linear infinite,
+        preloaderIntenseGlow 1.5s ease-in-out infinite;
+    box-shadow: 
+        0 0 10px #FFD700,
+        0 0 20px #FFD700,
+        0 0 30px #ffed4e;
+}
+
+/* Add a subtle pulse to the container when complete */
+#preloader .loading-bar-container.preloader-complete {
+    animation: preloaderContainerPulse 2s ease-in-out infinite;
+    border-color: #FFD700;
+}
+
+/* === PRELOADER-SPECIFIC ANIMATIONS (won't affect other sections) === */
+@keyframes preloaderTyping {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes preloaderFadeInButton {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes preloaderForgeProgress {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 0; }
+}
+
+@keyframes preloaderIntenseGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 10px #FFD700,
+            0 0 20px #FFD700,
+            0 0 30px #ffed4e;
+        filter: brightness(1.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 15px #FFD700,
+            0 0 30px #FFD700,
+            0 0 45px #ffed4e,
+            0 0 60px #FFA500;
+        filter: brightness(1.5);
+    }
+}
+
+@keyframes preloaderContainerPulse {
+    0%, 100% {
+        box-shadow: 
+            inset 2px 2px 0px rgba(255,255,255,0.1),
+            inset -2px -2px 0px rgba(0,0,0,0.5),
+            0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    50% {
+        box-shadow: 
+            inset 2px 2px 0px rgba(255,255,255,0.1),
+            inset -2px -2px 0px rgba(0,0,0,0.5),
+            0 0 20px rgba(255, 215, 0, 0.6);
+    }
+}
+
+.app-container {
+    display: none;
+}
+</style>
+
+<style> 
+  /* ============================================ */
+/* RATE PORTFOLIO MODAL STYLES */
+/* ============================================ */
+
+/* Overlay */
+.rate-modal-overlay,
+.rate-thankyou-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.rate-modal-overlay.active,
+.rate-thankyou-overlay.active {
+  display: flex;
+}
+
+/* Modal Box */
+.rate-modal {
+  background: linear-gradient(180deg, #2d1b36 0%, #1b1220 100%);
+  padding: 2rem;
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+  border: 4px solid #6b1c9c;
+  box-shadow: 6px 6px 0px #000, 0 0 30px rgba(107, 28, 156, 0.3);
+  text-align: center;
+}
+
+/* Close Button */
+.rate-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #F5DEB3;
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  transition: color 0.2s ease;
+}
+
+.rate-modal-close:hover {
+  color: #e53e3e;
+}
+
+/* Header */
+.rate-modal-header {
+  margin-bottom: 1.5rem;
+}
+
+.rate-modal-header .material-symbols-outlined {
+  font-size: 3rem;
+  color: #FFD700;
+}
+
+.rate-modal-header h2 {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.rate-modal-header p {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #F5DEB3;
+  font-size: 0.8rem;
+}
+
+/* Stars */
+.rate-stars-container {
+  margin: 1.5rem 0;
+}
+
+.rate-stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2.5rem;
+}
+
+.rate-star {
+  color: #4a4a4a;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.rate-star:hover {
+  transform: scale(1.3);
+  color: #FFD700;
+}
+
+.rate-star.active {
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.rate-star:hover ~ .rate-star {
+  color: #4a4a4a;
+}
+
+.rate-label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.55rem;
+  color: #F5DEB3;
+  margin-top: 0.5rem;
+  min-height: 1.2rem;
+}
+
+/* Feedback */
+.rate-feedback-container {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.rate-feedback-label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.55rem;
+  color: #F5DEB3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.rate-feedback-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 3px solid #6b1c9c;
+  color: #F5DEB3;
+  padding: 0.75rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.rate-feedback-input:focus {
+  outline: none;
+  border-color: #FFD700;
+}
+
+.rate-feedback-input::placeholder {
+  color: #666;
+}
+
+.rate-char-count {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.45rem;
+  color: #888;
+  text-align: right;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Submit Button */
+.rate-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  background: linear-gradient(180deg, #228B22 0%, #1a6b1a 100%);
+  color: #FFD700;
+  border: 3px solid #000;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0d3d0d;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rate-submit-btn:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 #0d3d0d;
+}
+
+.rate-submit-btn:active:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #0d3d0d;
+}
+
+.rate-submit-btn:disabled {
+  background: linear-gradient(180deg, #555 0%, #333 100%);
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #222;
+}
+
+/* Status Message */
+.rate-status {
+  margin-top: 1rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.5rem;
+  min-height: 1rem;
+  transition: all 0.3s ease;
+}
+
+.rate-status.sending {
+  color: #FFD700;
+}
+
+.rate-status.success {
+  color: #228B22;
+}
+
+.rate-status.error {
+  color: #e53e3e;
+}
+
+/* Thank You Overlay */
+.rate-thankyou {
+  background: linear-gradient(180deg, #2d1b36 0%, #1b1220 100%);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  border: 4px solid #FFD700;
+  box-shadow: 6px 6px 0px #000, 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.thankyou-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.rate-thankyou h2 {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.rate-thankyou p {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #F5DEB3;
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .rate-modal {
+    padding: 1.5rem;
+  }
+  
+  .rate-modal-header h2 {
+    font-size: 0.8rem;
+  }
+  
+  .rate-stars {
+    font-size: 2rem;
+    gap: 0.3rem;
+  }
+  
+  .rate-submit-btn {
+    font-size: 0.5rem;
+    padding: 0.75rem;
+  }
+}
+
+/* ============================================ */
+/* SMALL PROJECTS REDIRECT MODAL */
+/* ============================================ */
+
+.small-projects-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+  backdrop-filter: blur(4px);
+}
+
+.small-projects-modal-overlay.active {
+  display: flex;
+}
+
+.small-projects-modal {
+  background: linear-gradient(180deg, #2d1b36 0%, #1b1220 100%);
+  padding: 2rem;
+  max-width: 520px;
+  width: 90%;
+  position: relative;
+  border: 4px solid #a16207;
+  box-shadow: 6px 6px 0px #000, 0 0 30px rgba(161, 98, 7, 0.3);
+  text-align: center;
+}
+
+.small-projects-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #F5DEB3;
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  transition: color 0.2s ease;
+  z-index: 2;
+}
+
+.small-projects-close:hover {
+  color: #e53e3e;
+}
+
+.small-projects-header {
+  margin-bottom: 1.5rem;
+}
+
+.small-projects-header .material-symbols-outlined {
+  font-size: 3rem;
+  color: #FFD700;
+}
+
+.small-projects-header h2 {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  text-shadow: 2px 2px 0 #000;
+  line-height: 1.4;
+}
+
+.small-projects-body {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.small-projects-text {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #F5DEB3;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.small-projects-text strong {
+  color: #FFD700;
+}
+
+.small-projects-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #a16207;
+}
+
+.small-project-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.45rem;
+  color: #C0C0C0;
+  padding: 0.3rem;
+}
+
+.small-project-item .material-symbols-outlined {
+  font-size: 1rem;
+  color: #FFD700;
+}
+
+.small-projects-hint {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #888;
+  font-size: 0.7rem;
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.small-projects-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.small-projects-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1.2rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.5rem;
+  border: 3px solid #000;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.small-projects-btn.primary {
+  background: linear-gradient(180deg, #a16207 0%, #7a4a06 100%);
+  color: #FFD700;
+  box-shadow: 0 4px 0 #3d2503;
+  flex: 1;
+}
+
+.small-projects-btn.primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 #3d2503;
+  background: linear-gradient(180deg, #b8730f 0%, #a16207 100%);
+}
+
+.small-projects-btn.secondary {
+  background: linear-gradient(180deg, #555 0%, #333 100%);
+  color: #F5DEB3;
+  box-shadow: 0 4px 0 #222;
+}
+
+.small-projects-btn.secondary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 #222;
+}
+
+@media (max-width: 480px) {
+  .small-projects-modal {
+    padding: 1.5rem;
+  }
+  
+  .small-projects-header h2 {
+    font-size: 0.7rem;
+  }
+  
+  .small-projects-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .small-projects-actions {
+    flex-direction: column;
+  }
+  
+  .small-projects-btn {
+    font-size: 0.45rem;
+    padding: 0.7rem;
+  }
+}/* ============================================ */
+/* QUEST INFO PANEL - HOVER EFFECTS */
+/* ============================================ */
+
+/* Bouncy action buttons */
+.proj-quest-actions .proj-action-btn {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.proj-quest-actions .proj-action-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    letter-spacing: 0.5px;
+}
+
+.proj-quest-actions .proj-action-btn:active {
+    transform: translateY(0px) scale(0.98);
+}
+
+.proj-btn-live:hover {
+    box-shadow: 0 6px 0 #0d3d0d, 0 0 25px rgba(34, 139, 34, 0.6);
+}
+
+.proj-btn-source:hover {
+    box-shadow: 0 6px 0 #2d0845, 0 0 25px rgba(107, 28, 156, 0.6);
+}
+
+/* ============================================ */
+/* TEXT HOVER WITH DARK BACKGROUND (like left cards) */
+/* ============================================ */
+
+/* Quest title */
+.proj-quest-title {
+    transition: all 0.3s ease;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+}
+
+.proj-quest-title:hover {
+    color: #FFD700 !important;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5) !important;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Rank badge */
+.proj-quest-rank-badge {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.proj-quest-rank-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Quest image */
+.proj-quest-image {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.proj-quest-image:hover {
+    border-color: #FFD700 !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    transform: scale(1.02);
+}
+
+/* THE BRIEF section */
+.proj-quest-brief-section {
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.proj-quest-brief-section:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.proj-quest-brief-section:hover .proj-section-title {
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.proj-quest-brief-section:hover .proj-brief-description {
+    color: #FFD700 !important;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* REQUIREMENTS section */
+.proj-quest-solution-section {
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.proj-quest-solution-section:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.proj-quest-solution-section:hover .proj-section-title {
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Tech items bounce */
+.proj-tech-item {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+}
+
+.proj-tech-item:hover {
+    transform: translateY(-3px) scale(1.1);
+    background: #FFD700;
+    color: #1e3a8a;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* CONTRACT DETAILS section */
+.proj-contract-section {
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.proj-contract-section:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.proj-contract-section:hover .proj-section-title {
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.proj-contract-section:hover .proj-contract-details p {
+    color: #FFD700 !important;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* GUILD REWARDS section */
+.proj-rewards-section {
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.proj-rewards-section:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.proj-rewards-section:hover .proj-section-title {
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.proj-rewards-section:hover .proj-rewards-details p {
+    color: #FFD700 !important;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* Section title base transition */
+.proj-section-title {
+    transition: all 0.3s ease;
+}
+
+/* Brief description base transition */
+.proj-brief-description {
+    transition: all 0.3s ease;
+}
+
+/* Contract & Rewards text base transition */
+.proj-contract-details p,
+.proj-rewards-details p {
+    transition: all 0.3s ease;
+}
+</style>
+  </head>
+<body>
+    <div id="preloader">
+        <div id="welcomeScreen">
+            <h1 class="welcome-title">WELCOME ADVENTURER</h1>
+            <p class="preloader-subtitle">Prepare to enter the realm</p>
+            <button id="startButton" class="start-button">
+                <span class="material-symbols-outlined">swords</span>
+                ENTER PORTFOLIO
+            </button>
+        </div>
+        <div id="loadingScreen">
+            <div class="loading-container">
+                <div class="forge-status">STATUS: Initializing...</div>
+                <div class="loading-bar-container">
+                    <div id="loadingBar" class="loading-bar-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="app-container" style = "display: none;">
+      <!-- Pixel Theme Sidebar -->
+      <aside class="sidebar pixel-border">
+        <div class="sidebar-content">
+          <div class="brand-section">
+            <div class="logo" style="background-image: url('/images/knightC.png')" loading="lazy"></div>
+            <div class="brand-text">
+              <h1 class="brand-title">Miguelito</h1>
+              <p class="brand-subtitle">Web Adventurer</p>
+            </div>
+          </div>
+          
+          <nav class="navigation">
+            <a class="nav-item" href="#landing"> <!-- Add this -->
+           <div class="icon-pixel" style="background-image: url('/images/about.png')"></div>
+           <p>HOME</p>
+             </a>
+
+            <a class="nav-item active" href="#about">
+              <div class="icon-pixel" style="background-image: url('/images/pepegaReading.png')"></div>
+              <p>ABOUT</p>
+            </a>
+            <a class="nav-item" href="#education">
+              <div class="icon-pixel" style="background-image: url('/images/educ.png')"></div>
+              <p>EDUCATION</p>
+            </a>
+            <a class="nav-item" href="#projects">
+              <div class="icon-pixel" style="background-image: url('/images/projects.png')"></div>
+              <p>PROJECTS</p>
+            </a>
+            <a class="nav-item" href="#hobbies">
+              <div class="icon-pixel" style="background-image: url('/images/hobbies.png')"></div>
+              <p>HOBBIES</p>
+            </a>
+            <a class="nav-item" href="#contact">
+              <div class="icon-pixel" style="background-image: url('/images/contact.png')"></div>
+              <p>CONTACT</p>
+            </a>
+          </nav>
+        </div>
+        
+        <div class="sidebar-footer">
+
+          
+          <button class="special-offer-btn" id="ratePortfolioBtn">
+            <span>RATE PORTFOLIO</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+         <!-- LANDING SECTION - ADD THIS RIGHT HERE -->
+    <section id="landing">
+        <!-- Floating Runes -->
+        <div class="landing-rune" style="top: 10%; left: 5%;">{ }</div>
+        <div class="landing-rune" style="top: 80%; left: 8%;">&lt;/&gt;</div>
+        <div class="landing-rune" style="top: 25%; left: 90%;">[ ]</div>
+        <div class="landing-rune" style="top: 70%; left: 95%;">λ</div>
+        
+        <div class="landing-container">
+            <!-- Left Panel: Text Content -->
+            <div class="landing-text">
+                <h1 class="landing-title">WELCOME, TRAVELER</h1>
+                <h2 class="landing-subtitle">I AM MIGUELITO, A WEB ADVENTURER</h2>
+                <p class="landing-description">
+                    Embark on a journey through my digital realm where code meets creativity. 
+                    As a web adventurer, I wield the power of modern technologies to craft 
+                    immersive digital experiences and solve complex challenges.
+                </p>
+                <p class="landing-description">
+                    Scroll down to explore my skills, completed quests, and join me on 
+                    future adventures in the ever-evolving world of web development.
+                </p>
+                
+                <div class="landing-cta">
+                    <a href="#about" class="cta-button">
+                        <span class="material-symbols-outlined">auto_awesome</span>
+                        BEGIN ADVENTURE
+                    </a>
+              <button class="cta-button secondary" id="viewMapBtn">
+                <span class="material-symbols-outlined">map</span>
+                VIEW MAP
+            </button>
+                </div>
+            </div>
+            
+            <!-- Right Panel: 3D Model -->
+            <div class="landing-model pixel-border">
+                <div id="knightModel">
+                    <div class="model-loading">
+                        <div class="loading-spinner"></div>
+                        <p>SUMMONING KNIGHT...</p>
+                    </div>
+                </div>
+                <div class="model-instructions">
+                    DRAG TO ROTATE • SCROLL TO ZOOM
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <p>SCROLL TO EXPLORE</p>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+        <!-- About Section - RPG Character Sheet -->
+        <section id="about" class="character-sheet-section">
+          <div class="parchment-container">
+            <!-- Floating Runes -->
+            <div class="rune" style="top: 10%; left: 5%;">{ }</div>
+            <div class="rune" style="top: 80%; left: 8%;">&lt;/&gt;</div>
+            <div class="rune" style="top: 25%; left: 90%;">[ ]</div>
+            <div class="rune" style="top: 70%; left: 95%;">λ</div>
+            
+            <div class="character-grid">
+              <!-- Left Panel: Character Stats -->
+              <div class="character-stats">
+                <!-- Profile Header -->
+                <div class="profile-header pixel-border">
+                  <div class="character-portrait pixel-border-gold" style="background-image: url('/images/knightC.png')" loading = "lazy"></div>
+                  <div class="character-info">
+                    <p class="character-name">Miguelito</p>
+                    <p class="character-title">Web Adventurer</p>
+                  </div>
+                </div>
+
+                <!-- Stats Container -->
+                <div class="stats-container pixel-border">
+                  <h3 class="stats-title">Languages & Arcana</h3>
+                  
+                  <!-- Progress Bar: HTML/CSS -->
+                  <div class="skill-bar">
+                    <div class="skill-info">
+                      <p class="skill-name">HTML/CSS</p>
+                      <p class="skill-percent">85%</p>
+                    </div>
+                    <div class="progress-bar-bg pixel-border">
+                      <div class="progress-bar-fill" style="width: 85%"></div>
+                    </div>
+                  </div>
+
+                  <!-- Progress Bar: JavaScript -->
+                  <div class="skill-bar">
+                    <div class="skill-info">
+                      <p class="skill-name">JavaScript</p>
+                      <p class="skill-percent">75%</p>
+                    </div>
+                    <div class="progress-bar-bg pixel-border">
+                      <div class="progress-bar-fill" style="width: 75%"></div>
+                    </div>
+                  </div>
+
+                  <div class="skill-bar">
+                    <div class="skill-info">
+                      <p class="skill-name">Python</p>
+                      <p class="skill-percent">40%</p>
+                    </div>
+                    <div class="progress-bar-bg pixel-border">
+                      <div class="progress-bar-fill" style="width: 40%;  background: linear-gradient(90deg, #FFD700, #FFA500);"></div>
+                    </div>
+                  </div>
+
+                  <!-- Progress Bar: SQL -->
+                  <div class="skill-bar">
+                    <div class="skill-info">
+                      <p class="skill-name">SQL</p>
+                      <p class="skill-percent">70%</p>
+                    </div>
+                    <div class="progress-bar-bg pixel-border">
+                      <div class="progress-bar-fill" style="width: 70%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Links -->
+                <div class="action-links pixel-border">
+                  <a class="action-link" href="#projects">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>View Treasury (Projects)</span>
+                  </a>
+                  <a class="action-link" href="#contact">
+                    <span class="material-symbols-outlined">history_edu</span>
+                    <span>Send Message Scroll</span>
+                  </a>
+                </div>
+              </div>
+
+<!-- Right Panel: Adventure Log with Pagination -->
+<div class="adventure-log">
+  <div class="log-container pixel-border">
+    <h2 class="log-title">Adventure Log</h2>
+    <div class="log-content pixel-border-inset">
+      <!-- Page 1: Adventurer Profile -->
+      <div class="log-page active" id="page1">
+        <h3 class="quest-title">ADVENTURER PROFILE</h3>
+        <div class="profile-stats">
+          <div class="profile-stat">
+            <span class="stat-label">Name:</span>
+            <span class="stat-value">King Miguel Remo</span>
+          </div>
+          <div class="profile-stat">
+            <span class="stat-label">Email:</span>
+            <span class="stat-value">iggytesoro123@gmail.com</span>
+          </div>
+          <div class="profile-stat">
+            <span class="stat-label">Title:</span>
+            <span class="stat-value">BSIT Student</span>
+          </div>
+          <div class="profile-stat">
+            <span class="stat-label">Level:</span>
+            <span class="stat-value">21</span>
+          </div>
+          <div class="profile-stat">
+            <span class="stat-label">XP:</span>
+            <span class="stat-value">1850/2100 XP</span>
+          </div>
+          <div class="xp-bar-container">
+            <div class="xp-bar-bg pixel-border">
+              <div class="xp-bar-fill" style="width: 88%"></div>
+            </div>
+            <div class="xp-text">88% to Level 22</div>
+          </div>
+        </div>
+        <div class="profile-quote">
+          "It is never about being the best, It's about doing your best."
+        </div>
+      </div>
+
+      <!-- Page 2: Quest Log -->
+      <div class="log-page" id="page2">
+        <h3 class="quest-title">The Adventure Begins...</h3>
+        <p class="quest-text">
+          Greetings, traveler! I am King Miguel, a Web Adventurer currently undertaking the grand quest of Information Technology at CSTC. My journey started in the humble villages of basic HTML and CSS, and has led me through the dangerous forests of JavaScript, across the vast oceans of responsive design, and into the deep dungeons of backend development.
+        </p>
+        
+        <h3 class="quest-title">Main Objectives</h3>
+        <p class="quest-text">
+          <strong>Current Quest:</strong> Complete BSIT Degree & Master Full-Stack Development<br>
+          <strong>Daily Mission:</strong> Become a better web adventurer than I was yesterday and learn new programming spells<br>
+          <strong>Achievement Unlocked:</strong> Honor Student (Senior High School)
+        </p>
+
+        <h3 class="quest-title">Completed Quests</h3>
+        <p class="quest-text">
+          ✅ Built responsive websites with HTML/CSS<br>
+          ✅ Created interactive web apps with JavaScript<br>
+          ✅ Earned 12+ programming certifications<br>
+          ✅ Developed pixel art portfolio theme<br>
+          ✅ Mastered version control with Git
+        </p>
+      </div>
+
+      <!-- Page 3: Statistics (NOW INSIDE log-content) -->
+      <div class="log-page" id="page3">
+        <h3 class="quest-title">CHARACTER STATISTICS</h3>
+        
+        <div class="stats-radar-container">
+            <canvas id="statsRadar" width="250" height="250"></canvas>
+        </div>
+        
+        <div class="stats-breakdown">
+          <div class="stat-item">
+            <span class="stat-name">Coding Prowess</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 71%"></div>
+            </div>
+            <span class="stat-value">71%</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-name">Front-End Magic</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 80%"></div>
+            </div>
+            <span class="stat-value">80%</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-name">Back-End Sorcery</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 65%"></div>
+            </div>
+            <span class="stat-value">65%</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-name">Problem Solving</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 85%"></div>
+            </div>
+            <span class="stat-value">85%</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-name">Design Eye</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 72%"></div>
+            </div>
+            <span class="stat-value">72%</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-name">Learning Agility</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 90%"></div>
+            </div>
+            <span class="stat-value">90%</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-name">Debugging Instinct</span>
+            <div class="stat-bar pixel-border">
+              <div class="stat-fill" style="width: 80%"></div>
+            </div>
+            <span class="stat-value">80%</span>
+          </div>
+        </div>
+        
+        <div class="stats-quote">
+          "A true developer's strength lies not in the languages they know, but in their ability to solve problems creatively."
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+      <button class="pagination-btn prev-btn pixel-button">
+        <span class="material-symbols-outlined">chevron_left</span>
+        <span>Previous</span>
+      </button>
+      <div class="page-indicators">
+        <span class="page-indicator active" data-page="1"></span>
+        <span class="page-indicator" data-page="2"></span>
+        <span class="page-indicator" data-page="3"></span>
+      </div>
+      <button class="pagination-btn next-btn pixel-button">
+        <span>Next</span>
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+  </div>
+</div>
+            </div>
+          </div>
+        </section>
+
+        
+<section id="education" class="education-section">
+  <div class="academy-scroll">
+    <!-- Floating Runes -->
+    <div class="rune" style="top: 5%; left: 3%;">∑</div>
+    <div class="rune" style="top: 15%; right: 5%;">ƒ(x)</div>
+    <div class="rune" style="bottom: 20%; left: 8%;">&lt;/&gt;</div>
+    <div class="rune" style="bottom: 10%; right: 10%;">010</div>
+
+    <!-- Academy Header -->
+    <div class="academy-header">
+      <h2 class="academy-title">THE GRAND ACADEMY OF KNOWLEDGE</h2>
+      <p class="academy-subtitle">EDUCATION CHRONICLE</p>
+    </div>
+
+    <div class="education-grid">
+      <div class="scholar-profile">
+        <!-- Scholar Card -->
+        <div class="scholar-card pixel-border">
+          <div class="scholar-header">
+            <div class="scholar-portrait pixel-border-gold" style="background-image: url('/images/knightC.png')" loading = "lazy"></div>
+            <div class="scholar-info">
+              <h3>MIGUELITO</h3>
+              <p>BSIT STUDENT</p>
+            </div>
+          </div>
+          <div class="scholar-stats">
+            <div class="stat-item">
+              <span class="stat-label">LEVEL:</span>
+              <span class="stat-value">21</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">XP:</span>
+              <span class="stat-value">1850/2100</span>
+            </div>
+            <div class="xp-bar-container">
+              <div class="xp-bar-bg pixel-border">
+                <div class="xp-bar-fill" style="width: 88%"></div>
+              </div>
+              <div class="xp-text" style = "color: #FFD700;">88% TO LEVEL 22</div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">SEMESTERS:</span>
+              <span class="stat-value">5/8</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">HONORS:</span>
+              <span class="stat-value">1 MAJOR</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Buffs -->
+        <div class="learning-buffs pixel-border">
+          <h4 class="buffs-title">LEARNING BUFFS</h4>
+          <div class="buff-grid">
+            <div class="buff-item pixel-border">
+              <div class="buff-name">CODE WISDOM</div>
+            </div>
+            <div class="buff-item pixel-border">
+              <div class="buff-name">ALGORITHM POWER</div>
+            </div>
+            <div class="buff-item pixel-border">
+              <div class="buff-name">DATABASE MASTERY</div>
+            </div>
+            <div class="buff-item pixel-border">
+              <div class="buff-name">LOGIC SKILL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Quest -->
+        <div class="main-quest pixel-border">
+          <h4 class="quest-title">MAIN QUEST</h4>
+          <p class="quest-name">COMPLETE BSIT DEGREE</p>
+          <div class="quest-bar-bg pixel-border">
+            <div class="quest-bar-fill" style="width: 55%">55% COMPLETE</div>
+          </div>
+        </div>
+
+        <!-- Side Quests -->
+        <div class="side-quests pixel-border">
+          <h4 class="quest-title">SIDE QUESTS</h4>
+          <p class="quest-name">12 CERTIFICATIONS COMPLETED</p>
+          <button class="view-side-quests-btn pixel-button" id="viewSideQuestsBtn">
+            <span class="material-symbols-outlined">visibility</span>
+            VIEW SIDE QUESTS
+          </button>
+        </div>
+      </div> <!-- Closing scholar-profile div -->
+
+      <!-- Right Panel: Education Timeline -->
+      <div class="education-timeline">
+        <h3 class="timeline-title">QUEST PROGRESSION</h3>
+        <div class="timeline">
+
+          <div class="timeline-milestone active" data-milestone="4">
+            <div class="milestone-marker current">4</div>
+            <div class="quest-inprogress-badge">IN PROGRESS</div>
+            <div class="milestone-content">
+              <h4>THE ARCHMAGE'S CITADEL</h4>
+              <p class="milestone-period">2023 - PRESENT</p>
+              <p class="milestone-school">CSTC COLLEGE</p>
+              <p class="milestone-description">
+                Currently undertaking the grand quest of Information Technology. 
+                Mastering the digital arcana of programming, web development, 
+                and system architecture in the realm of Computer Science.
+              </p>
+              <div class="milestone-achievement">ACTIVE QUEST</div>
+            </div>
+          </div>
+
+          <!-- Senior High -->
+          <div class="timeline-milestone" data-milestone="3">
+            <div class="milestone-marker active">3</div>
+            <div class="quest-completed-badge">QUEST COMPLETED</div>
+            <div class="milestone-content">
+              <h4>THE MAGE'S ACADEMY</h4>
+              <p class="milestone-period">2021 - 2023</p>
+              <p class="milestone-school">SARIAYA INSTITUTE INC.</p>
+              <p class="milestone-description">
+                Completed the STEM path with honors. Mastered advanced mathematics 
+                and sciences while discovering the foundations of programming and
+                web development magic.
+              </p>
+              <div class="milestone-achievement">HONOR STUDENT</div>
+            </div>
+          </div>
+
+          <!-- Junior High -->
+          <div class="timeline-milestone" data-milestone="2">
+            <div class="milestone-marker active">2</div>
+            <div class="quest-completed-badge">QUEST COMPLETED</div>
+            <div class="milestone-content">
+              <h4>THE APPRENTICE'S HALL</h4>
+              <p class="milestone-period">2017 - 2021</p>
+              <p class="milestone-school">SARIAYA INSTITUTE INC.</p>
+              <p class="milestone-description">
+                Built foundational knowledge in various disciplines. 
+                First encountered the magical arts of computing and 
+                began the journey into technology and basic programming.
+              </p>
+            </div>
+          </div>
+
+          <!-- Elementary -->
+          <div class="timeline-milestone" data-milestone="1">
+            <div class="milestone-marker active">1</div>
+            <div class="quest-completed-badge">QUEST COMPLETED</div>
+            <div class="milestone-content">
+              <h4>THE BEGINNER'S GROVE</h4>
+              <p class="milestone-period">2011 - 2017</p>
+              <p class="milestone-school">CENTRAL MAIN ELEMENTARY</p>
+              <p class="milestone-description">
+                The beginning of the educational journey. Learned the 
+                fundamental skills of reading, writing, and arithmetic 
+                that would become the foundation for future adventures
+                in the digital realm.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="projects" class="projects-section">
+  <div class="proj-guild-hall">
+    <!-- Guild Header -->
+    <div class="proj-guild-header pixel-border">
+      <h2 class="proj-guild-title">THE ADVENTURER'S GUILD HALL</h2>
+      <p class="proj-guild-subtitle">QUEST ARCHIVES</p>
+    </div>
+
+    <div class="proj-guild-layout">
+      <!-- LEFT PANEL: Guild Quest Board -->
+      <div class="proj-quest-board">
+        <!-- Guild Member Info -->
+        <div class="proj-guild-member-info pixel-border">
+          <div class="proj-member-header">
+            <div class="proj-member-portrait pixel-border-gold" style="background-image: url('/images/knightC.png')" loading="lazy"></div>
+            <div class="proj-member-details">
+              <h3>MIGUELITO</h3>
+              <p>WEB ADVENTURER</p>
+              <div class="proj-member-stats">
+                <span class="proj-stat">Rank: B</span>
+                <span class="proj-stat">Guild Quests: 17</span>
+                <span class="proj-stat">Guild Reputation: 3500</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Quest Board -->
+        <div class="proj-quest-board-main pixel-border">
+          <h2 class="proj-quest-board-title">GUILD QUEST BOARD</h2>
+          
+          <!-- Search & Filters -->
+          <div class="proj-search-filters-section">
+            <h3 class="proj-section-subtitle">SEARCH & FILTERS</h3>
+            <div class="proj-filters-grid">
+              <div class="proj-search-group">
+                <label class="proj-filter-label" for="proj-quest-search">SCRY FOR QUESTS</label>
+                <div class="proj-search-input-container">
+                  <input class="proj-pixel-input-search" id="proj-quest-search" placeholder="Enter quest name..." type="text"/>
+                  <span class="material-symbols-outlined proj-search-icon">search</span>
+                </div>
+              </div>
+              
+              <div class="proj-filter-group">
+                <label class="proj-filter-label" for="proj-difficulty-filter">QUEST RANK</label>
+                <select class="proj-pixel-select" id="proj-difficulty-filter">
+                  <option value="all">ALL QUESTS</option>
+                  <option value="s">S RANK</option>
+                  <option value="a">A RANK</option>
+                  <option value="b">B RANK</option>
+                  <option value="c">C RANK</option>
+                  <option value="d">D RANK</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-quest-contracts-section">
+            <h3 class="proj-section-subtitle">QUEST LOG ARCHIVES</h3>
+            <div class="proj-quests-grid">
+
+              <!-- S RANK -->
+              <div class="proj-quest-card proj-quest-s" data-quest-id="nexus">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/nexus-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">LEGENDARY</div>
+                    <div class="proj-quest-difficulty">S</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Nexus — Project Management</h4>
+                  <p class="proj-quest-description">Full-featured project management tool with Kanban boards, analytics, and financial tracking</p>
+                  <div class="proj-quest-client">Royal Guild</div>
+                  <div class="proj-quest-reward">+5000 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-s" data-quest-id="rentruck">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/rentruck-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">LEGENDARY</div>
+                    <div class="proj-quest-difficulty">S</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Rentruck — Capstone</h4>
+                  <p class="proj-quest-description">Truck rental & inventory platform for VFL Builders & VFL Hardware</p>
+                  <div class="proj-quest-client">VFL Builders & Hardware</div>
+                  <div class="proj-quest-reward">+5000 Gold</div>
+                </div>
+              </div>
+
+              <!-- A RANK -->
+              <div class="proj-quest-card proj-quest-a" data-quest-id="flux">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/flux-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ELITE</div>
+                    <div class="proj-quest-difficulty">A</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Flux — Feedback Portal</h4>
+                  <p class="proj-quest-description">Agency-client feedback management with Kanban boards, threaded comments, and task conversion</p>
+                  <div class="proj-quest-client">Agency Guild</div>
+                  <div class="proj-quest-reward">+2500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-a" data-quest-id="thesis-quest">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/thesis-quest-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ELITE</div>
+                    <div class="proj-quest-difficulty">A</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Thesis Quest — Tracker</h4>
+                  <p class="proj-quest-description">Thesis progress tracking with milestone monitoring, deliverables, and supervisor oversight</p>
+                  <div class="proj-quest-client">University Guild</div>
+                  <div class="proj-quest-reward">+2500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-a" data-quest-id="tower-defense">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/tower-defense-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ELITE</div>
+                    <div class="proj-quest-difficulty">A</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Tower Defense — Game</h4>
+                  <p class="proj-quest-description">Strategic tower defense with enemy waves, upgrades, and AI pathfinding</p>
+                  <div class="proj-quest-client">Arcade Guild</div>
+                  <div class="proj-quest-reward">+2500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-a" data-quest-id="arena-defender">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/arena-defender-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ELITE</div>
+                    <div class="proj-quest-difficulty">A</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Arena Defender — Game</h4>
+                  <p class="proj-quest-description">Arena-based survival with enemy waves, power-ups, and leaderboard system</p>
+                  <div class="proj-quest-client">Arcade Guild</div>
+                  <div class="proj-quest-reward">+2500 Gold</div>
+                </div>
+              </div>
+
+              <!-- B RANK -->
+              <div class="proj-quest-card proj-quest-b" data-quest-id="booking">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/booking-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ADVENTURER</div>
+                    <div class="proj-quest-difficulty">B</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">BooKING — E-Commerce</h4>
+                  <p class="proj-quest-description">Full e-commerce platform for book lovers with cart, authentication, and localStorage</p>
+                  <div class="proj-quest-client">Bookstore Guild</div>
+                  <div class="proj-quest-reward">+1500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-b" data-quest-id="itindahan">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/ecommerce.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ADVENTURER</div>
+                    <div class="proj-quest-difficulty">B</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">iTINDAHAN — E-Commerce UI</h4>
+                  <p class="proj-quest-description">E-commerce platform UI with localStorage auth and multi-vendor marketplace concept</p>
+                  <div class="proj-quest-client">Marketplace Guild</div>
+                  <div class="proj-quest-reward">+1500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-b" data-quest-id="fourthfolio">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/fourthfolio-icon.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ADVENTURER</div>
+                    <div class="proj-quest-difficulty">B</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Old Portfolio (3rd Year)</h4>
+                  <p class="proj-quest-description">3rd year portfolio showcasing early web dev journey and foundational projects</p>
+                  <div class="proj-quest-client">Personal Archive</div>
+                  <div class="proj-quest-reward">+1500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-b" data-quest-id="current-portfolio">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/current-portfolio.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ADVENTURER</div>
+                    <div class="proj-quest-difficulty">B</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Current Portfolio</h4>
+                  <p class="proj-quest-description">RPG-themed portfolio with 15 quests, 3D knight, and interactive quest board</p>
+                  <div class="proj-quest-client">Personal Brand</div>
+                  <div class="proj-quest-reward">+1500 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-b" data-quest-id="ecommerce">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/ecommerce.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">ADVENTURER</div>
+                    <div class="proj-quest-difficulty">B</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">E-commerce Platform</h4>
+                  <p class="proj-quest-description">Full online store with product catalog, cart, and user authentication</p>
+                  <div class="proj-quest-client">Merchant Guild</div>
+                  <div class="proj-quest-reward">+1500 Gold</div>
+                </div>
+              </div>
+
+              <!-- C RANK -->
+              <div class="proj-quest-card proj-quest-c" data-quest-id="calculator">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/Calbolator.png')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">APPRENTICE</div>
+                    <div class="proj-quest-difficulty">C</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Functional Calculator</h4>
+                  <p class="proj-quest-description">Fully functional calculator built with HTML, CSS and JavaScript</p>
+                  <div class="proj-quest-client">Learning Challenge</div>
+                  <div class="proj-quest-reward">+800 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-c" data-quest-id="moving-clouds">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/MovingCloud.png')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">APPRENTICE</div>
+                    <div class="proj-quest-difficulty">C</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Moving Clouds Animation</h4>
+                  <p class="proj-quest-description">Complex JavaScript animation with moving cloud elements</p>
+                  <div class="proj-quest-client">Personal Challenge</div>
+                  <div class="proj-quest-reward">+800 Gold</div>
+                </div>
+              </div>
+
+              <!-- D RANK -->
+              <div class="proj-quest-card proj-quest-d" data-quest-id="netflix-clone">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/Alimani.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">BEGINNER</div>
+                    <div class="proj-quest-difficulty">D</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Netflix Sign-In Clone</h4>
+                  <p class="proj-quest-description">Static replica of Netflix's sign-in page interface</p>
+                  <div class="proj-quest-client">Learning Exercise</div>
+                  <div class="proj-quest-reward">+400 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-d" data-quest-id="instagram-clone">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/Ricardo.jpg')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">BEGINNER</div>
+                    <div class="proj-quest-difficulty">D</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Instagram Profile Clone</h4>
+                  <p class="proj-quest-description">Static Instagram profile page with sample posts</p>
+                  <div class="proj-quest-client">Learning Exercise</div>
+                  <div class="proj-quest-reward">+400 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-d" data-quest-id="solar-eclipse">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/Krillin.png')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">BEGINNER</div>
+                    <div class="proj-quest-difficulty">D</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Solar Eclipse Animation</h4>
+                  <p class="proj-quest-description">CSS-only solar eclipse animation using HTML and CSS</p>
+                  <div class="proj-quest-client">First Project</div>
+                  <div class="proj-quest-reward">+400 Gold</div>
+                </div>
+              </div>
+
+              <div class="proj-quest-card proj-quest-d" data-quest-id="search-filter">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" style="background-image: url('/images/Golteb.png')"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">BEGINNER</div>
+                    <div class="proj-quest-difficulty">D</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Filtering Search Bar</h4>
+                  <p class="proj-quest-description">Search functionality with dark mode toggle feature</p>
+                  <div class="proj-quest-client">Personal Project</div>
+                  <div class="proj-quest-reward">+400 Gold</div>
+                </div>
+              </div>
+
+            </div>  <!-- END proj-quests-grid -->
+          </div>  <!-- END proj-quest-contracts-section -->
+        </div>  <!-- END proj-quest-board-main -->
+      </div>  <!-- END proj-quest-board -->
+
+      <!-- ============================================ -->
+      <!-- RIGHT PANEL: QUEST INFO (NOW OUTSIDE LEFT PANEL) -->
+      <!-- ============================================ -->
+      <div class="proj-quest-archives" style="background-image: url(/images/bgplank.png);">
+        <div class="proj-archives-content pixel-border">
+          <h2 class="proj-archives-title">QUEST INFO</h2>
+          
+          <div class="proj-quest-display" id="projQuestDisplay" style="background-image: url(/images/rr1.png); background-size: cover; background-position: center; background-repeat: no-repeat;">
+
+            <!-- PLACEHOLDER -->
+            <div class="proj-quest-details" id="questPlaceholder">
+              <div class="proj-quest-placeholder">
+                <div class="placeholder-content">
+                  <div class="placeholder-icon">
+                    <span class="material-symbols-outlined">assignment</span>
+                  </div>
+                  <h3 class="placeholder-title">QUEST SCROLL AWAITS</h3>
+                  <p class="placeholder-text">Select a quest from the Guild Board to unveil its secrets and requirements</p>
+                  <div class="placeholder-hint">
+                    <span class="material-symbols-outlined">touch_app</span>
+                    Click any quest card to begin
+                  </div>
+                </div>
+              </div>
+              
+              <div class="proj-quest-actions">
+                <button type="button" class="proj-action-btn proj-btn-live" style="opacity: 0.5; pointer-events: none;">
+                  <span class="material-symbols-outlined">play_arrow</span>
+                  LAUNCH QUEST
+                </button>
+                <button type="button" class="proj-action-btn proj-btn-source" style="opacity: 0.5; pointer-events: none;">
+                  <span class="material-symbols-outlined">code</span>
+                  VIEW SOURCE
+                </button>
+              </div>
+            </div>
+
+            <!-- ACTUAL QUEST CONTENT -->
+            <div class="proj-quest-details" id="questContent" style="display: none;">
+              <div class="proj-quest-header">
+                <h3 class="proj-quest-title">QUEST TITLE</h3>
+                <span class="proj-quest-rank-badge">RANK COMMISSION</span>
+              </div>
+              
+              <div class="proj-quest-image"></div>
+              
+              <div class="proj-content-sections">
+                <div class="proj-quest-brief-section">
+                  <h4 class="proj-section-title">THE BRIEF</h4>
+                  <p class="proj-brief-description">Quest description will appear here</p>
+                </div>
+                
+                <div class="proj-quest-solution-section">
+                  <h4 class="proj-section-title">REQUIREMENTS</h4>
+                  <div class="proj-solution-tech"></div>
+                </div>
+                
+                <div class="proj-quest-results-inline">
+                  <div class="proj-contract-rewards-grid">
+                    <div class="proj-contract-section">
+                      <h4 class="proj-section-title">CONTRACT DETAILS</h4>
+                      <div class="proj-contract-details"></div>
+                    </div>
+                    
+                    <div class="proj-rewards-section">
+                      <h4 class="proj-section-title">GUILD REWARDS</h4>
+                      <div class="proj-rewards-details"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="proj-quest-actions" id="questActionButtons">
+                <button type="button" class="proj-action-btn proj-btn-live">
+                  <span class="material-symbols-outlined">play_arrow</span>
+                  LAUNCH QUEST
+                </button>
+                <button type="button" class="proj-action-btn proj-btn-source">
+                  <span class="material-symbols-outlined">code</span>
+                  VIEW SOURCE
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+ 
+
+    </div>  
+  </div> 
+</section>
+
+<section id="hobbies" class="hobbies-section">
+  <div class="multi-class-container">
+    <!-- Floating Runes -->
+    <div class="rune" style="top: 10%; left: 5%;">{ }</div>
+    <div class="rune" style="top: 80%; left: 8%;">&lt;/&gt;</div>
+    <div class="rune" style="top: 25%; left: 90%;">[ ]</div>
+    <div class="rune" style="top: 70%; left: 95%;">λ</div>
+    
+    <!-- Header -->
+    <div class="multi-class-header">
+      <h1 class="multi-class-title">THE MULTI-CLASS ADVENTURER</h1>
+    </div>
+    
+    <!-- Top Section: Class Selection + Character Display -->
+    <div class="top-section">
+      <!-- Left: Class Selection -->
+      <div class="character-stats">
+        <div class="class-selection-panel">
+          <h2 class="class-selection-title">CLASS SELECTION</h2>
+          <div class="class-options">
+            <div class="class-option" data-class="warrior">
+              <div class="class-content">
+                <div class="class-icon">🏋️</div>
+                <div class="class-info">
+                  <h3 class="class-name">WARRIOR</h3>
+                  <p class="class-subtitle">Physical Training</p>
+                </div>
+              </div>
+              <div class="class-details">
+                <p>+10 STR, +10 CON</p>
+                <p class="unlock-text">Unlocks: Endurance Aura</p>
+              </div>
+            </div>
+            
+            <div class="class-option" data-class="sage">
+              <div class="class-content">
+                <div class="class-icon">📚</div>
+                <div class="class-info">
+                  <h3 class="class-name">SAGE</h3>
+                  <p class="class-subtitle">Psychology Studies</p>
+                </div>
+              </div>
+              <div class="class-details">
+                <p>+20 INT, +15 WIS</p>
+                <p class="unlock-text">Unlocks: Pattern Recognition</p>
+              </div>
+            </div>
+            
+            <div class="class-option" data-class="rogue">
+              <div class="class-content">
+                <div class="class-icon">🎮</div>
+                <div class="class-info">
+                  <h3 class="class-name">ROGUE</h3>
+                  <p class="class-subtitle">Strategic Gaming</p>
+                </div>
+              </div>
+              <div class="class-details">
+                <p>+25 DEX, +20 CHA</p>
+                <p class="unlock-text">Unlocks: Tactical Insight</p>
+              </div>
+            </div>
+            
+            <div class="class-option" data-class="bard">
+              <div class="class-content">
+                <div class="class-icon">🎬</div>
+                <div class="class-info">
+                  <h3 class="class-name">BARD</h3>
+                  <p class="class-subtitle">Story Analysis</p>
+                </div>
+              </div>
+              <div class="class-details">
+                <p>+15 CRE, +20 EMP</p>
+                <p class="unlock-text">Unlocks: Narrative Crafting</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Character Display + Skill Tree -->
+      <div class="character-display-area">
+        <div class="character-display">
+          <div class="character-sprite" style="background-image: url('/images/knightC.png')" loading = "lazy"></div>
+          <div class="character-info">
+          <div class="character-header">
+            <h2 class="character-name">MIGUELITO</h2>
+            <span class="character-level">LVL 21</span>
+          </div>
+          <span class="character-class">WEB ADVENTURER</span>
+          
+       <div class="stats-bars">
+  <!-- HP Bar -->
+  <div class="hp-bar-container">
+    <span class="hp-label">HP</span>
+    <div class="hp-bar-bg">
+      <div class="hp-bar-fill" style="width: 70%"></div>
+    </div>
+    <span class="hp-value">700/1000</span>
+  </div>
+  
+  <!-- MP Bar -->
+  <div class="mp-bar-container">
+    <span class="mp-label">MP</span>
+    <div class="mp-bar-bg">
+      <div class="mp-bar-fill" style="width: 75%"></div>
+    </div>
+    <span class="mp-value">750/1000</span>
+  </div>
+</div>
+        </div>
+       </div>
+
+        
+        <div class="skill-tree-container">
+          <h3 class="skill-tree-title">SKILL TREE - CLASS SYNERGY</h3>
+          <div class="skill-tree-visual">
+            <div class="connection-node">🏋️</div>
+            <div class="connection-node">📚</div>
+            <div class="connection-node">🎮</div>
+            <div class="connection-node">🎬</div>
+            <div class="connection-node">🛡️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Bottom Section: Stats Grid -->
+<div class="stats-grid-container">
+  <h3 class="stats-grid-title">STAT DISTRIBUTION & BONUSES</h3>
+  <div class="stats-grid">
+    <div class="stat-card stat-strength">
+      <div class="stat-header">
+        <h4 class="stat-name">STRENGTH</h4>
+        <span class="stat-value">70</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: 70%"></div> 
+      </div>
+      <p class="stat-sources">Base: 60<br/>Warrior: +10</p>
+    </div>
+    
+    <div class="stat-card stat-intelligence">
+      <div class="stat-header">
+        <h4 class="stat-name">INTELLIGENCE</h4>
+        <span class="stat-value">75</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: 75%"></div> 
+      </div>
+      <p class="stat-sources">Base: 55<br/>Sage: +20</p>
+    </div>
+    
+    <div class="stat-card stat-dexterity">
+      <div class="stat-header">
+        <h4 class="stat-name">DEXTERITY</h4>
+        <span class="stat-value">84</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: 84%"></div> 
+      </div>
+      <p class="stat-sources">Base: 59<br/>Rogue: +25</p>
+    </div>
+    
+    <div class="stat-card stat-charisma">
+      <div class="stat-header">
+        <h4 class="stat-name">CHARISMA</h4>
+        <span class="stat-value">80</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: 80%"></div> 
+      </div>
+      <p class="stat-sources">Base: 45<br/>Rogue: +20<br/>Bard: +15</p>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+
+ <section id="contact" class="contact-section">
+        <!-- Lightweight floating runes -->
+        <div class="contact-rune" style="top: 10%; left: 5%; font-size: 2rem;">{ }</div>
+        <div class="contact-rune" style="top: 80%; left: 8%; font-size: 3rem;">&lt;/&gt;</div>
+        <div class="contact-rune" style="top: 25%; left: 90%; font-size: 2.5rem;">[ ]</div>
+        <div class="contact-rune" style="top: 70%; left: 95%; font-size: 3.5rem;">λ</div>
+        <div class="contact-rune" style="top: 50%; left: 15%; font-size: 1.5rem;">#</div>
+        <div class="contact-rune" style="top: 15%; left: 80%; font-size: 2rem;">;</div>
+        
+        <div class="contact-container">
+            <!-- Main Message Board -->
+            <div class="message-board">
+                <!-- Board Header -->
+                <div class="board-header">
+                    <h2 class="board-title">MESSENGER'S POST</h2>
+                    <p class="board-subtitle">SEND A SCROLL TO THE KNIGHT</p>
+                    <div class="header-decoration">
+                        <span class="material-symbols-outlined">history_edu</span>
+                    </div>
+                </div>
+
+                <!-- Side-by-side layout -->
+                <div class="contact-layout">
+                    <!-- Left: Message Panel -->
+                    <div class="message-panel">
+                        <!-- Contact Form as Parchment Scroll -->
+                        <form class="contact-form" id="contactForm">
+                            <div class="scroll-container">
+                                <div class="scroll-header">
+                                    <span class="material-symbols-outlined">auto_awesome</span>
+                                    <h3>MESSAGE TO THE KNIGHT</h3>
+                                </div>
+                                
+                                <div class="form-parchment">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <span class="material-symbols-outlined">person</span>
+                                            YOUR NAME
+                                        </label>
+                                        <input type="text" class="pixel-input" placeholder="Enter thy name, traveler..." required>
+                                    </div>
+                                </div>
+
+                                <div class="form-parchment">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <span class="material-symbols-outlined">mail</span>
+                                            PIGEON ADDRESS
+                                        </label>
+                                        <input type="email" class="pixel-input" placeholder="Where shall the pigeon find you?" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-parchment">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <span class="material-symbols-outlined">description</span>
+                                            MESSAGE SCROLL
+                                        </label>
+                                        <textarea class="pixel-textarea" placeholder="Write your message here, brave adventurer..." rows="5" required></textarea>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="send-scroll-btn">
+                                    <span class="material-symbols-outlined">send</span>
+                                    SEAL & SEND SCROLL
+                                    <div class="wax-seal"></div>
+                                </button>
+
+                                <div id="formStatus" class="status-message"></div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Right: Pinned Notices -->
+                    <div class="pinned-notices">
+                        <!-- Pigeon Post Notice -->
+                        <a href="mailto:iggytesoro123@gmail.com" class="notice-card" data-notice="email">
+                            <div class="notice-pin"></div>
+                            <div class="notice-header">
+                                <span class="material-symbols-outlined">flutter_dash</span>
+                                <h4>PIGEON POST</h4>
+                            </div>
+                            <p class="notice-content">iggytesoro123@gmail.com</p>
+                            <div class="notice-footer">Direct Message</div>
+                        </a>
+
+                        <!-- Kingdom Map Notice -->
+                        <a href="#" class="notice-card" data-notice="location">
+                            <div class="notice-pin"></div>
+                            <div class="notice-header">
+                                <span class="material-symbols-outlined">map</span>
+                                <h4>KINGDOM REALM</h4>
+                            </div>
+                            <p class="notice-content">Sariaya, Quezon Province</p>
+                            <div class="notice-footer">The Knight's Domain</div>
+                        </a>
+
+                        <!-- Guild Affiliations -->
+                        <div class="notice-card" data-notice="social">
+                            <div class="notice-pin"></div>
+                            <div class="notice-header">
+                                <span class="material-symbols-outlined">groups</span>
+                                <h4>GUILD TIES</h4>
+                            </div>
+                            <div class="guild-links">
+                                <a href="#" class="guild-link" title="LinkedIn Guild">
+                                    <span class="material-symbols-outlined">work</span>
+                                </a>
+                                <a href="#" class="guild-link" title="GitHub Guild">
+                                    <span class="material-symbols-outlined">code</span>
+                                </a>
+                                <a href="#" class="guild-link" title="Portfolio Guild">
+                                    <span class="material-symbols-outlined">castle</span>
+                                </a>
+                            </div>
+                            <div class="notice-footer">Allied Guilds</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Board Footer -->
+                <div class="board-footer">
+                    <p>"Thy message shall be received with honor and swift reply"</p>
+                    <div class="footer-decoration">
+                        <span class="material-symbols-outlined">auto_awesome</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Notice Details -->
+        <div class="notice-modal" id="noticeModal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeModal">&times;</span>
+                <div class="modal-header">
+                    <h3 id="modalTitle">Notice Details</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="modalContent">Content will appear here...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+      </main>
+    </div>
+<!-- Certification modal -->
+<div class="certificate-modal" id="certificateModal">
+    <div class="modal-content pixel-border">
+        <div class="modal-header">
+            <h3 id="modalTitle">Certificate Title</h3>
+            <span class="close-modal" id="closeModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="certificate-image" id="certificateImage"></div>
+            <div class="certificate-details">
+                <p id="certificateDescription">Certificate description will appear here</p>
+                <div class="certificate-date" id="certificateDate">Completion Date: </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="side-quests-modal" id="sideQuestsModal">
+    <div class="modal-content pixel-border">
+        <div class="modal-header">
+            <h3 id = "side-quest-header">SIDE QUESTS ARCHIVES</h3>
+            <span class="close-modal" id="closeSideQuestsModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="side-quests-container">
+                <div class="side-quests-timeline">
+                    <div class="side-quest-milestone" data-certificate="html">
+                        <div class="side-quest-marker completed">1</div>
+                        <div class="side-quest-content">
+                            <h5>C# Fundamentals</h5>
+                            <p class="side-quest-period">Completed: 1/28/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="css">
+                        <div class="side-quest-marker completed">2</div>
+                        <div class="side-quest-content">
+                            <h5>Basics of Classes and Objects in C#</h5>
+                            <p class="side-quest-period">Completed: 2/11/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="javascript">
+                        <div class="side-quest-marker completed">3</div>
+                        <div class="side-quest-content">
+                            <h5>HTML Fundamentals</h5>
+                            <p class="side-quest-period">Completed: 11/28/24</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="responsive">
+                        <div class="side-quest-marker completed">4</div>
+                        <div class="side-quest-content">
+                            <h5>Introduction to CSS</h5>
+                            <p class="side-quest-period">Completed: 12/4/24</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="git">
+                        <div class="side-quest-marker completed">5</div>
+                        <div class="side-quest-content">
+                            <h5>Java Fundamentals</h5>
+                            <p class="side-quest-period">Completed: 4/1/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="python">
+                        <div class="side-quest-marker completed">6</div>
+                        <div class="side-quest-content">
+                            <h5>Modern JavaScript for Beginners</h5>
+                            <p class="side-quest-period">Completed: 1/12/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="sql">
+                        <div class="side-quest-marker completed">7</div>
+                        <div class="side-quest-content">
+                            <h5>Object-Oriented Programming in JavaScript</h5>
+                            <p class="side-quest-period">Completed: 1/20/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="react">
+                        <div class="side-quest-marker completed">8</div>
+                        <div class="side-quest-content">
+                            <h5>Introduction to PHP</h5>
+                            <p class="side-quest-period">Completed: 3/1/2025</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="node">
+                        <div class="side-quest-marker completed">9</div>
+                        <div class="side-quest-content">
+                            <h5>Introduction to Python</h5>
+                            <p class="side-quest-period">Completed: 1/25/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="api">
+                        <div class="side-quest-marker completed">10</div>
+                        <div class="side-quest-content">
+                            <h5>SQL for Beginners</h5>
+                            <p class="side-quest-period">Completed: 2/7/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="security">
+                        <div class="side-quest-marker completed">11</div>
+                        <div class="side-quest-content">
+                            <h5>SQL for Intermediate</h5>
+                            <p class="side-quest-period">Completed: 3/1/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-quest-milestone" data-certificate="testing">
+                        <div class="side-quest-marker completed">12</div>
+                        <div class="side-quest-content">
+                            <h5>Introduction to Golang</h5>
+                            <p class="side-quest-period">Completed: 9/2/25</p>
+                            <div class="side-quest-badge">SIDE QUEST COMPLETED</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-preview" id="certificatePreview">
+                    <div class="preview-placeholder">
+                        <span class="material-symbols-outlined">description</span>
+                        <p>Select a side quest to view certificate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="map-modal" id="mapModal">
+    <div class="map-container">
+        <div class="map-content">
+            <!-- Move the X button HERE, inside map-content -->
+            <span class="close-map" id="closeMap">&times;</span>
+            
+            <div class="map-locations">
+                <div class="location-label location-castle" data-target="landing">
+                    ENTER KINGDOM
+                </div>
+                
+                <div class="location-label location-contacts" data-target="contact">
+                    MESSENGER'S POST
+                </div>
+                
+                <div class="location-label location-academy" data-target="education">
+                    ARCANUM ACADEMY
+                </div>
+                
+                <div class="location-label location-guild" data-target="projects">
+                    QUEST GUILD
+                </div>
+                
+                <div class="location-label location-training" data-target="hobbies">
+                    TRAINING GROUNDS
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- RATE PORTFOLIO MODAL -->
+<!-- ============================================ -->
+<div class="rate-modal-overlay" id="rateModalOverlay">
+  <div class="rate-modal pixel-border">
+    <!-- Close Button -->
+    <button class="rate-modal-close" id="rateModalClose">&times;</button>
+    
+    <!-- Modal Header -->
+    <div class="rate-modal-header">
+      <span class="material-symbols-outlined">military_tech</span>
+      <h2>RATE THE GUILD</h2>
+      <p>How would you judge this adventurer's work?</p>
+    </div>
+    
+    <!-- Star Rating -->
+    <div class="rate-stars-container">
+      <div class="rate-stars" id="rateStars">
+        <span class="rate-star" data-value="1">&#9733;</span>
+        <span class="rate-star" data-value="2">&#9733;</span>
+        <span class="rate-star" data-value="3">&#9733;</span>
+        <span class="rate-star" data-value="4">&#9733;</span>
+        <span class="rate-star" data-value="5">&#9733;</span>
+      </div>
+      <p class="rate-label" id="rateLabel">Select thy rating...</p>
+    </div>
+    
+    <!-- Feedback -->
+    <div class="rate-feedback-container">
+      <label class="rate-feedback-label">
+        <span class="material-symbols-outlined">edit_note</span>
+        MESSAGE TO THE KNIGHT (optional)
+      </label>
+      <textarea 
+        class="rate-feedback-input pixel-border" 
+        id="rateFeedback" 
+        placeholder="Leave words of wisdom or encouragement..."
+        rows="3"
+        maxlength="300"
+      ></textarea>
+      <span class="rate-char-count" id="rateCharCount">0/300</span>
+    </div>
+    
+    <!-- Submit Button -->
+    <button class="rate-submit-btn" id="rateSubmitBtn" disabled>
+      <span class="material-symbols-outlined">send</span>
+      SEAL & SEND RATING
+    </button>
+    
+    <!-- Status Message -->
+    <div class="rate-status" id="rateStatus"></div>
+  </div>
+</div>
+
+<!-- Thank You Overlay -->
+<div class="rate-thankyou-overlay" id="rateThankyouOverlay">
+  <div class="rate-thankyou pixel-border">
+    <span class="thankyou-icon">🏆</span>
+    <h2 id="thankyouTitle">THE GUILD THANKS YOU!</h2>
+    <p id="thankyouMessage">Your rating has been recorded in the royal archives.</p>
+    <button class="rate-submit-btn" id="rateThankyouClose">
+      <span class="material-symbols-outlined">check</span>
+      RETURN TO PORTFOLIO
+    </button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SMALL PROJECTS REDIRECT MODAL -->
+<!-- ============================================ -->
+<div class="small-projects-modal-overlay" id="smallProjectsModal">
+  <div class="small-projects-modal pixel-border">
+    <button class="small-projects-close" id="smallProjectsClose">&times;</button>
+    
+    <div class="small-projects-header">
+      <span class="material-symbols-outlined">archive</span>
+      <h2>ANCIENT SCROLLS LOCATED!</h2>
+    </div>
+    
+    <div class="small-projects-body">
+      <p class="small-projects-text">
+        These early quests were forged during my apprentice days and now reside in the 
+        <strong>3rd Year Portfolio Archives</strong> — where they remain fully functional and free of security curses.
+      </p>
+      
+      <div class="small-projects-list">
+        <div class="small-project-item">
+          <span class="material-symbols-outlined">calculate</span>
+          <span>Functional Calculator</span>
+        </div>
+        <div class="small-project-item">
+          <span class="material-symbols-outlined">cloud</span>
+          <span>Moving Clouds Animation</span>
+        </div>
+        <div class="small-project-item">
+          <span class="material-symbols-outlined">movie</span>
+          <span>Netflix Sign-In Clone</span>
+        </div>
+        <div class="small-project-item">
+          <span class="material-symbols-outlined">photo_camera</span>
+          <span>Instagram Profile Clone</span>
+        </div>
+        <div class="small-project-item">
+          <span class="material-symbols-outlined">dark_mode</span>
+          <span>Solar Eclipse Animation</span>
+        </div>
+        <div class="small-project-item">
+          <span class="material-symbols-outlined">search</span>
+          <span>Filtering Search Bar</span>
+        </div>
+      </div>
+      
+      <p class="small-projects-hint">
+        All six projects are safely stored and fully playable there. No security warnings — just pure nostalgia!
+      </p>
+    </div>
+    
+    <div class="small-projects-actions">
+      <button class="small-projects-btn secondary" id="smallProjectsStay">
+        <span class="material-symbols-outlined">close</span>
+        STAY HERE
+      </button>
+      <button class="small-projects-btn primary" id="smallProjectsGo">
+        <span class="material-symbols-outlined">travel_explore</span>
+        VISIT 3RD YEAR PORTFOLIO
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PROFILE PICTURE MODAL -->
+<!-- ============================================ -->
+<div class="profile-pic-modal-overlay" id="profilePicModal">
+  <div class="profile-pic-modal pixel-border">
+    <button class="profile-pic-close" id="profilePicClose">&times;</button>
+    
+    <div class="profile-pic-container">
+      <img src="/images/knightC.png" alt="Knight Portrait" class="profile-pic-full">
+    </div>
+    
+    <div class="profile-pic-info">
+      <h3>MIGUELITO</h3>
+      <p>Web Adventurer — Level 21</p>
+    </div>
+  </div>
+</div>
+
+<script src ="/js/preloader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+<script src="/js/knight.js"></script>
+<script src="/js/clouds.js"></script>
+<script src="/js/education.js"></script>
+<script src="/js/projects.js"></script>
+<script src="/js/hobbies.js"></script>
+<script src="/js/contact.js"></script>
+<script src="/js/map.js"></script>
+<script src="/js/rate.js"></script>
+<script src="/js/profile-pic.js"></script>
+</body>
+</html>
