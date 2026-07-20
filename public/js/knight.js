@@ -121,11 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('Loading knight model...');
         
-        const modelPaths = [
-            '/models/knight3d.glb',
-            './models/knight3d.glb',
-            'models/knight3d.glb',
-            '../models/knight3d.glb'
+      const modelPaths = [
+            '/images/knight3d.glb',
+            './images/knight3d.glb',
+            'images/knight3d.glb'
         ];
         
         let currentPathIndex = 0;
