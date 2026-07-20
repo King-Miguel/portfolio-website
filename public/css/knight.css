@@ -404,3 +404,14 @@
 .scholar-portrait:hover::after {
     border-color: #FFD700 !important;
 }
+
+/* Make sure spinner is visible above canvas */
+#knightModel {
+    position: relative;
+}
+
+#knightModel .model-loading {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
