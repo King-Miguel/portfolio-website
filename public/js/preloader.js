@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
  // Hide button initially, reveal after text animation completes (3.8s)
 if (startButton) {
-    console.log('✅ Start button found — will reveal after text animation');
+    console.log('✅ Start button found  -  will reveal after text animation');
     startButton.style.visibility = 'hidden';
     startButton.style.opacity = '0';
     startButton.disabled = false;

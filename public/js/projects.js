@@ -1,26 +1,26 @@
 const questsData = {
     // ============ S RANK (LEGENDARY) ============
     "nexus": {
-        title: "Nexus — Project Management",
+        title: "Nexus - Project Management",
         rank: "S",
         rankText: "LEGENDARY",
         image: "/images/nexus-icon.jpg",
         brief: "Full-featured project management tool with Kanban boards, real-time analytics, financial tracking, command palette, and soft delete with undo.",
         requirements: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS", "NextAuth", "Recharts"],
-        contract: { difficulty: "S Rank — Legendary", status: "Completed & Deployed", client: "Royal Guild" },
+        contract: { difficulty: "S Rank - Legendary", status: "Completed & Deployed", client: "Royal Guild" },
         rewards: { gold: "+5000 Gold", skills: "Full-Stack Mastery · Next.js · TypeScript · Database Design", badge: "🏆 Legendary Developer Badge" },
         client: "Royal Guild",
         liveLink: "https://nexus-alpha-ten-11.vercel.app",
         sourceLink: "https://github.com/King-Miguel"
     },
     "rentruck": {
-        title: "Rentruck — Capstone",
+        title: "Rentruck - Capstone",
         rank: "S",
         rankText: "LEGENDARY",
         image: "/images/rentruck-icon.jpg",
         brief: "Full-stack truck rental and inventory management platform built for VFL Builders & VFL Hardware. Features real-time availability, pricing algorithms, inventory tracking, and user management.",
         requirements: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Vercel", "Tailwind CSS"],
-        contract: { difficulty: "S Rank — Legendary", status: "Completed & Deployed", client: "VFL Builders & VFL Hardware" },
+        contract: { difficulty: "S Rank - Legendary", status: "Completed & Deployed", client: "VFL Builders & VFL Hardware" },
         rewards: { gold: "+5000 Gold", skills: "Full-Stack Architecture · Inventory Systems · Client Delivery", badge: "🏆 Capstone Master Badge" },
         client: "VFL Builders & VFL Hardware",
         liveLink: "https://rentruck1.vercel.app/",
@@ -29,66 +29,66 @@ const questsData = {
 
     // ============ A RANK (ELITE) ============
     "flux": {
-        title: "Flux — Client Feedback Portal",
+        title: "Flux - Client Feedback Portal",
         rank: "A",
         rankText: "ELITE",
         image: "/images/flux-icon.jpg",
         brief: "Agency-client feedback management system with Kanban board, threaded comments, role-based access, file attachments, and task conversion.",
         requirements: ["HTML5", "CSS3", "JavaScript", "Kanban", "LocalStorage", "UI/UX Design"],
-        contract: { difficulty: "A Rank — Elite", status: "Completed & Deployed", client: "Agency Guild" },
+        contract: { difficulty: "A Rank - Elite", status: "Completed & Deployed", client: "Agency Guild" },
         rewards: { gold: "+2500 Gold", skills: "Workflow Design · UX Architecture · Feedback Systems", badge: "🏅 Quest Master Badge" },
         client: "Agency Guild",
-        liveLink: "https://kingmiguelito-golteb.github.io/flux/landing.html",
+        liveLink: "https://flux1-portal.vercel.app/",
         sourceLink: "https://github.com/King-Miguel"
     },
     "thesis-quest": {
-        title: "Thesis Quest — Progress Tracker",
+        title: "Thesis Quest - Progress Tracker",
         rank: "A",
         rankText: "ELITE",
         image: "/images/thesis-quest-icon.jpg",
         brief: "Thesis progress tracking system for students with milestone monitoring, deliverable management, and supervisor oversight.",
         requirements: ["React", "Next.js", "Vercel", "Database", "Authentication"],
-        contract: { difficulty: "A Rank — Elite", status: "Completed & Deployed", client: "University Guild" },
+        contract: { difficulty: "A Rank - Elite", status: "Completed & Deployed", client: "University Guild" },
         rewards: { gold: "+2500 Gold", skills: "Academic Systems · Progress Tracking · React", badge: "🏅 Scholar's Badge" },
         client: "University Guild",
         liveLink: "https://thesisquest.vercel.app",
         sourceLink: "https://github.com/King-Miguel"
     },
     "tower-defense": {
-        title: "Tower Defense — Game",
+        title: "Tower Defense - Game",
         rank: "A",
         rankText: "ELITE",
         image: "/images/tower-defense-icon.jpg",
         brief: "Complete tower defense game with 6 unique towers (Basic, Sniper, Rapid, Cannon, Fire, Ice), 3 different maps (Forest, Desert, Ice), 13 enemy types including bosses, tower upgrades, targeting modes, prestige system, and achievements. Defend your base across 3 worlds!",
         requirements: ["JavaScript", "Game Design", "Canvas API", "AI Logic", "HTML5", "CSS3"],
-        contract: { difficulty: "A Rank — Elite", status: "Completed & Deployed", client: "Arcade Guild" },
+        contract: { difficulty: "A Rank - Elite", status: "Completed & Deployed", client: "Arcade Guild" },
         rewards: { gold: "+2500 Gold", skills: "Game Development · AI Logic · Canvas API", badge: "🏅 Tactician's Badge" },
         client: "Arcade Guild",
         liveLink: "https://king-miguel.itch.io/tower-defense",
         sourceLink: "https://github.com/King-Miguel"
     },
     "arena-defender": {
-        title: "Arena Defender — Game",
+        title: "Arena Defender - Game",
         rank: "A",
         rankText: "ELITE",
         image: "/images/arena-defender-icon.jpg",
         brief: "Wave-survival action game built with Phaser 3. Use WASD to move, auto-shoot at enemies, and protect your base from endless waves. Pick from 3 unique upgrades after each wave as enemies scale in difficulty. Features local high score tracking. How many waves can you survive?",
         requirements: ["JavaScript", "Game Design", "Canvas API", "AI Logic", "HTML5", "CSS3"],
-        contract: { difficulty: "A Rank — Elite", status: "Completed & Deployed", client: "Arcade Guild" },
+        contract: { difficulty: "A Rank - Elite", status: "Completed & Deployed", client: "Arcade Guild" },
         rewards: { gold: "+2500 Gold", skills: "Game Mechanics · Real-time Combat · Leaderboards", badge: "🏅 Gladiator's Badge" },
         client: "Arcade Guild",
         liveLink: "https://king-miguel.itch.io/arena-defender",
         sourceLink: "https://github.com/King-Miguel"
     },
     "lucena-heritage": {
-        title: "Lucena Heritage — Android Map App",
+        title: "Lucena Heritage - Android Map App",
         rank: "A",
         rankText: "ELITE",
         image: "/images/mobile-app2.jpg",
         video: "/images/mobile-app2.mp4",
         brief: "Android Studio app preserving Lucena City's cultural landmarks. Features splash screen, register/login with local database (email or phone detection for existing accounts), Google Maps API with heritage pin markers across Lucena, a recenter-to-Lucena map button, in-app camera capture, and secure logout. Built as a 3rd-year mobile development quest.",
         requirements: ["Android Studio", "Java", "SQLite / Local DB", "Google Maps API", "Camera API", "XML Layouts"],
-        contract: { difficulty: "A Rank — Elite", status: "Completed — Demo Video", client: "University Guild · 3rd Year" },
+        contract: { difficulty: "A Rank - Elite", status: "Completed - Demo Video", client: "University Guild · 3rd Year" },
         rewards: { gold: "+2500 Gold", skills: "Android Development · Maps Integration · Local Auth · Camera API", badge: "🏅 Cartographer's Badge" },
         client: "University Guild · 3rd Year",
         liveLink: "demo-video",
@@ -97,43 +97,43 @@ const questsData = {
 
     // ============ B RANK (ADVENTURER) ============
     "mcgill-pizza": {
-        title: "McGill Pizza — Android Ordering App",
+        title: "McGill Pizza - Android Ordering App",
         rank: "B",
         rankText: "ADVENTURER",
         image: "/images/mobile-app1.jpg",
         video: "/images/mobile-app1.mp4",
-        brief: "Full Android Studio food-ordering app for the McGill Pizza brand. Flow covers splash screen, login (demo credentials: Remo / Rasay), main hub with three category containers — Main Dishes (Margherita, Meat Lovers, Chicken Alfredo…), Side Dishes (garlic bread, wings, salads…), and Drinks (soda, juice, water). Each category opens a checkbox menu with Place Order, dine-in or takeout choice, and a thank-you modal summarizing the full order. Includes back navigation and top-right logout. Pair project — solo-built end to end.",
+        brief: "Full Android Studio food-ordering app for the McGill Pizza brand. Flow covers splash screen, login (demo credentials: Remo / Rasay), main hub with three category containers - Main Dishes (Margherita, Meat Lovers, Chicken Alfredo…), Side Dishes (garlic bread, wings, salads…), and Drinks (soda, juice, water). Each category opens a checkbox menu with Place Order, dine-in or takeout choice, and a thank-you modal summarizing the full order. Includes back navigation and top-right logout. Pair project - solo-built end to end.",
         requirements: ["Android Studio", "Java", "XML Layouts", "Activities & Intents", "UI/UX Design", "Modal Dialogs"],
-        contract: { difficulty: "B Rank — Adventurer", status: "Completed — Demo Video", client: "University Guild · 3rd Year" },
+        contract: { difficulty: "B Rank - Adventurer", status: "Completed - Demo Video", client: "University Guild · 3rd Year" },
         rewards: { gold: "+1500 Gold", skills: "Android UI · Multi-Activity Flow · Order Systems", badge: "📜 Pizza Artisan Badge" },
         client: "University Guild · 3rd Year",
         liveLink: "demo-video",
         sourceLink: "https://github.com/King-Miguel"
     },
     "booking": {
-        title: "BooKING — E-Commerce",
+        title: "BooKING - E-Commerce",
         rank: "B",
         rankText: "ADVENTURER",
         image: "/images/booking-icon.jpg",
         brief: "Full e-commerce platform for book lovers with product catalog, shopping cart, user authentication, and localStorage persistence.",
         requirements: ["HTML5", "CSS3", "JavaScript", "LocalStorage", "UI/UX Design"],
-        contract: { difficulty: "B Rank — Adventurer", status: "Completed & Deployed", client: "Bookstore Guild" },
+        contract: { difficulty: "B Rank - Adventurer", status: "Completed & Deployed", client: "Bookstore Guild" },
         rewards: { gold: "+1500 Gold", skills: "E-Commerce Architecture · LocalStorage · UI Design", badge: "📜 Merchant Guild Badge" },
         client: "Bookstore Guild",
-        liveLink: "https://kingmiguelito-golteb.github.io/BooKING/",
+        liveLink: "https://book-king1.vercel.app/",
         sourceLink: "https://github.com/King-Miguel"
     },
     "itindahan": {
-        title: "iTINDAHAN — E-Commerce UI",
+        title: "iTINDAHAN - E-Commerce UI",
         rank: "B",
         rankText: "ADVENTURER",
-        image: "/images/ecommerce.jpg",
+        image: "/images/ecommerce-ui.jpg",
         brief: "E-commerce platform UI with localStorage authentication, multi-vendor marketplace concept, and full shopping cart functionality.",
         requirements: ["HTML5", "CSS3", "JavaScript", "LocalStorage", "UI Design"],
-        contract: { difficulty: "B Rank — Adventurer", status: "Completed & Deployed", client: "Marketplace Guild" },
+        contract: { difficulty: "B Rank - Adventurer", status: "Completed & Deployed", client: "Marketplace Guild" },
         rewards: { gold: "+1500 Gold", skills: "Frontend Architecture · Multi-vendor UI · LocalStorage", badge: "📜 Vendor Guild Badge" },
         client: "Marketplace Guild",
-        liveLink: "https://kingmiguelito-golteb.github.io/iTINDAHAN/",
+        liveLink: "https://i-tindahan.vercel.app/",
         sourceLink: "https://github.com/King-Miguel"
     },
     "fourthfolio": {
@@ -143,7 +143,7 @@ const questsData = {
         image: "/images/fourthfolio-icon.jpg",
         brief: "My 3rd year portfolio showcasing early web development journey, foundational projects, and skill progression from beginner to intermediate.",
         requirements: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "Responsive Design"],
-        contract: { difficulty: "B Rank — Adventurer", status: "Completed & Deployed", client: "Personal Archive" },
+        contract: { difficulty: "B Rank - Adventurer", status: "Completed & Deployed", client: "Personal Archive" },
         rewards: { gold: "+1500 Gold", skills: "Portfolio Design · Responsive Layout · Version History", badge: "📜 Archivist's Badge" },
         client: "Personal Archive",
         liveLink: "https://kingmiguelito-golteb.github.io/fourthfolio/",
@@ -156,7 +156,7 @@ const questsData = {
         image: "/images/current-portfolio.jpg",
         brief: "Complete RPG-themed responsive portfolio with 19 quests (including Android Studio demos), 3D knight model, pixel art style, and interactive quest board. YOU ARE HERE!",
         requirements: ["HTML5", "CSS3", "JavaScript", "Node.js", "Express", "Three.js"],
-        contract: { difficulty: "B Rank — Adventurer", status: "Completed & Deployed", client: "Personal Brand" },
+        contract: { difficulty: "B Rank - Adventurer", status: "Completed & Deployed", client: "Personal Brand" },
         rewards: { gold: "+1500 Gold", skills: "Portfolio Design Mastery · RPG Theme · 3D Integration", badge: "📜 Showcase Expert Badge" },
         client: "Personal Brand",
         liveLink: "/",
@@ -169,14 +169,14 @@ const questsData = {
         image: "/images/ecommerce.jpg",
         brief: "Full online store with product catalog, shopping cart, user authentication and payment integration.",
         requirements: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Payment API"],
-        contract: { difficulty: "B Rank — Adventurer", status: "Completed", client: "Merchant Guild" },
+        contract: { difficulty: "B Rank - Adventurer", status: "Completed", client: "Merchant Guild" },
         rewards: { gold: "+1500 Gold", skills: "E-commerce Development · PHP · MySQL", badge: "📜 Merchant Guild Badge" },
         client: "Merchant Guild",
         liveLink: "#",
         sourceLink: "https://github.com/King-Miguel"
     },
 
-    // ============ C RANK (APPRENTICE) — NOW USE "small-project" ============
+    // ============ C RANK (APPRENTICE) - NOW USE "small-project" ============
     "calculator": {
         title: "Functional Calculator",
         rank: "C",
@@ -184,7 +184,7 @@ const questsData = {
         image: "/images/Calbolator.png",
         brief: "Fully functional calculator built with HTML, CSS and JavaScript as a learning challenge to understand DOM manipulation and event handling.",
         requirements: ["HTML5", "CSS3", "JavaScript", "DOM Manipulation"],
-        contract: { difficulty: "C Rank — Apprentice", status: "Completed & Deployed", client: "Learning Challenge" },
+        contract: { difficulty: "C Rank - Apprentice", status: "Completed & Deployed", client: "Learning Challenge" },
         rewards: { gold: "+800 Gold", skills: "JavaScript Logic · DOM Manipulation · Event Handling", badge: "🧮 Math Wizard Badge" },
         client: "Learning Challenge",
         liveLink: "small-project",  // ← TRIGGERS MODAL
@@ -197,14 +197,14 @@ const questsData = {
         image: "/images/MovingCloud.png",
         brief: "Complex JavaScript animation featuring moving cloud elements that demonstrate advanced CSS and JavaScript timing functions.",
         requirements: ["HTML5", "CSS3", "JavaScript", "Animations", "Timing Functions"],
-        contract: { difficulty: "C Rank — Apprentice", status: "Completed & Deployed", client: "Personal Challenge" },
+        contract: { difficulty: "C Rank - Apprentice", status: "Completed & Deployed", client: "Personal Challenge" },
         rewards: { gold: "+800 Gold", skills: "Animation Expertise · Timing Functions · JavaScript", badge: "☁️ Sky Master Badge" },
         client: "Personal Challenge",
         liveLink: "small-project",  // ← TRIGGERS MODAL
         sourceLink: "https://github.com/King-Miguel"
     },
 
-    // ============ D RANK (BEGINNER) — NOW USE "small-project" ============
+    // ============ D RANK (BEGINNER) - NOW USE "small-project" ============
     "netflix-clone": {
         title: "Netflix Sign-In Clone",
         rank: "D",
@@ -212,7 +212,7 @@ const questsData = {
         image: "/images/Alimani.jpg",
         brief: "Static replica of Netflix's sign-in page interface created as a learning exercise to practice form design and CSS layout.",
         requirements: ["HTML5", "CSS3", "Form Design", "UI Replication"],
-        contract: { difficulty: "D Rank — Beginner", status: "Completed & Deployed", client: "Learning Exercise" },
+        contract: { difficulty: "D Rank - Beginner", status: "Completed & Deployed", client: "Learning Exercise" },
         rewards: { gold: "+400 Gold", skills: "UI Design Basics · Form Styling · CSS Layout", badge: "🎬 Clone Master Badge" },
         client: "Learning Exercise",
         liveLink: "small-project",  // ← TRIGGERS MODAL
@@ -225,7 +225,7 @@ const questsData = {
         image: "/images/Ricardo.jpg",
         brief: "Static Instagram profile page replica with sample posts, created to practice CSS grid layouts and social media UI design.",
         requirements: ["HTML5", "CSS3", "Grid Layout", "UI Design"],
-        contract: { difficulty: "D Rank — Beginner", status: "Completed & Deployed", client: "Learning Exercise" },
+        contract: { difficulty: "D Rank - Beginner", status: "Completed & Deployed", client: "Learning Exercise" },
         rewards: { gold: "+400 Gold", skills: "Grid Layout · Social UI Design · CSS", badge: "📸 Profile Artist Badge" },
         client: "Learning Exercise",
         liveLink: "small-project",  // ← TRIGGERS MODAL
@@ -238,7 +238,7 @@ const questsData = {
         image: "/images/Krillin.png",
         brief: "CSS-only solar eclipse animation demonstrating pure CSS animations and transitions without JavaScript.",
         requirements: ["HTML5", "CSS3", "CSS Animations", "Keyframes"],
-        contract: { difficulty: "D Rank — Beginner", status: "Completed & Deployed", client: "First Project" },
+        contract: { difficulty: "D Rank - Beginner", status: "Completed & Deployed", client: "First Project" },
         rewards: { gold: "+400 Gold", skills: "CSS Animation Basics · Keyframes · Transitions", badge: "🌞 Celestial Animator Badge" },
         client: "First Project",
         liveLink: "small-project",  // ← TRIGGERS MODAL
@@ -251,7 +251,7 @@ const questsData = {
         image: "/images/Golteb.png",
         brief: "Interactive search functionality with filtering capabilities and dark mode toggle feature for enhanced user experience.",
         requirements: ["HTML5", "CSS3", "JavaScript", "DOM Filtering", "Dark Mode"],
-        contract: { difficulty: "D Rank — Beginner", status: "Completed & Deployed", client: "Personal Project" },
+        contract: { difficulty: "D Rank - Beginner", status: "Completed & Deployed", client: "Personal Project" },
         rewards: { gold: "+400 Gold", skills: "Search Implementation · Filtering · Dark Mode", badge: "🔍 Filter Master Badge" },
         client: "Personal Project",
         liveLink: "small-project",  // ← TRIGGERS MODAL
@@ -403,7 +403,7 @@ function openDemoVideoModal(quest) {
     if (subtitle) {
         subtitle.textContent = quest.client
             ? `Recorded walkthrough · ${quest.client}`
-            : 'Recorded walkthrough — no live deploy available for native apps';
+            : 'Recorded walkthrough - no live deploy available for native apps';
     }
 
     // Reset + load new source
@@ -434,7 +434,7 @@ function openDemoVideoModal(quest) {
     const playPromise = video.play();
     if (playPromise && typeof playPromise.catch === 'function') {
         playPromise.catch(function () {
-            // Autoplay blocked — user can press play manually
+            // Autoplay blocked - user can press play manually
         });
     }
 }
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Escape key — small projects + demo video
+    // Escape key - small projects + demo video
     document.addEventListener('keydown', function(e) {
         if (e.key !== 'Escape') return;
         if (modal && modal.classList.contains('active')) closeModal();
