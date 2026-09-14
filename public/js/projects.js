@@ -80,8 +80,36 @@ const questsData = {
         liveLink: "https://king-miguel.itch.io/arena-defender",
         sourceLink: "https://github.com/King-Miguel"
     },
+    "lucena-heritage": {
+        title: "Lucena Heritage — Android Map App",
+        rank: "A",
+        rankText: "ELITE",
+        image: "/images/mobile-app2.jpg",
+        video: "/images/mobile-app2.mp4",
+        brief: "Android Studio app preserving Lucena City's cultural landmarks. Features splash screen, register/login with local database (email or phone detection for existing accounts), Google Maps API with heritage pin markers across Lucena, a recenter-to-Lucena map button, in-app camera capture, and secure logout. Built as a 3rd-year mobile development quest.",
+        requirements: ["Android Studio", "Java", "SQLite / Local DB", "Google Maps API", "Camera API", "XML Layouts"],
+        contract: { difficulty: "A Rank — Elite", status: "Completed — Demo Video", client: "University Guild · 3rd Year" },
+        rewards: { gold: "+2500 Gold", skills: "Android Development · Maps Integration · Local Auth · Camera API", badge: "🏅 Cartographer's Badge" },
+        client: "University Guild · 3rd Year",
+        liveLink: "demo-video",
+        sourceLink: "https://github.com/King-Miguel"
+    },
 
     // ============ B RANK (ADVENTURER) ============
+    "mcgill-pizza": {
+        title: "McGill Pizza — Android Ordering App",
+        rank: "B",
+        rankText: "ADVENTURER",
+        image: "/images/mobile-app1.jpg",
+        video: "/images/mobile-app1.mp4",
+        brief: "Full Android Studio food-ordering app for the McGill Pizza brand. Flow covers splash screen, login (demo credentials: Remo / Rasay), main hub with three category containers — Main Dishes (Margherita, Meat Lovers, Chicken Alfredo…), Side Dishes (garlic bread, wings, salads…), and Drinks (soda, juice, water). Each category opens a checkbox menu with Place Order, dine-in or takeout choice, and a thank-you modal summarizing the full order. Includes back navigation and top-right logout. Pair project — solo-built end to end.",
+        requirements: ["Android Studio", "Java", "XML Layouts", "Activities & Intents", "UI/UX Design", "Modal Dialogs"],
+        contract: { difficulty: "B Rank — Adventurer", status: "Completed — Demo Video", client: "University Guild · 3rd Year" },
+        rewards: { gold: "+1500 Gold", skills: "Android UI · Multi-Activity Flow · Order Systems", badge: "📜 Pizza Artisan Badge" },
+        client: "University Guild · 3rd Year",
+        liveLink: "demo-video",
+        sourceLink: "https://github.com/King-Miguel"
+    },
     "booking": {
         title: "BooKING — E-Commerce",
         rank: "B",
@@ -126,7 +154,7 @@ const questsData = {
         rank: "B",
         rankText: "ADVENTURER",
         image: "/images/current-portfolio.jpg",
-        brief: "Complete RPG-themed responsive portfolio with 15 quests, 3D knight model, pixel art style, and interactive quest board. YOU ARE HERE!",
+        brief: "Complete RPG-themed responsive portfolio with 19 quests (including Android Studio demos), 3D knight model, pixel art style, and interactive quest board. YOU ARE HERE!",
         requirements: ["HTML5", "CSS3", "JavaScript", "Node.js", "Express", "Three.js"],
         contract: { difficulty: "B Rank — Adventurer", status: "Completed & Deployed", client: "Personal Brand" },
         rewards: { gold: "+1500 Gold", skills: "Portfolio Design Mastery · RPG Theme · 3D Integration", badge: "📜 Showcase Expert Badge" },
@@ -316,6 +344,11 @@ function updateQuestDisplay(questId) {
     actionsContainer.appendChild(liveBtn);
     actionsContainer.appendChild(sourceBtn);
     
+    // Swap LAUNCH label when this quest has an in-site demo video
+    if (quest.liveLink === 'demo-video' && quest.video) {
+        liveBtn.innerHTML = '<span class="material-symbols-outlined">videocam</span> WATCH DEMO';
+    }
+
     // LAUNCH QUEST BUTTON LOGIC
     liveBtn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -324,6 +357,10 @@ function updateQuestDisplay(questId) {
         // Check if it's a small project → show modal
         if (quest.liveLink === 'small-project') {
             document.getElementById('smallProjectsModal').classList.add('active');
+        }
+        // Native / Android apps → play recorded demo in-site
+        else if (quest.liveLink === 'demo-video' && quest.video) {
+            openDemoVideoModal(quest);
         }
         // Normal live link
         else if (quest.liveLink && quest.liveLink !== '#' && quest.liveLink !== '/') {
@@ -348,6 +385,79 @@ function updateQuestDisplay(questId) {
 }
 
 // =============================================
+// DEMO VIDEO MODAL (Android / native apps)
+// =============================================
+function openDemoVideoModal(quest) {
+    const modal = document.getElementById('demoVideoModal');
+    const video = document.getElementById('demoVideoPlayer');
+    const title = document.getElementById('demoVideoTitle');
+    const subtitle = document.getElementById('demoVideoSubtitle');
+    const poster = document.getElementById('demoVideoPoster');
+
+    if (!modal || !video) {
+        console.error('❌ Demo video modal not found in DOM');
+        return;
+    }
+
+    if (title) title.textContent = quest.title || 'QUEST DEMO';
+    if (subtitle) {
+        subtitle.textContent = quest.client
+            ? `Recorded walkthrough · ${quest.client}`
+            : 'Recorded walkthrough — no live deploy available for native apps';
+    }
+
+    // Reset + load new source
+    video.pause();
+    video.removeAttribute('src');
+    while (video.firstChild) video.removeChild(video.firstChild);
+
+    if (quest.image) {
+        video.setAttribute('poster', quest.image);
+        if (poster) {
+            poster.style.backgroundImage = `url('${quest.image}')`;
+            poster.style.display = 'block';
+        }
+    } else if (poster) {
+        poster.style.display = 'none';
+    }
+
+    const source = document.createElement('source');
+    source.src = quest.video;
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    video.load();
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+
+    // Autoplay when possible (muted first for browser policies, user can unmute)
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {
+            // Autoplay blocked — user can press play manually
+        });
+    }
+}
+
+function closeDemoVideoModal() {
+    const modal = document.getElementById('demoVideoModal');
+    const video = document.getElementById('demoVideoPlayer');
+    if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        while (video.firstChild) video.removeChild(video.firstChild);
+        video.load();
+    }
+    if (modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+}
+
+window.openDemoVideoModal = openDemoVideoModal;
+window.closeDemoVideoModal = closeDemoVideoModal;
+
+// =============================================
 // SMALL PROJECTS MODAL LOGIC
 // =============================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -361,26 +471,44 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.classList.remove('active');
     }
     
-    closeBtn.addEventListener('click', closeModal);
-    stayBtn.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (stayBtn) stayBtn.addEventListener('click', closeModal);
     
     // Close on overlay click
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
-    });
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+    }
     
     // Go to 3rd year portfolio
-    goBtn.addEventListener('click', function() {
-        window.open('https://kingmiguelito-golteb.github.io/fourthfolio/', '_blank', 'noopener,noreferrer');
-        closeModal();
-    });
-    
-    // Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+    if (goBtn) {
+        goBtn.addEventListener('click', function() {
+            window.open('https://kingmiguelito-golteb.github.io/fourthfolio/', '_blank', 'noopener,noreferrer');
             closeModal();
-        }
+        });
+    }
+    
+    // Escape key — small projects + demo video
+    document.addEventListener('keydown', function(e) {
+        if (e.key !== 'Escape') return;
+        if (modal && modal.classList.contains('active')) closeModal();
+        const demoModal = document.getElementById('demoVideoModal');
+        if (demoModal && demoModal.classList.contains('active')) closeDemoVideoModal();
     });
+
+    // Demo video modal wiring
+    const demoModal = document.getElementById('demoVideoModal');
+    const demoClose = document.getElementById('demoVideoClose');
+    const demoDone = document.getElementById('demoVideoDone');
+
+    if (demoClose) demoClose.addEventListener('click', closeDemoVideoModal);
+    if (demoDone) demoDone.addEventListener('click', closeDemoVideoModal);
+    if (demoModal) {
+        demoModal.addEventListener('click', function(e) {
+            if (e.target === demoModal) closeDemoVideoModal();
+        });
+    }
 });
 
 // =============================================
