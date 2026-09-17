@@ -110,6 +110,20 @@ const questsData = {
         liveLink: "demo-video",
         sourceLink: "https://github.com/King-Miguel"
     },
+    "rpg-maker": {
+        title: "Vengeance Path - RPG Maker Opening",
+        rank: "C",
+        rankText: "APPRENTICE",
+        image: "/images/rpg-maker.jpg",
+        video: "/images/rpg-maker.mp4",
+        brief: "School RPG Maker short built as story documentation for class. I wrote about seven chapters of backstory for a boy who loses his parents young and begs his grandfather to train him so he can take revenge. The playable build only covers the opening: house dialogue between the protagonist and his grandfather, on-screen text that lays out the kid's past, then a cut outside to his parents' graves where he vows revenge and walks off on a to-be-continued beat. Default engine characters, maps, and assets were used after planned Vroid character work did not make it into the build. Honest scope: opening demo and writing pass, not a finished game.",
+        requirements: ["RPG Maker", "Event Scripting", "Story Writing", "Dialogue Design", "Scene Flow"],
+        contract: { difficulty: "C Rank - Apprentice", status: "Opening Demo Only", client: "University Guild · Class Project" },
+        rewards: { gold: "+800 Gold", skills: "Narrative Design · Event Scripting · Scene Direction", badge: "📜 Story Scribe Badge" },
+        client: "University Guild · Class Project",
+        liveLink: "demo-video",
+        sourceLink: "https://github.com/King-Miguel"
+    },
     "booking": {
         title: "BooKING - E-Commerce",
         rank: "B",
@@ -154,7 +168,7 @@ const questsData = {
         rank: "B",
         rankText: "ADVENTURER",
         image: "/images/current-portfolio.jpg",
-        brief: "Complete RPG-themed responsive portfolio with 19 quests (including Android Studio demos), 3D knight model, pixel art style, and interactive quest board. YOU ARE HERE!",
+        brief: "Complete RPG-themed responsive portfolio with 20 quests (including Android and RPG Maker demos), 3D knight model, pixel art style, and interactive quest board. YOU ARE HERE!",
         requirements: ["HTML5", "CSS3", "JavaScript", "Node.js", "Express", "Three.js"],
         contract: { difficulty: "B Rank - Adventurer", status: "Completed & Deployed", client: "Personal Brand" },
         rewards: { gold: "+1500 Gold", skills: "Portfolio Design Mastery · RPG Theme · 3D Integration", badge: "📜 Showcase Expert Badge" },
