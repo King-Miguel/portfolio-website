@@ -1,16 +1,17 @@
 # King Miguel Remo - Resume (Canva paste guide)
+## Version: Junior Full-Stack (brave edition)
 
 Use a **clean 1-page professional template** (no photo, no RPG theme, no heavy graphics).
-Black / dark navy text, one accent color max. ATS-friendly fonts: Inter, Lato, Calibri, or Arial.
+Black / dark navy text, one accent color max. Fonts: Inter, Lato, Calibri, or Arial.
 
-When done: export PDF as `resume.pdf` and drop it in `public/images/resume.pdf` (we will wire the About button).
+Export PDF as `resume.pdf` → put in `public/images/resume.pdf` (we wire the About button after).
 
 ---
 
 ## HEADER
 
 **KING MIGUEL REMO**
-Junior Frontend Developer  |  Open to Internship and Full-Time
+Junior Full-Stack Developer  |  Open to Internship, OJT, and Full-Time
 
 Sariaya, Quezon, Philippines
 0956 960 9285  |  iggytesoro123@gmail.com
@@ -20,9 +21,9 @@ GitHub: https://github.com/King-Miguel
 
 ---
 
-## SUMMARY (3 lines max)
+## SUMMARY
 
-BSIT student specializing in Web and Mobile Application Development. Builds responsive web apps and shipped a live B2B client platform (RenTruck) solo. Looking for a junior frontend or internship role where I can ship UI, learn fast with a team, and grow into full-stack work.
+BSIT student (Web and Mobile Application Development) who designs, builds, and deploys full-stack web applications end to end. Capstone RenTruck is a live B2B rental and inventory platform for a real construction client, built solo across system design, database, API, and UI. Seeking a junior full-stack or software engineering role (internship / OJT / full-time) where I can ship product, own features, and keep leveling under a strong team.
 
 ---
 
@@ -31,7 +32,8 @@ BSIT student specializing in Web and Mobile Application Development. Builds resp
 **Bachelor of Science in Information Technology**
 Specialization: Web and Mobile Application Development
 College of Sciences, Technology and Communications, Inc. (CSTC)
-2023 - Present  |  Expected graduation: [fill year, e.g. 2027]
+2023 - Present  |  Expected graduation: May 2027
+Final year includes on-the-job training (OJT, ~400 hours) and capstone delivery.
 
 Senior High School (STEM), Sariaya Institute Inc. - Honor Student (2021-2023)
 
@@ -39,66 +41,59 @@ Senior High School (STEM), Sariaya Institute Inc. - Honor Student (2021-2023)
 
 ## TECHNICAL SKILLS
 
-**Frontend:** HTML5, CSS3, JavaScript, Responsive UI, Bootstrap, Tailwind CSS, React basics
-**Full-stack exposure:** Next.js, TypeScript, Node.js, Express
-**Backend / Data:** PostgreSQL, Supabase, Prisma, REST APIs, Authentication
-**Mobile:** Android Studio (Java), Expo / React Native (in progress)
-**Tools:** Git, GitHub, Vercel, VS Code, Figma-adjacent UI implementation
+**Languages:** JavaScript, TypeScript, HTML5, CSS3, SQL, Java, Python (foundational)
+**Frontend:** Responsive UI, Bootstrap, Tailwind CSS, React / Next.js
+**Backend:** Node.js, Express, REST APIs, Authentication, multi-role access control
+**Databases:** PostgreSQL, Supabase, Prisma, SQLite
+**Mobile:** Android Studio (Java), Expo / React Native (building)
+**Cloud and tools:** Vercel, Git, GitHub, VS Code
 
 ---
 
-## PROJECTS (lead with strongest)
+## PROJECTS
 
-### RenTruck - B2B Equipment Rental and Inventory Platform  |  Capstone
+### RenTruck - B2B Equipment Rental and Inventory Platform  |  Capstone (Masterwork)
 **Live:** https://rentruck1.vercel.app
-Production-deployed platform for VFL Builders (Tayabas, Quezon), a government-accredited construction company. Unifies truck rental and hardware retail into one system.
-- Solo end-to-end: system design, 28-model database, 65-endpoint API, and UI
-- Multi-role access for admins, engineers, field operators, and clients
-- Fleet browsing, scheduling, digital rental agreements, e-wallet/bank payments
-- Inventory stock movements, payment verification, revenue and utilization reports
-- Live commercial trial with the client toward full handover
+Production-deployed platform for VFL Builders (Tayabas, Quezon), a government-accredited construction company. Unifies truck rental operations and hardware retail in one system.
+- Solo full-stack delivery: system design, 28-model database, 65-endpoint API, and production UI
+- Five user roles spanning administrators, engineers, field operators, and clients
+- Client flows: fleet browse, schedule negotiation, digital rental agreements, e-wallet and bank payment
+- Ops flows: dispatcher scheduling, field duty and unit status logging, inventory stock movements
+- Admin: payment verification, revenue and utilization reporting
+- Live commercial trial with the client on the path to full handover
 **Stack:** Next.js, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Vercel
 
-### Nexus - Project Management Tool
+### Nexus - Project Management Platform
 **Live:** https://nexus-alpha-ten-11.vercel.app
-Full project management app with Kanban boards, analytics, financial tracking, command palette, and soft-delete with undo.
+Full-stack project management with Kanban boards, analytics, financial tracking, command palette, soft-delete with undo, and authenticated workflows.
 **Stack:** Next.js 14, TypeScript, PostgreSQL, Prisma, NextAuth, Recharts, Tailwind CSS
 
 ### Flux - Client Feedback Portal
 **Live:** https://flux1-portal.vercel.app
-Agency-client feedback workflow with Kanban, threaded comments, and task conversion.
-**Stack:** HTML, CSS, JavaScript, localStorage UI patterns (deployed on Vercel)
+Agency-client feedback system with Kanban workflow, threaded comments, and task conversion. Deployed for real use cases.
+**Stack:** HTML, CSS, JavaScript (Vercel)
 
-### BooKING and iTINDAHAN - E-commerce UIs
+### BooKING and iTINDAHAN - Commerce Frontends
 **Live:** https://book-king1.vercel.app  |  https://i-tindahan.vercel.app
-Product catalog, cart, and auth-style flows for bookstore and multi-vendor marketplace concepts.
+E-commerce style apps with catalogs, cart flows, and auth-style session handling.
 **Stack:** HTML, CSS, JavaScript
 
-### McGill Pizza and Lucena Heritage - Android (school)
-Food-ordering flow (activities, menus, order modal) and Lucena heritage map app (local auth, Google Maps pins, camera). Demo recordings on portfolio.
-**Stack:** Android Studio, Java, XML, SQLite / local DB, Maps API
+### Android - McGill Pizza Ordering and Lucena Heritage Maps
+School mobile builds covering multi-screen ordering UX and maps + local auth + camera. Walkthrough demos on portfolio (native apps, no store link).
+**Stack:** Android Studio, Java, XML, local database, Google Maps API
 
-### RPG-themed Personal Portfolio
+### Personal Portfolio (RPG-themed)
 **Live:** https://king-miguel-portfolio.vercel.app
-Interactive portfolio with quest board, demo video modals for native apps, and responsive layout.
+Custom interactive portfolio with project quest board, demo video modals, and responsive layout.
 **Stack:** HTML, CSS, JavaScript, Node.js, Express, Three.js
 
 ---
 
-## CERTIFICATIONS (pick 4-6 strongest; optional section if space)
+## CERTIFICATIONS (optional if space; pick 5-6)
 
-- HTML Fundamentals
-- Introduction to CSS
-- Modern JavaScript for Beginners
-- Object-Oriented Programming in JavaScript
-- SQL for Beginners / Intermediate
-- Java Fundamentals
-- Introduction to Python
-- Introduction to PHP
-- C# Fundamentals
-- Introduction to Golang
+HTML Fundamentals · Introduction to CSS · Modern JavaScript · OOP in JavaScript · SQL Beginner/Intermediate · Java Fundamentals · Introduction to Python · Introduction to PHP · C# Fundamentals · Introduction to Golang
 
-(Full list on portfolio Education / Side Quests.)
+(Complete set on portfolio Education section.)
 
 ---
 
@@ -113,17 +108,34 @@ Available upon request.
 
 ## CANVA LAYOUT TIPS
 
-1. No photo, no icons clutter, no 2-column skill clouds that break ATS if possible
-2. Order: Header -> Summary -> Skills -> Projects (RenTruck first) -> Education -> Certs (optional) -> References line
-3. Keep RenTruck longest; shrink smaller projects to 1 line each if overflowing
-4. Export: PDF, letter or A4, margins >= 0.5 inch
-5. Filename: `King_Miguel_Remo_Resume.pdf`
+1. No photo
+2. Order: Header → Summary → Skills → Projects (RenTruck biggest) → Education → Certs optional → References
+3. If page overflows: shrink Flux / commerce / Android to 1 line each; never cut RenTruck
+4. Export PDF, margins at least 0.5 inch
+5. File name: `King_Miguel_Remo_Resume.pdf` then copy to repo as `public/images/resume.pdf`
 
-## WHAT NOT TO PUT
+## DO NOT PUT ON THE PDF
 
-- Em dashes or "AI essay" tone
-- "Web Adventurer" / RPG jokes on the resume (keep that on the portfolio site)
-- Fake years of job experience
-- Dean as reference
-- GPS or features you did not build
+- "Web Adventurer" / RPG jokes (portfolio only)
+- Em dashes or fluffy AI essay tone
+- Fake job experience
+- GPS (you did not build that)
 - Cavite (client is Tayabas, Quezon)
+- Dean as reference
+- "Aspiring" / "hoping to maybe someday" language
+
+## HOW TO TALK IN INTERVIEWS (cheat sheet)
+
+- Title on paper: Junior Full-Stack Developer
+- Opening line: "I build and ship full-stack web apps. My capstone RenTruck is live with a real client."
+- If they dig frontend: walk UI, responsive work, portfolio, Flux, commerce
+- If they dig backend: 65 endpoints, roles, payments, inventory, Postgres/Supabase
+- OJT: available for the required hours in final year (2027 window); open earlier for internship if they will take a student
+
+## TIMELINE (for you, not on resume unless asked)
+
+- Capstone final defense: Oct 3 (current term)
+- Final year / OJT heavy semester: ~Jan 2027 onward (school calendar)
+- Classes and finals wrap: ~April-May 2027
+- Commencement window: May-July 2027
+- Resume line: Expected graduation May 2027
