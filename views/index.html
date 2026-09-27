@@ -1066,6 +1066,105 @@
 .proj-rewards-details p {
     transition: all 0.3s ease;
 }
+
+/* ============================================ */
+/* QUEST IMAGE LIGHTBOX */
+/* ============================================ */
+.quest-image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10003;
+  backdrop-filter: blur(6px);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.quest-image-modal-overlay.active { display: flex; }
+.quest-image-modal {
+  background: linear-gradient(180deg, #2d1b36 0%, #1b1220 100%);
+  padding: 1.25rem;
+  max-width: 920px;
+  width: 100%;
+  position: relative;
+  border: 4px solid #FFD700;
+  box-shadow: 6px 6px 0 #000, 0 0 40px rgba(255, 215, 0, 0.25);
+  text-align: center;
+  max-height: 95vh;
+  overflow: auto;
+}
+.quest-image-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #F5DEB3;
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  line-height: 1;
+  z-index: 2;
+}
+.quest-image-close:hover { color: #e53e3e; }
+.quest-image-modal h3 {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 0.7rem;
+  margin: 0.25rem 1.5rem 1rem;
+  line-height: 1.5;
+  text-shadow: 2px 2px 0 #000;
+}
+.quest-image-modal img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border: 3px solid #000;
+  background: #000;
+  image-rendering: auto;
+}
+.quest-image-hint {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #888;
+  font-size: 0.7rem;
+  margin: 0.75rem 0 0;
+}
+#questContent .proj-quest-image {
+  cursor: zoom-in;
+}
+#questContent .proj-quest-image::after {
+  content: 'click to enlarge';
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.4rem;
+  color: #FFD700;
+  background: rgba(0,0,0,0.65);
+  padding: 0.35rem 0.5rem;
+  border: 2px solid #000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+#questContent .proj-quest-image {
+  position: relative;
+}
+#questContent .proj-quest-image:hover::after {
+  opacity: 1;
+}
+.proj-quest-icon {
+  background-color: rgba(0,0,0,0.15);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 </style>
   </head>
 <body>
@@ -1300,17 +1399,17 @@
           </div>
           <div class="profile-stat">
             <span class="stat-label">Level:</span>
-            <span class="stat-value">21</span>
+            <span class="stat-value" data-level-value>21</span>
           </div>
           <div class="profile-stat">
             <span class="stat-label">XP:</span>
-            <span class="stat-value">1850/2100 XP</span>
+            <span class="stat-value" data-xp-value>1850/2100 XP</span>
           </div>
           <div class="xp-bar-container">
             <div class="xp-bar-bg pixel-border">
-              <div class="xp-bar-fill" style="width: 88%"></div>
+              <div class="xp-bar-fill" data-xp-bar style="width: 88%"></div>
             </div>
-            <div class="xp-text">88% to Level 22</div>
+            <div class="xp-text" data-xp-label>88% to Level 22</div>
           </div>
         </div>
         <div class="profile-quote">
@@ -1465,17 +1564,17 @@
           <div class="scholar-stats">
             <div class="stat-item">
               <span class="stat-label">LEVEL:</span>
-              <span class="stat-value">21</span>
+              <span class="stat-value" data-level-value>21</span>
             </div>
             <div class="stat-item">
               <span class="stat-label">XP:</span>
-              <span class="stat-value">1850/2100</span>
+              <span class="stat-value" data-xp-value-short>1850/2100</span>
             </div>
             <div class="xp-bar-container">
               <div class="xp-bar-bg pixel-border">
-                <div class="xp-bar-fill" style="width: 88%"></div>
+                <div class="xp-bar-fill" data-xp-bar style="width: 88%"></div>
               </div>
-              <div class="xp-text" style = "color: #FFD700;">88% TO LEVEL 22</div>
+              <div class="xp-text" data-xp-label-upper style="color: #FFD700;">88% TO LEVEL 22</div>
             </div>
             <div class="stat-item">
               <span class="stat-label">SEMESTERS:</span>
@@ -1664,9 +1763,25 @@
             <div class="proj-quests-grid">
 
               <!-- S RANK -->
+              <div class="proj-quest-card proj-quest-s" data-quest-id="rentruck">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" data-bg="/images/rentruck-icon.jpg"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">LEGENDARY</div>
+                    <div class="proj-quest-difficulty">S</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">RenTruck - Capstone</h4>
+                  <p class="proj-quest-description">B2B rental + inventory platform for VFL Builders (live commercial trial)</p>
+                  <div class="proj-quest-client">VFL Builders (Cavite)</div>
+                  <div class="proj-quest-reward">+5000 Gold</div>
+                </div>
+              </div>
+
               <div class="proj-quest-card proj-quest-s" data-quest-id="nexus">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/nexus-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/nexus-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">LEGENDARY</div>
                     <div class="proj-quest-difficulty">S</div>
@@ -1680,26 +1795,10 @@
                 </div>
               </div>
 
-              <div class="proj-quest-card proj-quest-s" data-quest-id="rentruck">
-                <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/rentruck-icon.jpg')"></div>
-                  <div class="proj-quest-badges">
-                    <div class="proj-quest-rank-badge">LEGENDARY</div>
-                    <div class="proj-quest-difficulty">S</div>
-                  </div>
-                </div>
-                <div class="proj-quest-text-container">
-                  <h4 class="proj-quest-name">Rentruck - Capstone</h4>
-                  <p class="proj-quest-description">Truck rental & inventory platform for VFL Builders & VFL Hardware</p>
-                  <div class="proj-quest-client">VFL Builders & Hardware</div>
-                  <div class="proj-quest-reward">+5000 Gold</div>
-                </div>
-              </div>
-
               <!-- A RANK -->
               <div class="proj-quest-card proj-quest-a" data-quest-id="flux">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/flux-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/flux-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ELITE</div>
                     <div class="proj-quest-difficulty">A</div>
@@ -1715,7 +1814,7 @@
 
               <div class="proj-quest-card proj-quest-a" data-quest-id="thesis-quest">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/thesis-quest-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/thesis-quest-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ELITE</div>
                     <div class="proj-quest-difficulty">A</div>
@@ -1731,7 +1830,7 @@
 
               <div class="proj-quest-card proj-quest-a" data-quest-id="tower-defense">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/tower-defense-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/tower-defense-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ELITE</div>
                     <div class="proj-quest-difficulty">A</div>
@@ -1747,7 +1846,7 @@
 
               <div class="proj-quest-card proj-quest-a" data-quest-id="arena-defender">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/arena-defender-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/arena-defender-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ELITE</div>
                     <div class="proj-quest-difficulty">A</div>
@@ -1763,7 +1862,7 @@
 
               <div class="proj-quest-card proj-quest-a" data-quest-id="lucena-heritage">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/mobile-app2.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/mobile-app2.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ELITE</div>
                     <div class="proj-quest-difficulty">A</div>
@@ -1780,7 +1879,7 @@
               <!-- B RANK -->
               <div class="proj-quest-card proj-quest-b" data-quest-id="mcgill-pizza">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/mobile-app1.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/mobile-app1.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ADVENTURER</div>
                     <div class="proj-quest-difficulty">B</div>
@@ -1794,25 +1893,10 @@
                 </div>
               </div>
 
-              <div class="proj-quest-card proj-quest-c" data-quest-id="rpg-maker">
-                <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/rpg-maker.jpg')"></div>
-                  <div class="proj-quest-badges">
-                    <div class="proj-quest-rank-badge">APPRENTICE</div>
-                    <div class="proj-quest-difficulty">C</div>
-                  </div>
-                </div>
-                <div class="proj-quest-text-container">
-                  <h4 class="proj-quest-name">Vengeance Path - RPG Opening</h4>
-                  <p class="proj-quest-description">RPG Maker story opening: grandfather training vow, parents' graves, to-be-continued</p>
-                  <div class="proj-quest-client">University Guild · Class Project</div>
-                  <div class="proj-quest-reward">+800 Gold</div>
-                </div>
-              </div>
 
               <div class="proj-quest-card proj-quest-b" data-quest-id="booking">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/booking-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/booking-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ADVENTURER</div>
                     <div class="proj-quest-difficulty">B</div>
@@ -1828,7 +1912,7 @@
 
               <div class="proj-quest-card proj-quest-b" data-quest-id="itindahan">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/ecommerce-ui.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/ecommerce-ui.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ADVENTURER</div>
                     <div class="proj-quest-difficulty">B</div>
@@ -1844,7 +1928,7 @@
 
               <div class="proj-quest-card proj-quest-b" data-quest-id="fourthfolio">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/fourthfolio-icon.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/fourthfolio-icon.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ADVENTURER</div>
                     <div class="proj-quest-difficulty">B</div>
@@ -1860,7 +1944,7 @@
 
               <div class="proj-quest-card proj-quest-b" data-quest-id="current-portfolio">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/current-portfolio.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/current-portfolio.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ADVENTURER</div>
                     <div class="proj-quest-difficulty">B</div>
@@ -1876,7 +1960,7 @@
 
               <div class="proj-quest-card proj-quest-b" data-quest-id="ecommerce">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/ecommerce.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/ecommerce.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">ADVENTURER</div>
                     <div class="proj-quest-difficulty">B</div>
@@ -1891,9 +1975,25 @@
               </div>
 
               <!-- C RANK -->
+              <div class="proj-quest-card proj-quest-c" data-quest-id="rpg-maker">
+                <div class="proj-quest-image-container">
+                  <div class="proj-quest-icon" data-bg="/images/rpg-maker.jpg"></div>
+                  <div class="proj-quest-badges">
+                    <div class="proj-quest-rank-badge">APPRENTICE</div>
+                    <div class="proj-quest-difficulty">C</div>
+                  </div>
+                </div>
+                <div class="proj-quest-text-container">
+                  <h4 class="proj-quest-name">Vengeance Path - RPG Opening</h4>
+                  <p class="proj-quest-description">RPG Maker story opening: grandfather training vow, parents' graves, to-be-continued</p>
+                  <div class="proj-quest-client">University Guild · Class Project</div>
+                  <div class="proj-quest-reward">+800 Gold</div>
+                </div>
+              </div>
+
               <div class="proj-quest-card proj-quest-c" data-quest-id="calculator">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/Calbolator.png')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/Calbolator.png"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">APPRENTICE</div>
                     <div class="proj-quest-difficulty">C</div>
@@ -1909,7 +2009,7 @@
 
               <div class="proj-quest-card proj-quest-c" data-quest-id="moving-clouds">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/MovingCloud.png')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/MovingCloud.png"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">APPRENTICE</div>
                     <div class="proj-quest-difficulty">C</div>
@@ -1926,7 +2026,7 @@
               <!-- D RANK -->
               <div class="proj-quest-card proj-quest-d" data-quest-id="netflix-clone">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/Alimani.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/Alimani.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">BEGINNER</div>
                     <div class="proj-quest-difficulty">D</div>
@@ -1942,7 +2042,7 @@
 
               <div class="proj-quest-card proj-quest-d" data-quest-id="instagram-clone">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/Ricardo.jpg')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/Ricardo.jpg"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">BEGINNER</div>
                     <div class="proj-quest-difficulty">D</div>
@@ -1958,7 +2058,7 @@
 
               <div class="proj-quest-card proj-quest-d" data-quest-id="solar-eclipse">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/Krillin.png')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/Krillin.png"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">BEGINNER</div>
                     <div class="proj-quest-difficulty">D</div>
@@ -1974,7 +2074,7 @@
 
               <div class="proj-quest-card proj-quest-d" data-quest-id="search-filter">
                 <div class="proj-quest-image-container">
-                  <div class="proj-quest-icon" style="background-image: url('/images/Golteb.png')"></div>
+                  <div class="proj-quest-icon" data-bg="/images/Golteb.png"></div>
                   <div class="proj-quest-badges">
                     <div class="proj-quest-rank-badge">BEGINNER</div>
                     <div class="proj-quest-difficulty">D</div>
@@ -2172,7 +2272,7 @@
           <div class="character-info">
           <div class="character-header">
             <h2 class="character-name">MIGUELITO</h2>
-            <span class="character-level">LVL 21</span>
+            <span class="character-level" data-level-badge>LVL 21</span>
           </div>
           <span class="character-class">WEB ADVENTURER</span>
           
@@ -2760,6 +2860,19 @@
   </div>
 </div>
 
+
+<!-- ============================================ -->
+<!-- QUEST IMAGE LIGHTBOX -->
+<!-- ============================================ -->
+<div class="quest-image-modal-overlay" id="questImageModal" aria-hidden="true" role="dialog" aria-labelledby="questImageTitle">
+  <div class="quest-image-modal pixel-border">
+    <button class="quest-image-close" id="questImageClose" type="button" aria-label="Close">&times;</button>
+    <h3 id="questImageTitle">QUEST PREVIEW</h3>
+    <img id="questImageFull" alt="Quest preview" />
+    <p class="quest-image-hint">Click outside or press Esc to close</p>
+  </div>
+</div>
+
 <!-- ============================================ -->
 <!-- PROFILE PICTURE MODAL -->
 <!-- ============================================ -->
@@ -2773,7 +2886,7 @@
     
     <div class="profile-pic-info">
       <h3>MIGUELITO</h3>
-      <p>Web Adventurer - Level 21</p>
+      <p data-profile-level-line>Web Adventurer - Level 21</p>
     </div>
   </div>
 </div>
@@ -2790,6 +2903,7 @@
 <script src="/js/contact.js"></script>
 <script src="/js/map.js"></script>
 <script src="/js/rate.js"></script>
+<script src="/js/level.js"></script>
 <script src="/js/profile-pic.js"></script>
 </body>
 </html>

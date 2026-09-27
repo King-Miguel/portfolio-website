@@ -1,5 +1,18 @@
 const questsData = {
     // ============ S RANK (LEGENDARY) ============
+    "rentruck": {
+        title: "RenTruck - Capstone (Masterwork)",
+        rank: "S",
+        rankText: "LEGENDARY",
+        image: "/images/rentruck-icon.jpg",
+        brief: "RenTruck is a production-deployed B2B equipment rental and inventory platform commissioned by VFL Builders, a government-accredited construction company in Cavite. It unifies their truck rental operation and hardware retail store into one system. The platform serves multiple user roles (administrators, engineers, field operators, and clients) across a 65-endpoint API and 28-model database: clients browse the fleet, negotiate schedules, sign digital rental agreements, and pay via e-wallet or bank transfer; dispatchers assign operators and track deliveries by GPS in real time; admins verify payments, manage inventory stock movements, and export revenue and utilization reports. Built solo end-to-end (system design, database architecture, API, and UI) and currently running a live commercial trial with the client on the path to full handover.",
+        requirements: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Vercel", "Tailwind CSS", "GPS Tracking", "Multi-role Auth", "Payments"],
+        contract: { difficulty: "S Rank - Legendary", status: "Live Commercial Trial", client: "VFL Builders (Cavite)" },
+        rewards: { gold: "+5000 Gold", skills: "Full-Stack Architecture · B2B Systems · Solo Delivery · Client Handover", badge: "🏆 Capstone Masterwork Badge" },
+        client: "VFL Builders (Cavite)",
+        liveLink: "https://rentruck1.vercel.app/",
+        sourceLink: "https://github.com/King-Miguel"
+    },
     "nexus": {
         title: "Nexus - Project Management",
         rank: "S",
@@ -11,19 +24,6 @@ const questsData = {
         rewards: { gold: "+5000 Gold", skills: "Full-Stack Mastery · Next.js · TypeScript · Database Design", badge: "🏆 Legendary Developer Badge" },
         client: "Royal Guild",
         liveLink: "https://nexus-alpha-ten-11.vercel.app",
-        sourceLink: "https://github.com/King-Miguel"
-    },
-    "rentruck": {
-        title: "Rentruck - Capstone",
-        rank: "S",
-        rankText: "LEGENDARY",
-        image: "/images/rentruck-icon.jpg",
-        brief: "Full-stack truck rental and inventory management platform built for VFL Builders & VFL Hardware. Features real-time availability, pricing algorithms, inventory tracking, and user management.",
-        requirements: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Vercel", "Tailwind CSS"],
-        contract: { difficulty: "S Rank - Legendary", status: "Completed & Deployed", client: "VFL Builders & VFL Hardware" },
-        rewards: { gold: "+5000 Gold", skills: "Full-Stack Architecture · Inventory Systems · Client Delivery", badge: "🏆 Capstone Master Badge" },
-        client: "VFL Builders & VFL Hardware",
-        liveLink: "https://rentruck1.vercel.app/",
         sourceLink: "https://github.com/King-Miguel"
     },
 
@@ -303,6 +303,12 @@ function updateQuestDisplay(questId) {
         imageEl.style.backgroundImage = `url('${quest.image}')`;
         imageEl.style.backgroundSize = 'cover';
         imageEl.style.backgroundPosition = 'center';
+        imageEl.style.cursor = 'pointer';
+        imageEl.title = 'Click to enlarge';
+        imageEl.setAttribute('data-full-image', quest.image);
+        imageEl.setAttribute('data-full-title', quest.title || 'Quest Preview');
+        imageEl.setAttribute('role', 'button');
+        imageEl.setAttribute('tabindex', '0');
     }
     
     const briefEl = content.querySelector('.proj-brief-description');
@@ -568,10 +574,13 @@ function filterQuests() {
 // =============================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🏰 Guild Hall initializing...');
-    
+
+    sortQuestCardsByRank();
+    initQuestIconLazyLoad();
+
     const questCards = document.querySelectorAll('.proj-quest-card');
     console.log(`📜 Found ${questCards.length} quest cards`);
-    
+
     questCards.forEach((card) => {
         card.addEventListener('click', function() {
             const questId = this.getAttribute('data-quest-id');
@@ -580,16 +589,131 @@ document.addEventListener('DOMContentLoaded', function() {
             updateQuestDisplay(questId);
         });
     });
-    
+
     const searchInput = document.getElementById('proj-quest-search');
     if (searchInput) searchInput.addEventListener('input', filterQuests);
-    
+
     const filterSelect = document.getElementById('proj-difficulty-filter');
     if (filterSelect) filterSelect.addEventListener('change', filterQuests);
-    
-    console.log('✅ Guild Hall ready! Small projects → modal redirect');
+
+    // Quest detail image lightbox
+    const questImage = document.querySelector('#questContent .proj-quest-image');
+    if (questImage) {
+        const openFromImage = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const src = questImage.getAttribute('data-full-image');
+            if (!src) return;
+            openQuestImageModal(src, questImage.getAttribute('data-full-title'));
+        };
+        questImage.addEventListener('click', openFromImage);
+        questImage.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') openFromImage(e);
+        });
+    }
+
+    const qModal = document.getElementById('questImageModal');
+    const qClose = document.getElementById('questImageClose');
+    if (qClose) qClose.addEventListener('click', closeQuestImageModal);
+    if (qModal) {
+        qModal.addEventListener('click', function(e) {
+            if (e.target === qModal) closeQuestImageModal();
+        });
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && qModal && qModal.classList.contains('active')) {
+            closeQuestImageModal();
+        }
+    });
+
+    console.log('✅ Guild Hall ready! Sorted ranks · lazy icons · image lightbox');
 });
+
+
+
+// =============================================
+// QUEST IMAGE LIGHTBOX (right-panel preview)
+// =============================================
+function openQuestImageModal(src, title) {
+    const modal = document.getElementById('questImageModal');
+    const img = document.getElementById('questImageFull');
+    const titleEl = document.getElementById('questImageTitle');
+    if (!modal || !img) return;
+    img.src = src;
+    img.alt = title || 'Quest preview';
+    if (titleEl) titleEl.textContent = title || 'QUEST PREVIEW';
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+}
+
+function closeQuestImageModal() {
+    const modal = document.getElementById('questImageModal');
+    const img = document.getElementById('questImageFull');
+    if (img) img.removeAttribute('src');
+    if (modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+}
+
+// =============================================
+// LAZY-LOAD QUEST CARD ICONS
+// =============================================
+function initQuestIconLazyLoad() {
+    const icons = document.querySelectorAll('.proj-quest-icon[data-bg]');
+    if (!icons.length) return;
+
+    const loadIcon = (el) => {
+        const bg = el.getAttribute('data-bg');
+        if (!bg || el.dataset.loaded === '1') return;
+        el.style.backgroundImage = `url('${bg}')`;
+        el.dataset.loaded = '1';
+        el.removeAttribute('data-bg');
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        icons.forEach(loadIcon);
+        return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                loadIcon(entry.target);
+                io.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '200px 0px', threshold: 0.01 });
+
+    icons.forEach((el) => io.observe(el));
+}
+
+// =============================================
+// SORT QUEST CARDS BY RANK (S > A > B > C > D)
+// =============================================
+function sortQuestCardsByRank() {
+    const grid = document.querySelector('.proj-quests-grid');
+    if (!grid) return;
+    const rankOrder = { s: 0, a: 1, b: 2, c: 3, d: 4 };
+    const cards = Array.from(grid.querySelectorAll('.proj-quest-card'));
+    cards.sort((a, b) => {
+        const qa = questsData[a.getAttribute('data-quest-id')];
+        const qb = questsData[b.getAttribute('data-quest-id')];
+        const ra = qa ? (rankOrder[qa.rank.toLowerCase()] ?? 99) : 99;
+        const rb = qb ? (rankOrder[qb.rank.toLowerCase()] ?? 99) : 99;
+        if (ra !== rb) return ra - rb;
+        // Within S rank, RenTruck first
+        const ida = a.getAttribute('data-quest-id');
+        const idb = b.getAttribute('data-quest-id');
+        if (ida === 'rentruck') return -1;
+        if (idb === 'rentruck') return 1;
+        return 0;
+    });
+    cards.forEach((card) => grid.appendChild(card));
+}
 
 window.updateQuestDisplay = updateQuestDisplay;
 window.filterQuests = filterQuests;
 window.questsData = questsData;
+window.openQuestImageModal = openQuestImageModal;
+window.closeQuestImageModal = closeQuestImageModal;
