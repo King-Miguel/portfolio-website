@@ -2442,18 +2442,18 @@
                     <!-- Right: Pinned Notices -->
                     <div class="pinned-notices">
                         <!-- Pigeon Post Notice -->
-                        <a href="mailto:iggytesoro123@gmail.com" class="notice-card" data-notice="email">
+                        <div class="notice-card notice-card-clickable" data-notice="email" role="button" tabindex="0">
                             <div class="notice-pin"></div>
                             <div class="notice-header">
                                 <span class="material-symbols-outlined">flutter_dash</span>
                                 <h4>PIGEON POST</h4>
                             </div>
                             <p class="notice-content">iggytesoro123@gmail.com</p>
-                            <div class="notice-footer">Direct Message</div>
-                        </a>
+                            <div class="notice-footer">Tap for contact details</div>
+                        </div>
 
                         <!-- Kingdom Map Notice -->
-                        <a href="#" class="notice-card" data-notice="location">
+                        <div class="notice-card notice-card-clickable" data-notice="location" role="button" tabindex="0">
                             <div class="notice-pin"></div>
                             <div class="notice-header">
                                 <span class="material-symbols-outlined">map</span>
@@ -2461,7 +2461,7 @@
                             </div>
                             <p class="notice-content">Sariaya, Quezon Province</p>
                             <div class="notice-footer">The Knight's Domain</div>
-                        </a>
+                        </div>
 
                         <!-- Academic References -->
                         <div class="notice-card notice-card-refs" data-notice="references" role="button" tabindex="0">
@@ -2487,14 +2487,16 @@
         </div>
 
         <!-- Modal for Notice Details -->
-        <div class="notice-modal" id="noticeModal">
-            <div class="modal-content">
-                <span class="close-modal" id="closeModal">&times;</span>
-                <div class="modal-header">
-                    <h3 id="modalTitle">Notice Details</h3>
+        <div class="notice-modal" id="noticeModal" aria-hidden="true">
+            <div class="notice-modal-content pixel-border">
+                <button type="button" class="notice-modal-close" id="noticeModalClose" aria-label="Close">&times;</button>
+                <div class="notice-modal-header">
+                    <span class="material-symbols-outlined" id="noticeModalIcon">info</span>
+                    <h3 id="noticeModalTitle">Notice Details</h3>
                 </div>
-                <div class="modal-body">
-                    <p id="modalContent">Content will appear here...</p>
+                <div class="notice-modal-body">
+                    <p id="noticeModalContent">Content will appear here...</p>
+                    <a class="notice-modal-action" id="noticeModalAction" href="#" style="display:none;"></a>
                 </div>
             </div>
         </div>
@@ -2507,8 +2509,8 @@
 <div class="certificate-modal" id="certificateModal">
     <div class="modal-content pixel-border">
         <div class="modal-header">
-            <h3 id="modalTitle">Certificate Title</h3>
-            <span class="close-modal" id="closeModal">&times;</span>
+            <h3 id="certificateModalTitle">Certificate Title</h3>
+            <button type="button" class="close-modal" id="certificateModalClose" aria-label="Close">&times;</button>
         </div>
         <div class="modal-body">
             <div class="certificate-image" id="certificateImage"></div>
@@ -2652,7 +2654,7 @@
     <div class="map-container">
         <div class="map-content">
             <!-- Move the X button HERE, inside map-content -->
-            <span class="close-map" id="closeMap">&times;</span>
+            <button type="button" class="close-map" id="closeMap" aria-label="Close map">&times;</button>
             
             <div class="map-locations">
                 <div class="location-label location-castle" data-target="landing">

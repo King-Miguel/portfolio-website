@@ -53,8 +53,8 @@ sideQuestsModal.addEventListener('click', function(e) {
 });
     
     const certificateModal = document.getElementById('certificateModal');
-    const closeModal = document.getElementById('closeModal');
-    const modalTitle = document.getElementById('modalTitle');
+    const closeModal = document.getElementById('certificateModalClose');
+    const modalTitle = document.getElementById('certificateModalTitle');
     const certificateImage = document.getElementById('certificateImage');
     const certificateDescription = document.getElementById('certificateDescription');
     const certificateDate = document.getElementById('certificateDate');

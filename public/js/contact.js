@@ -1,9 +1,10 @@
-// Contact Section - Formspree delivery + references modal
+// Contact Section - Formspree delivery + notice/reference modals
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Contact section loaded');
 
-    // Same Formspree endpoint as the rating system (delivers to your inbox)
+    // Same Formspree endpoint as the rating system (email notifications go to your inbox)
     const FORMSPREE_CONTACT_URL = 'https://formspree.io/f/maqronqj';
+    const CONTACT_EMAIL = 'iggytesoro123@gmail.com';
 
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -55,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!response.ok) throw new Error('Formspree error');
 
                 if (statusElement) {
-                    statusElement.textContent = 'Message delivered! The knight will respond soon.';
+                    statusElement.textContent = 'Message delivered! Check your email notifications (Formspree). The knight will respond soon.';
                     statusElement.className = 'status-message status-success';
                 }
                 contactForm.reset();
             } catch (err) {
                 console.error('Contact submit failed:', err);
                 if (statusElement) {
-                    statusElement.textContent = 'Carrier pigeon lost. Email iggytesoro123@gmail.com directly.';
+                    statusElement.textContent = 'Carrier pigeon lost. Email ' + CONTACT_EMAIL + ' directly.';
                     statusElement.className = 'status-message status-error';
                 }
             } finally {
@@ -73,35 +74,72 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (statusElement) {
                     setTimeout(function() {
                         statusElement.style.display = 'none';
-                    }, 6000);
+                    }, 7000);
                 }
             }
         });
     }
 
-    // Notice cards (email / location still use simple modal)
-    const noticeCards = document.querySelectorAll('.notice-card');
+    // Notice modal (scoped unique IDs - no clash with certificate modal)
     const noticeModal = document.getElementById('noticeModal');
-    const closeModal = document.getElementById('closeModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
+    const noticeClose = document.getElementById('noticeModalClose');
+    const noticeTitle = document.getElementById('noticeModalTitle');
+    const noticeContent = document.getElementById('noticeModalContent');
+    const noticeAction = document.getElementById('noticeModalAction');
+    const noticeIcon = document.getElementById('noticeModalIcon');
+    const noticeCards = document.querySelectorAll('.notice-card[data-notice]');
 
     const noticeDetails = {
         email: {
             title: 'PIGEON POST',
-            content: 'Direct message delivery via electronic pigeon. Your message will be received promptly at: iggytesoro123@gmail.com'
+            icon: 'flutter_dash',
+            content: 'Write me directly at ' + CONTACT_EMAIL + '. You can also use the message scroll on the left - it delivers through Formspree to the same inbox.',
+            actionHref: 'mailto:' + CONTACT_EMAIL + '?subject=Hello%20from%20your%20portfolio',
+            actionLabel: 'OPEN MAIL APP'
         },
         location: {
             title: 'KINGDOM REALM',
-            content: 'The knight resides in the digital realm, with physical coordinates in Sariaya, Quezon Province. Available for quests throughout the Philippines and beyond.'
+            icon: 'map',
+            content: 'Based in Sariaya, Quezon Province, Philippines. Open to local and remote quests (internships, freelance, and full-time roles).',
+            actionHref: null,
+            actionLabel: null
         }
     };
 
-    noticeCards.forEach(function(card) {
-        card.addEventListener('click', function(e) {
-            const noticeType = this.getAttribute('data-notice');
+    function openNotice(type) {
+        const details = noticeDetails[type];
+        if (!details || !noticeModal) return;
 
-            // References open dedicated modal
+        if (noticeTitle) noticeTitle.textContent = details.title;
+        if (noticeContent) noticeContent.textContent = details.content;
+        if (noticeIcon) noticeIcon.textContent = details.icon || 'info';
+
+        if (noticeAction) {
+            if (details.actionHref) {
+                noticeAction.href = details.actionHref;
+                noticeAction.textContent = details.actionLabel || 'OPEN LINK';
+                noticeAction.style.display = 'inline-flex';
+            } else {
+                noticeAction.removeAttribute('href');
+                noticeAction.style.display = 'none';
+            }
+        }
+
+        noticeModal.classList.add('active');
+        noticeModal.style.display = 'flex';
+        noticeModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeNotice() {
+        if (!noticeModal) return;
+        noticeModal.classList.remove('active');
+        noticeModal.style.display = 'none';
+        noticeModal.setAttribute('aria-hidden', 'true');
+    }
+
+    noticeCards.forEach(function(card) {
+        function handleOpen(e) {
+            const noticeType = card.getAttribute('data-notice');
             if (noticeType === 'references') {
                 e.preventDefault();
                 const refs = document.getElementById('refsModal');
@@ -111,34 +149,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return;
             }
-
-            if (this.getAttribute('href') && this.getAttribute('href') !== '#') {
-                return;
+            if (noticeType === 'email' || noticeType === 'location') {
+                e.preventDefault();
+                openNotice(noticeType);
             }
-
-            e.preventDefault();
-            const details = noticeDetails[noticeType];
-            if (details && modalTitle && modalContent) {
-                modalTitle.textContent = details.title;
-                modalContent.textContent = details.content;
-                if (noticeModal) noticeModal.style.display = 'flex';
+        }
+        card.addEventListener('click', handleOpen);
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleOpen(e);
             }
         });
     });
 
-    if (closeModal) {
-        closeModal.addEventListener('click', function() {
-            if (noticeModal) noticeModal.style.display = 'none';
-        });
-    }
-
+    if (noticeClose) noticeClose.addEventListener('click', closeNotice);
     if (noticeModal) {
         noticeModal.addEventListener('click', function(e) {
-            if (e.target === noticeModal) noticeModal.style.display = 'none';
+            if (e.target === noticeModal) closeNotice();
         });
     }
 
-    // References modal close
+    // References modal
     const refsModal = document.getElementById('refsModal');
     const refsClose = document.getElementById('refsModalClose');
     function closeRefs() {
@@ -152,11 +184,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === refsModal) closeRefs();
         });
     }
+
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeRefs();
-            if (noticeModal) noticeModal.style.display = 'none';
-        }
+        if (e.key !== 'Escape') return;
+        closeNotice();
+        closeRefs();
     });
 
     // Pause knight when contact visible
