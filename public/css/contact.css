@@ -485,3 +485,11 @@
         height: 35px;
     }
 }
+
+.status-message.status-error {
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+.status-message.status-success {
+  color: #228B22;
+}

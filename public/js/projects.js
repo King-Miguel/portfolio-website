@@ -5,11 +5,11 @@ const questsData = {
         rank: "S",
         rankText: "LEGENDARY",
         image: "/images/rentruck-icon.jpg",
-        brief: "RenTruck is a production-deployed B2B equipment rental and inventory platform commissioned by VFL Builders, a government-accredited construction company in Cavite. It unifies their truck rental operation and hardware retail store into one system. The platform serves multiple user roles (administrators, engineers, field operators, and clients) across a 65-endpoint API and 28-model database: clients browse the fleet, negotiate schedules, sign digital rental agreements, and pay via e-wallet or bank transfer; dispatchers assign operators and track deliveries by GPS in real time; admins verify payments, manage inventory stock movements, and export revenue and utilization reports. Built solo end-to-end (system design, database architecture, API, and UI) and currently running a live commercial trial with the client on the path to full handover.",
-        requirements: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Vercel", "Tailwind CSS", "GPS Tracking", "Multi-role Auth", "Payments"],
-        contract: { difficulty: "S Rank - Legendary", status: "Live Commercial Trial", client: "VFL Builders (Cavite)" },
+        brief: "RenTruck is a production-deployed B2B equipment rental and inventory platform commissioned by VFL Builders, a government-accredited construction company in Tayabas, Quezon. It unifies their truck rental operation and hardware retail store into one system. The platform serves five user roles (administrators, engineers, field operators, and clients) across a 65-endpoint API and 28-model database: clients browse the fleet, negotiate schedules, sign digital rental agreements, and pay via e-wallet or bank transfer; dispatchers assign operators and coordinate rental schedules while field staff log duty and unit status from their dashboards; admins verify payments, manage inventory stock movements, and export revenue and utilization reports. Built solo end-to-end (system design, database architecture, API, and UI) and currently running a live commercial trial with the client on the path to full handover.",
+        requirements: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Vercel", "Tailwind CSS", "Multi-role Auth", "Payments", "Inventory"],
+        contract: { difficulty: "S Rank - Legendary", status: "Live Commercial Trial", client: "VFL Builders (Tayabas, Quezon)" },
         rewards: { gold: "+5000 Gold", skills: "Full-Stack Architecture · B2B Systems · Solo Delivery · Client Handover", badge: "🏆 Capstone Masterwork Badge" },
-        client: "VFL Builders (Cavite)",
+        client: "VFL Builders (Tayabas, Quezon)",
         liveLink: "https://rentruck1.vercel.app/",
         sourceLink: "https://github.com/King-Miguel"
     },
@@ -589,6 +589,15 @@ document.addEventListener('DOMContentLoaded', function() {
             updateQuestDisplay(questId);
         });
     });
+
+    // Pin masterwork quest on load so visitors see RenTruck first
+    const pinnedId = 'rentruck';
+    const pinnedCard = document.querySelector('.proj-quest-card[data-quest-id="' + pinnedId + '"]');
+    if (pinnedCard && questsData[pinnedId]) {
+        questCards.forEach(c => c.classList.remove('active-quest'));
+        pinnedCard.classList.add('active-quest');
+        updateQuestDisplay(pinnedId);
+    }
 
     const searchInput = document.getElementById('proj-quest-search');
     if (searchInput) searchInput.addEventListener('input', filterQuests);
