@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         email: {
             title: 'PIGEON POST',
             icon: 'flutter_dash',
-            content: 'Write me directly at ' + CONTACT_EMAIL + '. You can also use the message scroll on the left - it delivers through Formspree to the same inbox.',
+            content: 'Write me directly at ' + CONTACT_EMAIL + ' or call 0956 960 9285. You can also use the message scroll on the left (Formspree) or the LinkedIn scroll on the board.',
             actionHref: 'mailto:' + CONTACT_EMAIL + '?subject=Hello%20from%20your%20portfolio',
             actionLabel: 'OPEN MAIL APP'
         },
@@ -147,6 +147,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     refs.classList.add('active');
                     refs.setAttribute('aria-hidden', 'false');
                 }
+                return;
+            }
+            // Phone / LinkedIn use real hrefs - let the browser handle them
+            if (noticeType === 'phone' || noticeType === 'linkedin') {
                 return;
             }
             if (noticeType === 'email' || noticeType === 'location') {
