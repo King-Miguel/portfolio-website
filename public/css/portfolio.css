@@ -359,6 +359,7 @@ body {
   background: linear-gradient(90deg, #1a6b1a 0%, #228B22 45%, #3cb371 100%);
   transition: width 0.45s ease;
   position: relative;
+  overflow: hidden; /* keep shine only on the filled segment */
   box-shadow:
     0 0 6px rgba(34, 139, 34, 0.55),
     0 0 14px rgba(50, 205, 50, 0.35),
@@ -380,16 +381,19 @@ body {
   content: '';
   position: absolute;
   top: 0;
-  left: -40%;
-  width: 40%;
+  left: -50%;
+  width: 45%;
   height: 100%;
   background: linear-gradient(
     90deg,
-    transparent,
-    rgba(255, 255, 255, 0.28),
-    transparent
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 35%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.12) 65%,
+    transparent 100%
   );
   animation: skillShine 3.2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes skillBarPulse {
@@ -427,8 +431,9 @@ body {
 }
 
 @keyframes skillShine {
-  0% { left: -40%; }
-  60%, 100% { left: 120%; }
+  0% { left: -50%; }
+  55% { left: 110%; }
+  55.01%, 100% { left: 110%; } /* hold off-fill; never paints empty track */
 }
 
 .skill-bar:hover .progress-bar-fill {
