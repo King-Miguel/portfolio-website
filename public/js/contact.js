@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const refs = document.getElementById('refsModal');
                 if (refs) {
                     refs.classList.add('active');
+                    refs.style.display = 'flex';
                     refs.setAttribute('aria-hidden', 'false');
                 }
                 return;
@@ -180,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeRefs() {
         if (!refsModal) return;
         refsModal.classList.remove('active');
+        refsModal.style.display = 'none';
         refsModal.setAttribute('aria-hidden', 'true');
     }
     if (refsClose) refsClose.addEventListener('click', closeRefs);
