@@ -535,6 +535,57 @@
   text-shadow: 1px 1px 0 rgba(255,255,255,0.7) !important;
 }
 
+/* Long briefs (e.g. RenTruck) stay short until the reader unfurls */
+.proj-brief-description.is-expandable {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.proj-brief-text {
+  display: block;
+  margin: 0;
+}
+
+.proj-brief-text.is-collapsed {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  max-height: 4.5em; /* fallback ~4 lines at 1.5 line-height */
+}
+
+.proj-brief-toggle {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.45rem;
+  letter-spacing: 0.5px;
+  color: #5D4037;
+  background: #FFD700;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 #000;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.proj-brief-toggle:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #000;
+  color: #8B0000;
+}
+
+.proj-brief-toggle:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #000;
+}
+
+.proj-brief-toggle[aria-expanded="true"] {
+  background: #f5e6c8;
+}
+
 .proj-solution-tech {
   display: flex;
   flex-wrap: wrap;

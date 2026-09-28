@@ -14,7 +14,7 @@ Export PDF as `resume.pdf` → `public/images/resume.pdf` (wire About button aft
 Junior Full-Stack Developer  |  Open to Internship, OJT, and Full-Time
 
 Sariaya, Quezon, Philippines
-0956 960 9285  |  iggytesoro123@gmail.com
+0956 960 9285  |  kingmiguel.dev@gmail.com
 Portfolio: https://king-miguel-portfolio.vercel.app
 LinkedIn: https://www.linkedin.com/in/king-miguel-remo-a8018b436/
 GitHub: https://github.com/King-Miguel

@@ -312,7 +312,42 @@ function updateQuestDisplay(questId) {
     }
     
     const briefEl = content.querySelector('.proj-brief-description');
-    if (briefEl) briefEl.textContent = quest.brief;
+    if (briefEl) {
+        // Long briefs (RenTruck masterwork, Android, etc.) collapse so the
+        // detail panel stays near short-quest height. Full text on demand.
+        const COLLAPSE_AT = 240;
+        const fullBrief = quest.brief || '';
+        briefEl.textContent = '';
+        briefEl.classList.remove('is-expandable');
+
+        if (fullBrief.length > COLLAPSE_AT) {
+            briefEl.classList.add('is-expandable');
+
+            const textSpan = document.createElement('span');
+            textSpan.className = 'proj-brief-text is-collapsed';
+            textSpan.textContent = fullBrief;
+
+            const toggleBtn = document.createElement('button');
+            toggleBtn.type = 'button';
+            toggleBtn.className = 'proj-brief-toggle';
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.textContent = 'READ MORE';
+
+            toggleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                textSpan.classList.toggle('is-collapsed');
+                const collapsed = textSpan.classList.contains('is-collapsed');
+                toggleBtn.textContent = collapsed ? 'READ MORE' : 'SHOW LESS';
+                toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            });
+
+            briefEl.appendChild(textSpan);
+            briefEl.appendChild(toggleBtn);
+        } else {
+            briefEl.textContent = fullBrief;
+        }
+    }
     
     const techContainer = content.querySelector('.proj-solution-tech');
     if (techContainer) {

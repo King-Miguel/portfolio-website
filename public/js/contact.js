@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Same Formspree endpoint as the rating system (email notifications go to your inbox)
     const FORMSPREE_CONTACT_URL = 'https://formspree.io/f/maqronqj';
-    const CONTACT_EMAIL = 'iggytesoro123@gmail.com';
+    const CONTACT_EMAIL = 'kingmiguel.dev@gmail.com';
 
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
