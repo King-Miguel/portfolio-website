@@ -150,6 +150,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return;
             }
+            if (noticeType === 'messenger') {
+                e.preventDefault();
+                const mm = document.getElementById('messengerModal');
+                if (mm) {
+                    mm.classList.add('active');
+                    mm.style.display = 'flex';
+                    mm.setAttribute('aria-hidden', 'false');
+                }
+                return;
+            }
             // Phone / LinkedIn use real hrefs - let the browser handle them
             if (noticeType === 'phone' || noticeType === 'linkedin') {
                 return;
@@ -191,10 +201,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Messenger QR modal
+    const messengerModal = document.getElementById('messengerModal');
+    const messengerClose = document.getElementById('messengerModalClose');
+    function closeMessenger() {
+        if (!messengerModal) return;
+        messengerModal.classList.remove('active');
+        messengerModal.style.display = 'none';
+        messengerModal.setAttribute('aria-hidden', 'true');
+    }
+    if (messengerClose) messengerClose.addEventListener('click', closeMessenger);
+    if (messengerModal) {
+        messengerModal.addEventListener('click', function(e) {
+            if (e.target === messengerModal) closeMessenger();
+        });
+    }
+
     document.addEventListener('keydown', function(e) {
         if (e.key !== 'Escape') return;
         closeNotice();
         closeRefs();
+        closeMessenger();
     });
 
     // Pause knight when contact visible
