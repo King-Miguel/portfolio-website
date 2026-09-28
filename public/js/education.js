@@ -37,6 +37,11 @@ const certificatePreview = document.getElementById('certificatePreview');
 if (viewSideQuestsBtn && sideQuestsModal) {
     viewSideQuestsBtn.addEventListener('click', function() {
         sideQuestsModal.classList.add('active');
+        // Show first certificate immediately so preview is never blank
+        setTimeout(function() {
+            const first = document.querySelector('.side-quest-milestone');
+            if (first) first.click();
+        }, 30);
     });
 }
 
@@ -46,11 +51,13 @@ if (closeSideQuestsModal) {
     });
 }
 
-sideQuestsModal.addEventListener('click', function(e) {
-    if (e.target === sideQuestsModal) {
-        sideQuestsModal.classList.remove('active');
-    }
-});
+if (sideQuestsModal) {
+    sideQuestsModal.addEventListener('click', function(e) {
+        if (e.target === sideQuestsModal) {
+            sideQuestsModal.classList.remove('active');
+        }
+    });
+}
     
     const certificateModal = document.getElementById('certificateModal');
     const closeModal = document.getElementById('certificateModalClose');
@@ -139,33 +146,51 @@ sideQuestsModal.addEventListener('click', function(e) {
             milestone.addEventListener('click', function() {
                 const certificateId = this.getAttribute('data-certificate');
                 const certificate = certificateData[certificateId];
-                
-                if (certificate) {
-                    certificatePreview.innerHTML = `
-                        <div class="certificate-display">
-                            <div class="certificate-image" style="background-image: url('${certificate.imageUrl}')"></div>
-                            <div class="certificate-info">
-                                <h4>${certificate.title}</h4>
-                                <p>${certificate.description}</p>
-                                <div class="certificate-meta">${certificate.date}</div>
+                if (!certificate || !certificatePreview) return;
+
+                sideQuestMilestones.forEach(m => m.classList.remove('active-cert'));
+                this.classList.add('active-cert');
+
+                const src = certificate.imageUrl;
+                certificatePreview.innerHTML = `
+                    <div class="certificate-display">
+                        <div class="certificate-image-frame">
+                            <img
+                                class="certificate-image-img"
+                                src="${src}"
+                                alt="${certificate.title}"
+                                loading="eager"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                            />
+                            <div class="certificate-image-fallback" style="display:none;">
+                                <span class="material-symbols-outlined">broken_image</span>
+                                <p>Certificate image missing</p>
+                                <a href="${src}" target="_blank" rel="noopener">Open file</a>
                             </div>
                         </div>
-                    `;
-                }
+                        <div class="certificate-info">
+                            <h4>${certificate.title}</h4>
+                            <p>${certificate.description}</p>
+                            <div class="certificate-meta">${certificate.date}</div>
+                        </div>
+                    </div>
+                `;
             });
         });
-    
-    if (closeModal) {
+
+        if (closeModal && certificateModal) {
         closeModal.addEventListener('click', function() {
             certificateModal.classList.remove('active');
         });
     }
-    
-    certificateModal.addEventListener('click', function(e) {
-        if (e.target === certificateModal) {
-            certificateModal.classList.remove('active');
-        }
-    });
+
+    if (certificateModal) {
+        certificateModal.addEventListener('click', function(e) {
+            if (e.target === certificateModal) {
+                certificateModal.classList.remove('active');
+            }
+        });
+    }
 
     console.log('Education Chronicle loaded! Ready to explore the Academy! 🎓✨');
 });
