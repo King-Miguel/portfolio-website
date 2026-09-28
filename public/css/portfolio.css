@@ -917,18 +917,7 @@ body {
   gap: 0.5rem;
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  
-  .main-content {
-    margin-left: 0;
-    padding: 1rem;
-  }
-  
+@media (max-width: 900px) {
   .parchment-container {
     padding: 1rem;
   }
@@ -2853,4 +2842,331 @@ body {
 #about .next-btn.pixel-button:active {
     transform: translate(2px, 2px) !important;
     box-shadow: 1px 1px 0px #000 !important;
+}
+
+/* =========================================================
+   MOBILE SYSTEM (drawer nav + layout pass)
+   Breakpoint: 900px - phones and small tablets
+   ========================================================= */
+
+.mobile-topbar {
+  display: none;
+}
+
+.mobile-nav-overlay {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    padding: 0 0.75rem;
+    background: #A9A9A9;
+    border-bottom: 4px solid #000;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.35);
+    z-index: 1200;
+  }
+
+  .mobile-menu-btn {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #2d1b36;
+    border: 3px solid #000;
+    color: #FFD700;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 #000;
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-btn .material-symbols-outlined {
+    font-size: 1.6rem;
+  }
+
+  .mobile-menu-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 #000;
+  }
+
+  .mobile-topbar-brand {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .mobile-topbar-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: #000;
+    line-height: 1.2;
+  }
+
+  .mobile-topbar-sub {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.45rem;
+    color: #3E2723;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-topbar-resume {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #6b1c9c;
+    border: 3px solid #000;
+    color: #FFD700;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 #000;
+    flex-shrink: 0;
+  }
+
+  .mobile-topbar-resume .material-symbols-outlined {
+    font-size: 1.4rem;
+  }
+
+  .mobile-nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1290;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Drawer sidebar */
+  .sidebar {
+    width: min(300px, 86vw) !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: translateX(-105%);
+    transition: transform 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+    z-index: 1300 !important;
+    padding-top: 0.75rem;
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding: 0.75rem !important;
+    padding-top: 68px !important; /* clear fixed topbar */
+    width: 100% !important;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .app-container {
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Landing */
+  #landing {
+    padding: 1rem 0.5rem !important;
+    min-height: auto;
+  }
+
+  .landing-title {
+    font-size: 1.15rem !important;
+    line-height: 1.35 !important;
+    word-break: break-word;
+  }
+
+  .landing-subtitle {
+    font-size: 0.7rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .landing-description {
+    font-size: 0.95rem !important;
+  }
+
+  .landing-model {
+    height: 280px !important;
+  }
+
+  .landing-rune {
+    display: none !important;
+  }
+
+  /* About */
+  .character-sheet-section,
+  .education-section {
+    padding: 1rem 0 !important;
+    min-height: auto;
+  }
+
+  .parchment-container,
+  .academy-scroll {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-width: 4px !important;
+    padding: 1rem !important;
+  }
+
+  .action-link-title {
+    font-size: 0.5rem !important;
+  }
+
+  .action-link-sub {
+    font-size: 0.7rem !important;
+  }
+
+  .profile-stats .stat-value {
+    word-break: break-word;
+    font-size: 0.85rem;
+  }
+
+  /* Education */
+  .academy-title {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .milestone-content h4 {
+    font-size: 0.7rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .quest-completed-badge,
+  .quest-inprogress-badge {
+    font-size: 0.35rem !important;
+    max-width: 45%;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  /* Hobbies section shell */
+  #hobbies .multi-class-container,
+  .multi-class-container {
+    padding: 1rem !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Contact */
+  .contact-section {
+    padding: 1rem 0 !important;
+  }
+
+  .contact-container,
+  .message-board {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .board-title {
+    font-size: 1rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .pixel-input,
+  .pixel-textarea {
+    font-size: 16px !important; /* prevent iOS zoom */
+  }
+
+  .notice-content {
+    word-break: break-word;
+  }
+
+  /* Preloader text */
+  .welcome-title {
+    font-size: 1.1rem !important;
+    white-space: normal !important;
+    width: auto !important;
+    max-width: 92vw;
+    line-height: 1.4 !important;
+  }
+
+  .preloader-subtitle {
+    font-size: 0.75rem !important;
+    white-space: normal !important;
+    width: auto !important;
+  }
+
+  #preloader {
+    padding: 1rem;
+  }
+
+  #loadingScreen {
+    width: 92% !important;
+  }
+
+  /* Generic overflow guards */
+  img, video, canvas {
+    max-width: 100%;
+  }
+
+  h1, h2, h3, h4 {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-topbar-sub {
+    display: none;
+  }
+
+  .landing-title {
+    font-size: 1rem !important;
+  }
+
+  .cta-button {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    font-size: 0.55rem !important;
+    padding: 0.85rem 1rem !important;
+  }
+
+  .special-offer-btn {
+    font-size: 0.55rem !important;
+  }
+
+  .brand-title {
+    font-size: 0.85rem !important;
+  }
+
+  .nav-item p {
+    font-size: 0.7rem;
+  }
+}
+
+/* Touch-friendly nav items */
+@media (max-width: 900px) {
+  .nav-item {
+    min-height: 48px;
+    padding: 0.65rem 0.5rem !important;
+  }
 }

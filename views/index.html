@@ -1434,8 +1434,23 @@
 
 
     <div class="app-container" style = "display: none;">
+      <!-- Mobile top bar + menu toggle -->
+      <header class="mobile-topbar" id="mobileTopbar">
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+          <span class="material-symbols-outlined" id="mobileMenuIcon">menu</span>
+        </button>
+        <div class="mobile-topbar-brand">
+          <span class="mobile-topbar-title">Miguelito</span>
+          <span class="mobile-topbar-sub">Web Adventurer</span>
+        </div>
+        <a class="mobile-topbar-resume" href="/images/resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open resume">
+          <span class="material-symbols-outlined">description</span>
+        </a>
+      </header>
+      <div class="mobile-nav-overlay" id="mobileNavOverlay" hidden></div>
+
       <!-- Pixel Theme Sidebar -->
-      <aside class="sidebar pixel-border">
+      <aside class="sidebar pixel-border" id="sidebar">
         <div class="sidebar-content">
           <div class="brand-section">
             <div class="logo" style="background-image: url('/images/knightC.png')" loading="lazy"></div>
@@ -3256,5 +3271,6 @@
 <script src="/js/rate.js"></script>
 <script src="/js/level.js"></script>
 <script src="/js/profile-pic.js"></script>
+<script src="/js/mobile-nav.js"></script>
 </body>
 </html>

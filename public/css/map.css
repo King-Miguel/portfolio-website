@@ -201,3 +201,30 @@
         min-width: 80px;
     }
 }
+
+@media (max-width: 900px) {
+  .map-modal {
+    padding: 0.5rem;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .map-container {
+    max-width: 100%;
+    margin-top: 2.5rem;
+  }
+
+  .location-label {
+    font-size: 0.4rem;
+    padding: 6px 8px;
+    white-space: normal;
+    max-width: 90px;
+    line-height: 1.25;
+  }
+
+  .close-map {
+    top: 8px;
+    right: 8px;
+    position: fixed;
+  }
+}

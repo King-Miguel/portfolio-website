@@ -455,3 +455,36 @@
     80%  { content: ''; }
     100% { content: ''; }
 }
+
+@media (max-width: 900px) {
+  #landing {
+    padding: 1rem 0.75rem;
+  }
+
+  .landing-container {
+    gap: 1.5rem;
+  }
+
+  .landing-title {
+    font-size: 1.15rem;
+    line-height: 1.35;
+  }
+
+  .landing-subtitle {
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .landing-description {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .landing-model {
+    height: 260px;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+}

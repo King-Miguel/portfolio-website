@@ -550,3 +550,42 @@
 .status-message.status-success {
   color: #228B22;
 }
+
+
+@media (max-width: 900px) {
+  .contact-section {
+    padding: 1rem 0;
+  }
+
+  .message-board {
+    border-width: 4px;
+  }
+
+  .board-title {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .board-subtitle {
+    font-size: 0.55rem;
+  }
+
+  .pixel-input,
+  .pixel-textarea {
+    font-size: 16px;
+  }
+
+  .send-scroll-btn {
+    width: 100%;
+    font-size: 0.55rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .notice-card {
+    padding: 0.85rem;
+  }
+
+  .notice-header h4 {
+    font-size: 0.55rem;
+  }
+}

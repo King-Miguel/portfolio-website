@@ -815,3 +815,98 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
+
+/* Mobile projects pass */
+@media (max-width: 900px) {
+  .projects-section {
+    padding: 1rem 0;
+  }
+
+  .proj-guild-hall {
+    padding: 1rem;
+    border-width: 4px;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .proj-guild-title {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .proj-guild-subtitle {
+    font-size: 0.55rem;
+  }
+
+  .proj-guild-header {
+    padding: 1rem;
+  }
+
+  .proj-member-stats {
+    gap: 0.4rem;
+  }
+
+  .proj-stat {
+    font-size: 0.4rem;
+  }
+
+  .proj-quest-board-title,
+  .proj-archives-title {
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+
+  .proj-pixel-input-search,
+  .proj-pixel-select {
+    font-size: 16px; /* iOS zoom guard */
+    height: 44px;
+  }
+
+  .proj-quest-card {
+    min-height: 0;
+    padding: 1rem;
+  }
+
+  .proj-quest-name {
+    font-size: 0.55rem;
+  }
+
+  .proj-quest-description {
+    font-size: 0.7rem;
+  }
+
+  .proj-quest-title {
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+
+  .proj-brief-description {
+    font-size: 0.75rem;
+  }
+
+  .proj-action-btn {
+    font-size: 0.45rem;
+    padding: 0.85rem 0.5rem;
+  }
+
+  .proj-quests-grid {
+    max-height: none;
+    grid-template-columns: 1fr;
+  }
+
+  .proj-quest-display {
+    min-height: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .proj-guild-title {
+    font-size: 0.8rem;
+  }
+
+  .proj-tech-item {
+    font-size: 0.4rem;
+  }
+}
