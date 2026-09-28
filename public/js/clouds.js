@@ -105,24 +105,65 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, stepTime);
     }
-        const ctaButtons = document.querySelectorAll('.cta-button');
-        ctaButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = href;
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
+
+    // Unified smooth scroll for ALL same-page hash links
+    // (nav, landing CTA, About action links, map pins, etc.)
+    function smoothNavigate(href) {
+        if (!href || href === '#' || href.length < 2) return false;
+        let targetSection = null;
+        try {
+            targetSection = document.querySelector(href);
+        } catch (_) {
+            return false;
+        }
+        if (!targetSection) return false;
+
+        navItems.forEach(nav => {
+            nav.classList.remove('active');
+            if (nav.getAttribute('href') === href) nav.classList.add('active');
         });
+
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+        try {
+            if (history.replaceState) history.replaceState(null, '', href);
+        } catch (_) {}
+
+        return true;
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.defaultPrevented) return;
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        if (link.getAttribute('target') === '_blank') return;
+        if (link.hasAttribute('download')) return;
+        if (link.getAttribute('data-no-smooth') != null) return;
+
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.indexOf('#') !== 0) return;
+
+        // Only handle real section / element targets on this page
+        let target = null;
+        try {
+            target = document.querySelector(href);
+        } catch (_) {
+            return;
+        }
+        if (!target) return;
+
+        e.preventDefault();
+        smoothNavigate(href);
+    });
+
+    // Expose for map.js / other modules that scroll programmatically
+    window.portfolioSmoothNavigate = smoothNavigate;
+
     // Add global animation styles
     const style = document.createElement('style');
     style.textContent = `
@@ -205,22 +246,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth scroll to section
+    // Nav items still get active-state feedback; actual scroll is handled
+    // by the global hash-link listener above (same path as About CTAs).
     navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-                
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+        item.addEventListener('click', function () {
+            navItems.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
         });
     });
 

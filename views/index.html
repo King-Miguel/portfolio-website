@@ -2638,6 +2638,35 @@
     </div>
   </div>
 </div>
+
+    <!-- Mini-game: Bug Bash Arena (opt-in, lazy start, no load cost on Projects) -->
+    <div class="bug-bash pixel-border" id="bugBash">
+      <div class="bug-bash-header">
+        <div class="bug-bash-titles">
+          <h3 class="bug-bash-title">SIDE QUEST: BUG BASH</h3>
+          <p class="bug-bash-sub">Tap the bugs before the timer ends. Miss a feature, lose a life.</p>
+        </div>
+        <div class="bug-bash-hud" aria-live="polite">
+          <span class="bug-bash-stat" title="Score">SCR <strong id="bugScore">0</strong></span>
+          <span class="bug-bash-stat" title="Lives">HP <strong id="bugLives">3</strong></span>
+          <span class="bug-bash-stat" title="Time left">T <strong id="bugTime">30</strong></span>
+          <span class="bug-bash-stat" title="Best run">BEST <strong id="bugBest">0</strong></span>
+        </div>
+      </div>
+
+      <div class="bug-bash-stage" id="bugBashStage" role="application" aria-label="Bug Bash mini-game arena">
+        <div class="bug-bash-overlay" id="bugBashOverlay">
+          <p class="bug-bash-msg" id="bugBashMsg">Ready, adventurer?</p>
+          <p class="bug-bash-hint">Bugs = -1 HP if they escape. Features give bonus points. No particles, no lag.</p>
+          <button type="button" class="bug-bash-btn" id="bugBashStart">START RUN</button>
+        </div>
+      </div>
+
+      <div class="bug-bash-footer">
+        <button type="button" class="bug-bash-btn ghost" id="bugBashRestart" disabled>TRY AGAIN</button>
+        <p class="bug-bash-tip">Desktop: click. Mobile: tap. Game loop only runs while this quest is active.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -3266,6 +3295,7 @@
 <script src="/js/education.js"></script>
 <script src="/js/projects.js"></script>
 <script src="/js/hobbies.js"></script>
+<script src="/js/minigame.js"></script>
 <script src="/js/contact.js"></script>
 <script src="/js/map.js"></script>
 <script src="/js/rate.js"></script>
